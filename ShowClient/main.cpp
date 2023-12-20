@@ -2,8 +2,16 @@
 
 #include <iostream>
 
+#include <string>
+#include "utility/dbgutil.hpp"
+#include "utility/strutil.hpp"
+#include "utility/timeutil.hpp"
+
+
+using namespace std::string_literals ;
+
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
+    
+    DBGMSG(std::cout, "This is a test "s + "howdy"s) ;
     return 0;
 }

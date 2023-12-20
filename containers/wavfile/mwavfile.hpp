@@ -7,7 +7,7 @@
 #include <iostream>
 #include <string>
 #include <filesystem>
-#include "utility/filemap.hpp"
+#include "utility/mapfile.hpp"
 
 #include "wavfmtchunk.hpp"
 #include "wavdatachunk.hpp"
@@ -69,7 +69,7 @@
 class MWAVFile {
 private:
     static constexpr auto SSDRATE = 0.037 ;
-    util::filemap_t memoryMap ;
+    util::MapFile memoryMap ;
     
     WAVFmtChunk fmtChunk ;
     WAVDataChunk dataChunk ;

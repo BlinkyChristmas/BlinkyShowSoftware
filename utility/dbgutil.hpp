@@ -7,11 +7,11 @@
 #include <iostream>
 #include <string>
 
-#if defined(_DEBUG)
+#if defined(_DEBUG) || defined(DEBUG)
 //======================================================================
 #define DBGMSG( os, msg ) \
   (os) << "DBG: " << __FILE__ << "(" << __LINE__ << ") "\
-       <<  (var)  << std::endl
+       <<  (msg)  << std::endl
 
 #else
 #define DBGMSG( os, var)
