@@ -91,11 +91,19 @@ int main(int argc, const char * argv[]) {
                 if (connect(config)){
                     // we connected!
                     status.setLed(StatusLed::CONNECTSTATUS, StatusLed::ON) ;
-
+                    // we need to start a read, and start our thread
+                    myClient.initialRead() ;
+                    runThread = std::thread(&runLoop) ;
                 }
                 while (myClient.isValid() && config.connectTime.inRange() && config.runSpan.inRange()){
                     // we dont do anything, but just hang around
                     std::this_thread::sleep_for(std::chrono::milliseconds(250)) ;
+                }
+                io_context.stop() ;
+                io_context.reset() ;
+                if (runThread.joinable()){
+                    runThread.join() ;
+                    runThread = std::thread() ;
                 }
                 // If we are here, we either: Disconnected, outside connect hours, outside running hours
                 // Should we force it if we are playing something?

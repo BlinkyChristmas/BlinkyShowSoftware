@@ -208,3 +208,11 @@ auto Client::lastSendTime() const -> util::ourclock::time_point {
 auto Client::millSinceSend(const util::ourclock::time_point &time) -> size_t {
     return std::chrono::duration_cast<std::chrono::milliseconds>(time - send_time).count() ;
 }
+// ========================================================================================
+auto Client::initialRead() -> void {
+    if (netSocket.is_open()){
+        incomingPacket = Packet();
+        bytesAsked = incomingPacket.size() ;
+        netSocket.async_read_some(asio::buffer(incomingPacket.bufferData().data(),bytesAsked),std::bind(&Client::packetRead,this,std::placeholders::_1,std::placeholders::_2));
+    }
+}

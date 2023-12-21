@@ -58,7 +58,8 @@ public:
     auto lastSendTime() const -> util::ourclock::time_point ;
     auto millSinceSend(const util::ourclock::time_point &time  = util::ourclock::now()) -> size_t ;
  
-    
+    auto initialRead() -> void ;
+
 };
 
 
