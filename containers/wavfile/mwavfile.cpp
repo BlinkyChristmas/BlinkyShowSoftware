@@ -6,6 +6,7 @@
 #include <stdexcept>
 #include <cmath>
 
+#include "utility/dbgutil.hpp"
 
 using namespace std::string_literals ;
 
@@ -30,7 +31,7 @@ auto MWAVFile::load(const std::filesystem::path &filepath) -> bool {
     if (memoryMap.ptr == nullptr) {
         throw std::runtime_error("Unable to map: "s + filepath.string());
     }
-    if (memoryMap.length <= 8) {
+    if (memoryMap.size <= 8) {
         throw std::runtime_error("Invalid file type: "s + filepath.string());
     }
     try {
@@ -43,8 +44,7 @@ auto MWAVFile::load(const std::filesystem::path &filepath) -> bool {
         return true ;
     }
     catch (const std::exception &e) {
-        std::cerr << "Unable to process: "<< filepath.string() << "\n" ;
-        std::cerr << e.what() << std::endl;
+        DBGMSG(std::cerr, "Unable to process: "s + filepath.string() + "\n"s + e.what()) ;
         return false ;
     }
     catch (...){
@@ -58,12 +58,12 @@ auto MWAVFile::checkFileType(const std::uint8_t *input) -> bool {
     std::uint32_t signature ;
     std::copy(input,input+4,reinterpret_cast<std::uint8_t*>(&signature));
     if (signature != riff) {
-        //std::cerr << "Invalid file type" << std::endl;
+        DBGMSG(std::cerr,"Invalid wave file type"s);
         return false ;
     }
     std::copy(input+8,input+12,reinterpret_cast<std::uint8_t*>(&signature));
     if (signature != wave) {
-        //std::cerr << "Invalid file type" << std::endl;
+        DBGMSG(std::cerr,"Invalid wave signature file type "s);
         return false ;
     }
     return true;

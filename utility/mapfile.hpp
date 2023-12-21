@@ -33,7 +33,7 @@ namespace util {
         MapFile() ;
         ~MapFile() ;
         
-        auto map(const std::filesystem::path &path, size_t length, size_t offset) -> const std::uint8_t* ;
+        auto map(const std::filesystem::path &path, size_t length = 0, size_t offset = 0) -> const std::uint8_t* ;
         auto unmap() -> void ;
         
     };

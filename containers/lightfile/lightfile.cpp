@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <stdexcept>
 
+#include "utility/dbgutil.hpp"
 
 using namespace std::string_literals ;
 
@@ -52,8 +53,7 @@ auto LightFile::loadFile(const std::filesystem::path &lightfile) -> bool {
     }
     catch (const std::exception &e){
         // we had some type of error
-        std::cerr << "Error loading: " << lightfile.string() <<"\n";
-        std::cerr << e.what() << std::endl;
+        DBGMSG(std::cerr, "Error loading: "s + lightfile.string()+"\n"s+e.what());
         return false ;
     }
 }

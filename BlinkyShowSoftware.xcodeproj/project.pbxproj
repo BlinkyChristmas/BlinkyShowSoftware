@@ -24,6 +24,8 @@
 		561BE3E82B338DFC0092D4DF /* wavdatachunk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3C02B337F240092D4DF /* wavdatachunk.cpp */; };
 		561BE3E92B338DFC0092D4DF /* wavfmtchunk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3BB2B337F240092D4DF /* wavfmtchunk.cpp */; };
 		561BE3EB2B338E050092D4DF /* lightheader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3B62B337F240092D4DF /* lightheader.cpp */; };
+		561BE3ED2B33BFF20092D4DF /* lightfile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3B52B337F240092D4DF /* lightfile.cpp */; };
+		561BE3EE2B33BFF90092D4DF /* mwavfile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3BD2B337F240092D4DF /* mwavfile.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -1952,10 +1954,12 @@
 			files = (
 				561BE3CB2B3380820092D4DF /* main.cpp in Sources */,
 				561BE3EB2B338E050092D4DF /* lightheader.cpp in Sources */,
+				561BE3EE2B33BFF90092D4DF /* mwavfile.cpp in Sources */,
 				561BE3E82B338DFC0092D4DF /* wavdatachunk.cpp in Sources */,
 				561BE3E12B338DE00092D4DF /* playpacket.cpp in Sources */,
 				561BE3E42B338DE00092D4DF /* packet.cpp in Sources */,
 				561BE3DA2B338B8F0092D4DF /* buffer.cpp in Sources */,
+				561BE3ED2B33BFF20092D4DF /* lightfile.cpp in Sources */,
 				561BE3E22B338DE00092D4DF /* noppacket.cpp in Sources */,
 				561BE3E02B338DE00092D4DF /* identpacket.cpp in Sources */,
 				561BE3E52B338DE00092D4DF /* loadpacket.cpp in Sources */,
@@ -2108,6 +2112,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
+					__MACOSX_CORE__,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -2120,6 +2125,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CF264WE69M;
 				ENABLE_HARDENED_RUNTIME = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					ASIO_STANDALONE,
+					__MACOSX_CORE__,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
