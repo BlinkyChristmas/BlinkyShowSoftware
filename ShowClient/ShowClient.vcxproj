@@ -18,6 +18,40 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\network\blinkclient.cpp" />
+    <ClCompile Include="..\network\client.cpp" />
+    <ClCompile Include="..\network\identpacket.cpp" />
+    <ClCompile Include="..\network\loadpacket.cpp" />
+    <ClCompile Include="..\network\nameclient.cpp" />
+    <ClCompile Include="..\network\noppacket.cpp" />
+    <ClCompile Include="..\network\packet.cpp" />
+    <ClCompile Include="..\network\playpacket.cpp" />
+    <ClCompile Include="..\network\showpacket.cpp" />
+    <ClCompile Include="..\network\syncpacket.cpp" />
+    <ClCompile Include="..\utility\buffer.cpp" />
+    <ClCompile Include="..\utility\mapfile.cpp" />
+    <ClCompile Include="..\utility\timeutil.cpp" />
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\network\allpackets.hpp" />
+    <ClInclude Include="..\network\blinkclient.hpp" />
+    <ClInclude Include="..\network\client.hpp" />
+    <ClInclude Include="..\network\identpacket.hpp" />
+    <ClInclude Include="..\network\loadpacket.hpp" />
+    <ClInclude Include="..\network\nameclient.hpp" />
+    <ClInclude Include="..\network\noppacket.hpp" />
+    <ClInclude Include="..\network\packet.hpp" />
+    <ClInclude Include="..\network\playpacket.hpp" />
+    <ClInclude Include="..\network\showpacket.hpp" />
+    <ClInclude Include="..\network\syncpacket.hpp" />
+    <ClInclude Include="..\utility\buffer.hpp" />
+    <ClInclude Include="..\utility\dbgutil.hpp" />
+    <ClInclude Include="..\utility\mapfile.hpp" />
+    <ClInclude Include="..\utility\strutil.hpp" />
+    <ClInclude Include="..\utility\timeutil.hpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -102,10 +136,11 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);ASIO_STANDALONE</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);ASIO_STANDALONE;NOMINMAX;WIN32_LEAN_AND_MEAN</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc11</LanguageStandard_C>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)\..\;$(ProjectDir)\..\support;$(ProjectDir)\..\support\asio</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -118,10 +153,11 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);ASIO_STANDALONE</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);ASIO_STANDALONE;NOMINMAX;WIN32_LEAN_AND_MEAN</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc11</LanguageStandard_C>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)\..\;$(ProjectDir)\..\support;$(ProjectDir)\..\support\asio</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

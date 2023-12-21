@@ -1,5 +1,8 @@
 //Copyright © 2023 Charles Kerr. All rights reserved.
 
+#if defined(_WIN32)
+#include <Windows.h>
+#endif
 #include <iostream>
 
 #include <string>

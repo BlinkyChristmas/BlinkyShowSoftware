@@ -45,7 +45,7 @@ auto Packet::packetID() const -> PacketType  {
     if (this->size() < 4) {
         return PacketType::INVALID ;
     }
-    auto id = this->read<int>(IDOFFSET,4) ;
+    auto id = this->read<int>(IDOFFSET) ;
     if (id < 0 || id > static_cast<int>(PacketType::TYPECOUNT)){
         return PacketType::INVALID ;
     }
@@ -57,16 +57,16 @@ auto Packet::setPacketID(PacketType value) -> void {
 }
 
 //======================================================================
-auto Packet::length() const -> int {
+auto Packet::length() const -> size_t {
     if (this->size() < 8) {
         return 0 ;
     }
-    return this->read<int>(LENGTHOFFSET,4) ;
+    return static_cast<size_t>(this->read<std::uint32_t>(LENGTHOFFSET)) ;
 
 }
 //======================================================================
-auto Packet::setLength(int value) -> void {
-    this->write(value,IDOFFSET);
+auto Packet::setLength(size_t value) -> void {
+    this->write(static_cast<std::uint32_t>(value),IDOFFSET);
 }
 
 //======================================================================

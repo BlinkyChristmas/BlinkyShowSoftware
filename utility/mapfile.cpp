@@ -6,7 +6,7 @@
 #include <stdexcept>
 
 #if defined(_WIN32)
-
+#include <Windows.h>
 
 #else
 #include <sys/mman.h>
@@ -41,13 +41,33 @@ namespace util {
         if (!std::filesystem::exists(path)) {
             throw std::runtime_error("Unable to map nonexistent file: "s + path.string());
         }
-        auto filesize = std::filesystem::file_size(path) ;
+        auto filesize = static_cast<size_t>(std::filesystem::file_size(path)) ;
         if (length == 0) {
             length = filesize ;
         }
         
 #if defined(_WIN32)
-        
+        auto hfile = ::CreateFileA(path.string().c_str(), GENERIC_READ | GENERIC_WRITE, 0, nullptr, OPEN_EXISTING, FILE_FLAG_RANDOM_ACCESS, nullptr);
+        if (hfile == INVALID_HANDLE_VALUE) {
+            throw std::runtime_error("Unable to open: "s + path.string());
+        }
+        auto hmap = CreateFileMapping(hfile, nullptr, PAGE_READWRITE, 0, 0, nullptr);
+        if (hmap == nullptr) {
+            CloseHandle(hfile);
+            throw std::runtime_error("Error mapping file: "s + path.string());
+        }
+        // We need to figure out offset high/low for this call, riht now use zero
+        ptr = reinterpret_cast<std::uint8_t*>(MapViewOfFile(hmap, FILE_MAP_READ | FILE_MAP_WRITE, 0, 0, length));
+        if (ptr == nullptr) {
+            CloseHandle(hmap);
+            CloseHandle(hfile);
+            throw std::runtime_error("Error mapping file: "s + path.string());
+        }
+        CloseHandle(hmap);
+        CloseHandle(hfile);
+        size = length;
+
+
 #else
         
         // we need to get a fd (and the size of the file)
@@ -76,7 +96,7 @@ namespace util {
             return ;
         }
 #if defined(_WIN32)
-        
+        UnmapViewOfFile(reinterpret_cast<void*>(ptr));
 #else
         munmap(ptr,size) ;
 #endif
@@ -106,13 +126,32 @@ namespace util {
         if (!std::filesystem::exists(path)) {
             throw std::runtime_error("Unable to map nonexistent file: "s + path.string());
         }
-        auto filesize = std::filesystem::file_size(path) ;
+        auto filesize = static_cast<size_t>(std::filesystem::file_size(path)) ;
         if (length == 0) {
             length = filesize ;
         }
         
 #if defined(_WIN32)
-        
+        auto hfile = ::CreateFileA(path.string().c_str(), GENERIC_READ |GENERIC_WRITE, 0, nullptr, OPEN_EXISTING, FILE_FLAG_RANDOM_ACCESS, nullptr);
+        if (hfile == INVALID_HANDLE_VALUE) {
+            throw std::runtime_error("Unable to open: "s + path.string());
+        }
+        auto hmap = CreateFileMapping(hfile, nullptr, PAGE_READONLY, 0, 0, nullptr);
+        if (hmap == nullptr) {
+            CloseHandle(hfile);
+            throw std::runtime_error("Error mapping file: "s + path.string());
+        }
+        // We need to figure out offset high/low for this call, riht now use zero
+        ptr = const_cast<const std::uint8_t *>(reinterpret_cast< std::uint8_t*>(MapViewOfFile(hmap, FILE_MAP_READ, 0, 0, length)));
+        if (ptr == nullptr) {
+            CloseHandle(hmap);
+            CloseHandle(hfile);
+            throw std::runtime_error("Error mapping file: "s + path.string());
+    }
+        CloseHandle(hmap);
+        CloseHandle(hfile);
+        size = length;
+
 #else
         
         // we need to get a fd (and the size of the file)
@@ -128,7 +167,7 @@ namespace util {
             throw std::runtime_error( "Unable to map file: "s + path.string() );
         }
         size = length ;
-        ptr = reinterpret_cast<const std::uint8_t*>(temp) ;
+        ptr = const_cast<const std::uint8_t*>(reinterpret_cast<std::uint8_t*>(temp)) ;
         
 #endif
         return ptr ;
@@ -141,7 +180,8 @@ namespace util {
             return ;
         }
 #if defined(_WIN32)
-        
+        UnmapViewOfFile(reinterpret_cast<void*>(const_cast<std::uint8_t*>(ptr)));
+
 #else
         munmap(const_cast<std::uint8_t*>(ptr),size) ;
 #endif

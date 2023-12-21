@@ -52,10 +52,10 @@ public:
     auto connectTime() const -> util::ourclock::time_point ;
     
     auto lastReceiveTime() const -> util::ourclock::time_point ;
-    auto millSinceReceive(const util::ourclock::time_point &time = util::ourclock::now()) -> double ;
+    auto millSinceReceive(const util::ourclock::time_point &time = util::ourclock::now()) -> size_t ;
 
     auto lastSendTime() const -> util::ourclock::time_point ;
-    auto millSinceSend(const util::ourclock::time_point &time  = util::ourclock::now()) -> double ;
+    auto millSinceSend(const util::ourclock::time_point &time  = util::ourclock::now()) -> size_t ;
  
     
 };

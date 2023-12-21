@@ -40,8 +40,8 @@ public:
     auto packetID() const -> PacketType ;
     auto setPacketID(PacketType type) -> void ;
     
-    auto length() const -> int ;
-    auto setLength(int value) -> void ;
+    auto length() const -> size_t ;
+    auto setLength(size_t value) -> void ;
     
     auto stamp() -> void ;
     auto deltaMicro(const std::chrono::system_clock::time_point &timepoint) -> size_t ;

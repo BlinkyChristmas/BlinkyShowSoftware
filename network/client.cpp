@@ -176,7 +176,7 @@ auto Client::lastReceiveTime() const -> util::ourclock::time_point {
     return receive_time ;
 }
 // ========================================================================================
-auto Client::millSinceReceive(const util::ourclock::time_point &time ) -> double {
+auto Client::millSinceReceive(const util::ourclock::time_point &time ) -> size_t {
     return std::chrono::duration_cast<std::chrono::milliseconds>(time - receive_time).count() ;
 }
 
@@ -185,6 +185,6 @@ auto Client::lastSendTime() const -> util::ourclock::time_point {
     return send_time ;
 }
 // ========================================================================================
-auto Client::millSinceSend(const util::ourclock::time_point &time) -> double {
+auto Client::millSinceSend(const util::ourclock::time_point &time) -> size_t {
     return std::chrono::duration_cast<std::chrono::milliseconds>(time - send_time).count() ;
 }
