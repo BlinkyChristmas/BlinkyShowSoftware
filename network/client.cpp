@@ -81,7 +81,6 @@ auto Client::close() -> void {
 
 // ========================================================================================
 auto Client::connect(asio::ip::tcp::endpoint &endpoint, int clientPort) -> bool {
-    auto rvalue = false ;
     asio::error_code ec ;
     if (netSocket.is_open()) {
         netSocket.shutdown(asio::ip::tcp::socket::shutdown_type::shutdown_both) ;

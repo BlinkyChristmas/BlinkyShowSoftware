@@ -82,12 +82,12 @@ public:
     
     auto load(const std::filesystem::path &filepath) -> bool ;
     auto clear() -> void ;
-
+    
     auto isLoaded() const -> bool ;
     
     auto setFrame(std::uint32_t frame) -> bool ;
     
-    auto loadBuffer(char *buffer, std::uint32_t samplecount ) -> std::uint32_t ;
+    auto loadBuffer(std::uint8_t *buffer, std::uint32_t samplecount ) -> std::uint32_t ;
 };
 
 

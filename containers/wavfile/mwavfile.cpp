@@ -96,13 +96,13 @@ auto MWAVFile::setFrame(std::uint32_t frame) -> bool {
     return true ;
 }
 //======================================================================
-auto MWAVFile::loadBuffer(char *buffer, std::uint32_t samplecount ) -> std::uint32_t {
+auto MWAVFile::loadBuffer(std::uint8_t *buffer, std::uint32_t samplecount ) -> std::uint32_t {
     auto location = currentOffset ;
     auto bytecount = samplecount * fmtChunk.blockAlign ;
     if (location + bytecount >= dataChunk.size) {
         bytecount = static_cast<std::uint32_t>(dataChunk.size - location) ;
     }
-    std::copy(dataChunk.ptrToData + location,dataChunk.ptrToData+location+bytecount,reinterpret_cast<std::uint8_t*>(buffer));
+    std::copy(dataChunk.ptrToData + location,dataChunk.ptrToData+location+bytecount,buffer);
     currentOffset += bytecount ;
     
     return static_cast<std::uint32_t>(bytecount/fmtChunk.blockAlign)   ;

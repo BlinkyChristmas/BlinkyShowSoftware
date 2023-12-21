@@ -1,0 +1,7 @@
+//*****************************************************************************
+// Setting the time zone
+//****************************************************************************
+
+1. Enter command to set the timezone
+    ssh dpkg-reconfigure tzdata
+2. Select your timezone from the menu

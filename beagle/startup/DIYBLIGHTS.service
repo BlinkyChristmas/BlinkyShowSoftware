@@ -1,0 +1,12 @@
+[Unit]
+Description=Enable the DIYB Beagle Light software (sound volume,pru firmware, start the pru, and the software"
+After=generic-board-startup.service
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/startup
+ExecStart=/root/startup/startBeagleClient.sh
+
+[Install]
+WantedBy=multi-user.target

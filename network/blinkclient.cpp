@@ -63,6 +63,6 @@ BlinkClient::BlinkClient(asio::io_context &context,IdentPacket::ClientType clien
 
 }
 // ========================================================================================
-auto BlinkClient::setPacketRountine(Packet::PacketType type, std::function<bool(const Packet&)> &routine) -> void {
+auto BlinkClient::setPacketRountine(Packet::PacketType type, PacketProcessing routine) -> void {
     this->packetRoutines.insert_or_assign(type,routine) ;
 }

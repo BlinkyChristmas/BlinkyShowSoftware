@@ -1,0 +1,12 @@
+//********************************************************************************
+// Adding a user to SUDO
+//********************************************************************************
+
+1. To add a user to SUDO enter:
+    adduser username sudo    // Where username is the name of the user account
+    
+    
+    
+    
+    
+    

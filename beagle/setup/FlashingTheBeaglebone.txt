@@ -1,0 +1,47 @@
+//********************************************************************************
+// Background and Needed Software
+//********************************************************************************
+
+//********************************************************************************
+// Needed Software and Images
+//*******************************************************************************
+1. Debian image for the beaglebone:
+    https://www.beagleboard.org/distros
+Note:
+    The latest at the time of this is located here:
+    https://www.beagleboard.org/distros/am335x-12-2-2023-10-07-4gb-emmc-iot-flasher
+
+//**************************************************************************
+// Make a SD card of the image
+//**************************************************************************
+1. Decompress the img.z file using:
+    Windows - 7up
+    Debian - sudo apt-get install xz-utils
+        Then: unxz am335x-eMMC-flasher-debian-12.2-iot-armhf-2023-10-07-4gb.img.xz
+    macOS - install The Unarchiver from the app store.
+
+2. Insert a blank SD card into the sd card reader
+3. Find the physical disk of your sd card reader
+    macOS: insert the SD card, and using DiskUtil find the physical disk
+
+4. Dismount the SD card (but do not eject it)
+5. Write the image
+    macOS (assuming the sd card is disk10)
+        sudo dd if=am335x-eMMC-flasher-debian-12.2-iot-armhf-2023-10-07-4gb.img of=/dev/rdisk10 bs=1M status=progress
+
+6. Eject the card
+7. Insert the card into the BeagleBone, and while holding the button near the SD card, apply power (the led status lights should go on, keep holding the button until they go off and start to flash)
+8. After all led activity (leds should remain off), remove the SD card, and reboot the BeagleBone.
+
+//**************************************************************************
+// First Login
+//**************************************************************************
+1. The stock image comes with two accounts:
+    root/root (one can not ssh using this initially)
+    debian/temppwd
+2. Find the BeagleBone ip address:
+    If necessary, use the TTL cable and loggin in via serial (macOS one can use Serial2 available for free trial)
+3. Log into the BeagleBone Black from the command line
+    ssh debian@beagleipaddress
+    Enter the password when asked
+

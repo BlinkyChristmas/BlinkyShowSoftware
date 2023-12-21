@@ -1,0 +1,65 @@
+//*****************************************************************************
+// Adding ALSA sound
+//****************************************************************************
+
+1. Added the needed software
+    sudo apt-get install alsa-firmware-loaders alsa-utils alsa-tools libasound2-dev
+
+
+
+//*****************************************************************************
+// Making the card the default device
+//****************************************************************************
+
+1. Plug in your sound card
+2. Find the name of the card
+    cat /proc/asound/cards
+3. Create /etc/asound.conf
+    nano /etc/asound.conf
+4. Add the following (replace card 1 witht he number or name of your card):
+
+    pcm.!default {
+        type hw
+        card 1
+    }
+
+    ctl.!default {
+        type hw
+        card 1
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

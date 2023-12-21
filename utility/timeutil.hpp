@@ -25,7 +25,7 @@ namespace util {
     /// - Returns: string value of the time point
     inline auto sysTimeToString(const std::chrono::system_clock::time_point &t, const std::string &format = "%a %b %d %H:%M:%S %Y") -> std::string {
         std::stringstream output;
-        auto time = std::chrono::system_clock::to_time_t(t);
+        auto time = ourclock::to_time_t(t);
         tm myvalue;
 #if defined(_MSC_VER)
         auto status = ::localtime_s(&myvalue, &time);
@@ -43,13 +43,13 @@ namespace util {
     ///     - str: the string value for the time point
     ///     - format: the string value representing the format (Thu Dec 30 14:13:28 2021)
     /// - Returns: a system time point
-    inline auto stringToSysTime(const std::string &str, const std::string &format = "%a %b %d %H:%M:%S %Y") -> std::chrono::system_clock::time_point {
+    inline auto stringToSysTime(const std::string &str, const std::string &format = "%a %b %d %H:%M:%S %Y") -> ourclock::time_point {
         std::stringstream timbuf(str);
         tm converted;
         timbuf >> std::get_time(&converted, format.c_str());
         converted.tm_isdst = -1;
         auto ntime = mktime(&converted);
-        return std::chrono::system_clock::from_time_t(ntime);
+        return ourclock::from_time_t(ntime);
     }
     
     //=======================================================================
@@ -58,7 +58,7 @@ namespace util {
     ///     - format: the format string (defaults to Thu Dec 30 14:13:28 2021)
     /// - Returns: string value of the time point
     inline auto timeNow(const std::string &format = "%a %b %d %H:%M:%S %Y") -> std::string {
-        return sysTimeToString(std::chrono::system_clock::now(), format);
+        return sysTimeToString(ourclock::now(), format);
     }
     
     //======================================================================
@@ -71,11 +71,11 @@ namespace util {
          
         HourMinute() ;
         HourMinute(int hour, int minute);
-        HourMinute(const std::chrono::system_clock::time_point &timePoint) ;
+        HourMinute(const ourclock::time_point &timePoint) ;
         HourMinute(const std::string &timeString) ;
 
         auto load(const std::string &timeString) -> void ;
-        auto load(const std::chrono::system_clock::time_point &timePoint) ->void  ;
+        auto load(const ourclock::time_point &timePoint) ->void  ;
 
         auto describe() const -> std::string ;
         
@@ -101,7 +101,56 @@ namespace util {
         static auto now() -> HourMinute ;
 
     } ;
-
+    
+    // ===========================================================================================
+    // HourRange
+    // ===========================================================================================
+    class HourRange {
+        HourMinute startTime ;
+        HourMinute endTime ;
+        
+    public:
+        HourRange()  = default ;
+        HourRange(const HourMinute &start, const HourMinute &end) ;
+        HourRange(const std::string & line ) ;
+        auto inRange(const ourclock::time_point &now = ourclock::now() ) const -> bool ;
+    };
+    // ===========================================================================================
+    // MonthDay
+    // ===========================================================================================
+    class MonthRange ;
+    class MonthDay{
+        friend class MonthRange ;
+        int month ;
+        int day ;
+        int year ;
+        auto convert(const std::string &line) -> void ;
+        auto setMonthData(const ourclock::time_point) ->void ;
+    public:
+        MonthDay(const ourclock::time_point &now = ourclock::now());
+        MonthDay(int monthvalue, int dayvalue) ;
+        MonthDay(const std::string &line) ;
+        
+        auto operator<(const MonthDay &value) const -> bool ;
+        auto operator==(const MonthDay &value) const -> bool ;
+        auto operator!=(const MonthDay &value) const -> bool ;
+        auto operator<=(const MonthDay &value) const -> bool ;
+        auto operator>(const MonthDay &value) const -> bool ;
+        auto operator>=(const MonthDay &value) const -> bool ;
+        auto describe() const -> std::string ;
+    };
+    // ===========================================================================================
+    // MonthRange
+    // ===========================================================================================
+    class MonthRange{
+        MonthDay startDay ;
+        MonthDay endDay ;
+    public:
+        MonthRange() ;
+        MonthRange(const MonthDay &beg, const MonthDay &end);
+        MonthRange(const std::string &line) ;
+        auto inRange(const ourclock::time_point &now = ourclock::now() ) const -> bool ;
+    } ;
 }
 
 #endif /* timeutil_hpp */
