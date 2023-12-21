@@ -94,5 +94,5 @@ auto LightFile::copy(std::uint32_t frame,  char *buffer, int offset, int length 
 //======================================================================
 auto LightFile::clear(bool nothrow) -> void  {
     lightHeader.clear() ;
-    lightData.unmap(nothrow) ;
+    lightData.unmap() ;
 }

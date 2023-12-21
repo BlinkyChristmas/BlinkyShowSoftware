@@ -9,7 +9,7 @@
 using namespace std::string_literals ;
 
 //======================================================================
-// Foward delcares, where the real action occurs
+// Foward declares, where the real action occurs
 auto clientLoad(const Packet &packet,BlinkClient *ptr) -> bool ;
 auto clientNop(const Packet &packet,BlinkClient *ptr) -> bool ;
 auto clientPlay(const Packet &packet,BlinkClient *ptr) -> bool ;

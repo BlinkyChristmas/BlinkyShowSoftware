@@ -19,6 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\containers\lightfile\lightfile.cpp" />
+    <ClCompile Include="..\containers\lightfile\lightheader.cpp" />
+    <ClCompile Include="..\containers\wavfile\mwavfile.cpp" />
+    <ClCompile Include="..\containers\wavfile\wavdatachunk.cpp" />
+    <ClCompile Include="..\containers\wavfile\wavfmtchunk.cpp" />
     <ClCompile Include="..\network\blinkclient.cpp" />
     <ClCompile Include="..\network\client.cpp" />
     <ClCompile Include="..\network\identpacket.cpp" />
@@ -29,12 +34,18 @@
     <ClCompile Include="..\network\playpacket.cpp" />
     <ClCompile Include="..\network\showpacket.cpp" />
     <ClCompile Include="..\network\syncpacket.cpp" />
+    <ClCompile Include="..\support\rtaudio\RtAudio.cpp" />
     <ClCompile Include="..\utility\buffer.cpp" />
     <ClCompile Include="..\utility\mapfile.cpp" />
     <ClCompile Include="..\utility\timeutil.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\containers\lightfile\lightfile.hpp" />
+    <ClInclude Include="..\containers\lightfile\lightheader.hpp" />
+    <ClInclude Include="..\containers\wavfile\mwavfile.hpp" />
+    <ClInclude Include="..\containers\wavfile\wavdatachunk.hpp" />
+    <ClInclude Include="..\containers\wavfile\wavfmtchunk.hpp" />
     <ClInclude Include="..\network\allpackets.hpp" />
     <ClInclude Include="..\network\blinkclient.hpp" />
     <ClInclude Include="..\network\client.hpp" />
@@ -136,7 +147,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);ASIO_STANDALONE;NOMINMAX;WIN32_LEAN_AND_MEAN</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);ASIO_STANDALONE;NOMINMAX;WIN32_LEAN_AND_MEAN;__WINDOWS_DS__;_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc11</LanguageStandard_C>
@@ -145,6 +156,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);ole32.lib;dsound.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -153,7 +165,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);ASIO_STANDALONE;NOMINMAX;WIN32_LEAN_AND_MEAN</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);ASIO_STANDALONE;NOMINMAX;WIN32_LEAN_AND_MEAN;__WINDOWS_DS__;_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc11</LanguageStandard_C>
@@ -164,6 +176,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);ole32.lib;dsound.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

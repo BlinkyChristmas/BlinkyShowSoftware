@@ -132,7 +132,7 @@ namespace util {
         }
         
 #if defined(_WIN32)
-        auto hfile = ::CreateFileA(path.string().c_str(), GENERIC_READ |GENERIC_WRITE, 0, nullptr, OPEN_EXISTING, FILE_FLAG_RANDOM_ACCESS, nullptr);
+        auto hfile = ::CreateFileA(path.string().c_str(), GENERIC_READ, 0, nullptr, OPEN_EXISTING, FILE_FLAG_RANDOM_ACCESS, nullptr);
         if (hfile == INVALID_HANDLE_VALUE) {
             throw std::runtime_error("Unable to open: "s + path.string());
         }
