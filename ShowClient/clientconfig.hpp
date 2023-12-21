@@ -10,7 +10,7 @@
 #include <array>
 
 #include "utility/timeutil.hpp"
-#include "pruconfig.hpp"
+#include "controllers/pruconfig.hpp"
 
 
 

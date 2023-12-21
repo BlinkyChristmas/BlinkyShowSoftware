@@ -23,6 +23,7 @@
 #include "controllers/mediacontroller.hpp"
 #include "controllers/frameclock.hpp"
 #include "controllers/statusled.hpp"
+#include "controllers/lightcontroller.hpp"
 
 #include "utility/dbgutil.hpp"
 
@@ -36,16 +37,22 @@ auto clientNop( const Packet &packet) -> bool;
 auto clientPlay( const Packet &packet) -> bool;
 auto clientShow( const Packet &packet) -> bool;
 auto clientSync( const Packet &packet) -> bool;
+
+auto clockUpdate(std::uint32_t frame) -> void ;
+
+// Now some stuff we use
+
 auto runLoop() -> void ;
 auto cleanup() -> void ;
-auto initClient() -> void ;
 auto connect( const ClientConfig &config) -> bool ;
 auto usage() -> void ;
+auto initalize() -> void ;
 // Globals
 FrameClock frameClock ;
 MediaController mediaController ;
 ClientConfig config ;
 StatusLed status ;
+LightController lights ;
 
 asio::io_context io_context ;
 BlinkClient myClient(io_context) ;
@@ -90,8 +97,14 @@ int main(int argc, const char * argv[]) {
                     // we dont do anything, but just hang around
                     std::this_thread::sleep_for(std::chrono::milliseconds(250)) ;
                 }
-                // If we are here, we should not be running a show, or playing a song!
-                // Should we force it?
+                // If we are here, we either: Disconnected, outside connect hours, outside running hours
+                // Should we force it if we are playing something?
+                frameClock.play(false) ;
+                mediaController.play(false);
+                lights.play(false) ;
+                mediaController.setShow(false);
+                lights.setShow(false) ;
+                
                 
                 // What about status?
                 status.setLed(StatusLed::SHOWSTATUS, StatusLed::OFF) ; // The issue, is we would wipe out error status?
@@ -138,6 +151,10 @@ auto clientLoad( const Packet &packet) -> bool {
             // But in theory, we should get the error on the play (not loaded), so probably ok
         }
         // Load the light file
+        if (::lights.load(lights)){
+            // WE had an issue loading?
+            
+        }
         
     }
 
@@ -166,16 +183,20 @@ auto clientPlay( const Packet &packet) -> bool {
             }
         }
         // Set the light controller to play here
-        
+        lights.play(true, frame) ;
         // and the frame clock ;
+        frameClock.play(true,frame);
     }
     else {
-        status.setLed(StatusLed::PLAYSTATUS, StatusLed::OFF) ;
+        frameClock.play(false);
         if (useAudio) {
             mediaController.play(false) ;
         }
         // Set the light controller to stop play here
-        // and the frame clock ;
+        lights.play(false) ;
+
+        status.setLed(StatusLed::PLAYSTATUS, StatusLed::OFF) ;
+
     }
     return true;
 }
@@ -193,6 +214,7 @@ auto clientShow( const Packet &packet) -> bool {
             }
         }
         // Do Light controller here
+        lights.setShow(true ) ;
     }
     else {
         status.setLed(StatusLed::SHOWSTATUS, StatusLed::OFF) ;
@@ -200,6 +222,7 @@ auto clientShow( const Packet &packet) -> bool {
             mediaController.setShow(false) ;
         }
         // Set the light controller here
+        lights.setShow(false);
     }
     return true;
 }
@@ -207,10 +230,15 @@ auto clientShow( const Packet &packet) -> bool {
 //======================================================================
 auto clientSync( const Packet  &packet) -> bool {
     // Just the frame clock
-    
+    auto ptr = static_cast<const SyncPacket*>(&packet) ;
+    frameClock.sync(ptr->frame());
     return true;
 }
-
+//======================================================================
+auto clockUpdate(std::uint32_t frame) -> void {
+    lights.sync(frame) ;
+    mediaController.sync(frame) ;
+}
 //======================================================================
 auto runLoop() -> void {
     io_context.run() ;
@@ -235,9 +263,10 @@ auto initClient() -> void {
 }
 
 //======================================================================
-auto connect() -> bool {
-    
-    return false ;
+auto intialize() -> void {
+    initClient() ;
+    // We need to add our callback
+    frameClock.setUpdateCallback(&clockUpdate) ;
 }
 
 //======================================================================

@@ -8,6 +8,10 @@
 #include <string>
 //======================================================================
 struct PRUConfig {
+    static constexpr auto MODE_SSD = 0 ;
+    static constexpr auto MODE_DMX = 1 ;
+    static constexpr auto MODE_WS2812 = 2 ;
+    
     int pru ;
     int mode ;
     int offset ;

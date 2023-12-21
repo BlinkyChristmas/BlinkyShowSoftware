@@ -168,3 +168,8 @@ auto MediaController::play(bool state, std::uint32_t frame ) -> bool{
     }
     return true ;
 }
+
+//======================================================================
+auto MediaController::sync( std::uint32_t frame) -> void {
+    this->syncFrame = frame ;
+}

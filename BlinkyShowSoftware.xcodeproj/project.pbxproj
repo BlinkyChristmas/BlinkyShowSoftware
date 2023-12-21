@@ -35,6 +35,7 @@
 		561BE4192B347C420092D4DF /* statusled.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE4182B347C420092D4DF /* statusled.cpp */; };
 		561BE4212B347C710092D4DF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE4202B347C710092D4DF /* main.cpp */; };
 		561BE42C2B347C880092D4DF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE42B2B347C880092D4DF /* main.cpp */; };
+		561BE4322B34B7770092D4DF /* lightcontroller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE4302B34B7770092D4DF /* lightcontroller.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -838,6 +839,8 @@
 		561BE4202B347C710092D4DF /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		561BE4292B347C870092D4DF /* ServerEmu */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ServerEmu; sourceTree = BUILT_PRODUCTS_DIR; };
 		561BE42B2B347C880092D4DF /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		561BE4302B34B7770092D4DF /* lightcontroller.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = lightcontroller.cpp; sourceTree = "<group>"; };
+		561BE4312B34B7770092D4DF /* lightcontroller.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = lightcontroller.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -925,12 +928,16 @@
 		561BE0C02B337DF40092D4DF /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				561BE4162B34743E0092D4DF /* pruconfig.hpp */,
+				561BE4142B3473A00092D4DF /* pruconfig.cpp */,
 				561BE4182B347C420092D4DF /* statusled.cpp */,
 				561BE4172B347C420092D4DF /* statusled.hpp */,
 				561BE3F02B33FE330092D4DF /* frameclock.cpp */,
 				561BE3F12B33FE330092D4DF /* frameclock.hpp */,
 				561BE3F62B34068C0092D4DF /* mediacontroller.cpp */,
 				561BE3F72B34068C0092D4DF /* mediacontroller.hpp */,
+				561BE4302B34B7770092D4DF /* lightcontroller.cpp */,
+				561BE4312B34B7770092D4DF /* lightcontroller.hpp */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -1952,8 +1959,6 @@
 		561BE3C92B3380820092D4DF /* ShowClient */ = {
 			isa = PBXGroup;
 			children = (
-				561BE4162B34743E0092D4DF /* pruconfig.hpp */,
-				561BE4142B3473A00092D4DF /* pruconfig.cpp */,
 				561BE4122B3473760092D4DF /* clientconfig.cpp */,
 				561BE4112B3473760092D4DF /* clientconfig.hpp */,
 				561BE3D42B3381000092D4DF /* CMakeLists.txt */,
@@ -2169,6 +2174,7 @@
 				561BE4192B347C420092D4DF /* statusled.cpp in Sources */,
 				561BE3E62B338DE00092D4DF /* syncpacket.cpp in Sources */,
 				561BE3F42B3400AE0092D4DF /* client.cpp in Sources */,
+				561BE4322B34B7770092D4DF /* lightcontroller.cpp in Sources */,
 				561BE3DC2B338B970092D4DF /* mapfile.cpp in Sources */,
 				561BE3E92B338DFC0092D4DF /* wavfmtchunk.cpp in Sources */,
 				561BE4152B3473A00092D4DF /* pruconfig.cpp in Sources */,
