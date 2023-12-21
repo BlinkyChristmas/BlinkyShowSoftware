@@ -66,3 +66,8 @@ BlinkClient::BlinkClient(asio::io_context &context,IdentPacket::ClientType clien
 auto BlinkClient::setPacketRountine(Packet::PacketType type, PacketProcessing routine) -> void {
     this->packetRoutines.insert_or_assign(type,routine) ;
 }
+
+// ========================================================================================
+auto BlinkClient::setServerKey( std::uint32_t key) -> void {
+    this->server_key = key ;
+}

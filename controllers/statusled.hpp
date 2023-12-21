@@ -8,14 +8,15 @@
 #include <string>
 #include <vector>
 
-constexpr auto  SHOWSTATUS = 0 ;
-constexpr auto  CONNECTSTATUS = 1 ;
-constexpr auto  PLAYSTATUS = 2 ;
-constexpr auto  RUNSTATUS = 3 ;
-constexpr auto  LEDCOUNT = 4 ;
 //======================================================================
 class StatusLed {
 public:
+    static constexpr auto  SHOWSTATUS = 0 ;
+    static constexpr auto  CONNECTSTATUS = 1 ;
+    static constexpr auto  PLAYSTATUS = 2 ;
+    static constexpr auto  RUNSTATUS = 3 ;
+    static constexpr auto  LEDCOUNT = 4 ;
+
     enum LEDMode {
         OFF,ON,FLASH
     };

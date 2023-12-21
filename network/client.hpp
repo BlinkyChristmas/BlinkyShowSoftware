@@ -39,6 +39,7 @@ public:
     auto shutdown() -> void ;
     auto close() -> void ;
     auto connect(asio::ip::tcp::endpoint &endpoint, int clientPort) -> bool ;
+    auto bind(int port) -> bool ;
     static auto resolve(const std::string &ipaddress, int serverPort) -> asio::ip::tcp::endpoint ;
     
     [[maybe_unused]] auto sendPacket(const Packet &packet) -> bool ;

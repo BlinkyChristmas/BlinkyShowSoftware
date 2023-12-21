@@ -34,7 +34,7 @@ public:
     virtual ~BlinkClient() = default;
     
     auto setPacketRountine(Packet::PacketType type, PacketProcessing routine) -> void ;
-
+    auto setServerKey( std::uint32_t key) -> void ;
 };
 
 

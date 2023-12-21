@@ -115,6 +115,27 @@ auto Client::connect(asio::ip::tcp::endpoint &endpoint, int clientPort) -> bool 
 }
 
 // ========================================================================================
+auto Client::bind(int port) -> bool {
+    asio::error_code ec ;
+    if (!netSocket.is_open()){
+        netSocket.open(asio::ip::tcp::v4(),ec) ;
+    }
+    if (ec) {
+        return false ;
+    }
+    if (port > 0) {
+        auto ip_address = asio::ip::address_v4::from_string("127.0.0.1") ;
+        auto endpoint = asio::ip::tcp::endpoint(ip_address,port) ;
+        netSocket.bind(endpoint,ec) ;
+        if (ec) {
+            return false ;
+        }
+    }
+    return true ;
+    
+}
+
+// ========================================================================================
 auto Client::resolve(const std::string &ipaddress, int serverPort) -> asio::ip::tcp::endpoint {
     asio::io_context io_context ;
     asio::ip::tcp::resolver resolver(io_context) ;
