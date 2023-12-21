@@ -5,43 +5,64 @@
 #include <algorithm>
 #include <stdexcept>
 
-
+#include "utility/dbgutil.hpp"
 using namespace std::string_literals ;
 
-//======================================================================
-// Foward declares, where the real action occurs
-auto clientLoad(const Packet &packet,BlinkClient *ptr) -> bool ;
-auto clientNop(const Packet &packet,BlinkClient *ptr) -> bool ;
-auto clientPlay(const Packet &packet,BlinkClient *ptr) -> bool ;
-auto clientShow(const Packet &packet,BlinkClient *ptr) -> bool ;
-auto clientSync(const Packet &packet,BlinkClient *ptr) -> bool ;
 
 // ========================================================================================
-auto BlinkClient::processLoadPacket(const Packet &packet) -> bool {
-    return clientLoad(packet,this) ;
-}
-// ========================================================================================
-auto BlinkClient::processNopPacket(const Packet &packet) -> bool {
-    return clientNop(packet,this) ;
-}
-// ========================================================================================
-auto BlinkClient::processPlayPacket(const Packet &packet) -> bool {
-    return clientPlay(packet,this) ;
-}
-// ========================================================================================
-auto BlinkClient::processShowPacket(const Packet &packet) -> bool {
-    return clientShow(packet,this) ;
-}
-// ========================================================================================
-auto BlinkClient::processSyncPacket(const Packet &packet) -> bool {
-    return clientSync(packet,this) ;
+auto BlinkClient::processPacket(const Packet &packet) -> bool {
+    auto id = packet.packetID() ;
+    switch(id){
+        case IdentPacket::IDENT:{
+            return processIdentPacket(packet) ;
+        }
+        default: {
+            auto iter = packetRoutines.find(id) ;
+            if (iter != packetRoutines.end()) {
+                if (iter->second != nullptr){
+                    return iter->second(packet) ;
+                }
+                return true ;
+            }
+            DBGMSG(std::cerr, "Unknown packet received: "s + std::to_string(id)) ;
+            return true ;
+        }
+    }
 }
 
 // ========================================================================================
-BlinkClient::BlinkClient(asio::io_context &context,std::uint32_t key ) : NameClient(context,key){
-    
+auto BlinkClient::processIdentPacket(const Packet &packet) -> bool {
+    auto ptr = static_cast<const IdentPacket*>(&packet) ;
+    name = ptr->handle() ;
+    type = ptr->clientType() ;
+    if (server_key != ptr->key()){
+        this->close() ;
+        return false ;
+    }
+    return true ;
+}
+
+
+// ========================================================================================
+BlinkClient::BlinkClient(asio::io_context &context,std::uint32_t key):Client(context),type(IdentPacket::ClientType::UNKNOWN),server_key(key){
+    packetRoutines.insert_or_assign(Packet::LOAD,nullptr) ;
+    packetRoutines.insert_or_assign(Packet::NOP,nullptr) ;
+    packetRoutines.insert_or_assign(Packet::PLAY,nullptr) ;
+    packetRoutines.insert_or_assign(Packet::SHOW,nullptr) ;
+    packetRoutines.insert_or_assign(Packet::SYNC,nullptr) ;
+
+}
+
+// ========================================================================================
+BlinkClient::BlinkClient(asio::io_context &context,IdentPacket::ClientType clienttype, std::uint32_t key):Client(context),type(clienttype),server_key(key){
+    packetRoutines.insert_or_assign(Packet::LOAD,nullptr) ;
+    packetRoutines.insert_or_assign(Packet::NOP,nullptr) ;
+    packetRoutines.insert_or_assign(Packet::PLAY,nullptr) ;
+    packetRoutines.insert_or_assign(Packet::SHOW,nullptr) ;
+    packetRoutines.insert_or_assign(Packet::SYNC,nullptr) ;
+
 }
 // ========================================================================================
-BlinkClient::BlinkClient(asio::io_context &context,IdentPacket::ClientType clienttype, std::uint32_t key ): NameClient(context,clienttype,key) {
-    
+auto BlinkClient::setPacketRountine(Packet::PacketType type, std::function<bool(const Packet&)> &routine) -> void {
+    this->packetRoutines.insert_or_assign(type,routine) ;
 }

@@ -24,6 +24,7 @@ if (WIN32)
         $<$<CONFIG:Release>:NDEBUG>
         $<$<CONFIG:Debug>:_DEBUG>
         __WINDOWS_DS__
+        _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS
     )
 
     target_compile_options(showclient PRIVATE
