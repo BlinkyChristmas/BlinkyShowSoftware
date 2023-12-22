@@ -28,7 +28,6 @@
 		561BE3EF2B33FE0E0092D4DF /* RtAudio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3982B337E960092D4DF /* RtAudio.cpp */; };
 		561BE3F22B33FE330092D4DF /* frameclock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3F02B33FE330092D4DF /* frameclock.cpp */; };
 		561BE3F42B3400AE0092D4DF /* client.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE39B2B337EF20092D4DF /* client.cpp */; };
-		561BE3F52B3400B80092D4DF /* blinkclient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE39E2B337EF20092D4DF /* blinkclient.cpp */; };
 		561BE3F82B34068C0092D4DF /* mediacontroller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3F62B34068C0092D4DF /* mediacontroller.cpp */; };
 		561BE4132B3473760092D4DF /* clientconfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE4122B3473760092D4DF /* clientconfig.cpp */; };
 		561BE4152B3473A00092D4DF /* pruconfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE4142B3473A00092D4DF /* pruconfig.cpp */; };
@@ -36,6 +35,40 @@
 		561BE4212B347C710092D4DF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE4202B347C710092D4DF /* main.cpp */; };
 		561BE42C2B347C880092D4DF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE42B2B347C880092D4DF /* main.cpp */; };
 		561BE4322B34B7770092D4DF /* lightcontroller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE4302B34B7770092D4DF /* lightcontroller.cpp */; };
+		561BE4332B34E9010092D4DF /* identpacket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE39D2B337EF20092D4DF /* identpacket.cpp */; };
+		561BE4342B34E9010092D4DF /* playpacket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE39F2B337EF20092D4DF /* playpacket.cpp */; };
+		561BE4352B34E9010092D4DF /* showpacket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3A22B337EF20092D4DF /* showpacket.cpp */; };
+		561BE4362B34E9010092D4DF /* loadpacket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3A82B337EF20092D4DF /* loadpacket.cpp */; };
+		561BE4372B34E9010092D4DF /* noppacket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3A42B337EF20092D4DF /* noppacket.cpp */; };
+		561BE4392B34E9010092D4DF /* syncpacket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3AD2B337EF20092D4DF /* syncpacket.cpp */; };
+		561BE43A2B34E9010092D4DF /* client.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE39B2B337EF20092D4DF /* client.cpp */; };
+		561BE43B2B34E9010092D4DF /* packet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3A32B337EF20092D4DF /* packet.cpp */; };
+		561BE43C2B34E9020092D4DF /* identpacket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE39D2B337EF20092D4DF /* identpacket.cpp */; };
+		561BE43D2B34E9020092D4DF /* playpacket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE39F2B337EF20092D4DF /* playpacket.cpp */; };
+		561BE43E2B34E9020092D4DF /* showpacket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3A22B337EF20092D4DF /* showpacket.cpp */; };
+		561BE43F2B34E9020092D4DF /* loadpacket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3A82B337EF20092D4DF /* loadpacket.cpp */; };
+		561BE4402B34E9020092D4DF /* noppacket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3A42B337EF20092D4DF /* noppacket.cpp */; };
+		561BE4422B34E9020092D4DF /* syncpacket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3AD2B337EF20092D4DF /* syncpacket.cpp */; };
+		561BE4432B34E9020092D4DF /* client.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE39B2B337EF20092D4DF /* client.cpp */; };
+		561BE4442B34E9020092D4DF /* packet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3A32B337EF20092D4DF /* packet.cpp */; };
+		561BE4452B34E91F0092D4DF /* timeutil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3B32B337F0C0092D4DF /* timeutil.cpp */; };
+		561BE4462B34E91F0092D4DF /* buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3B22B337F0C0092D4DF /* buffer.cpp */; };
+		561BE4472B34E91F0092D4DF /* mapfile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3D82B33857F0092D4DF /* mapfile.cpp */; };
+		561BE4482B34E9200092D4DF /* timeutil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3B32B337F0C0092D4DF /* timeutil.cpp */; };
+		561BE4492B34E9200092D4DF /* buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3B22B337F0C0092D4DF /* buffer.cpp */; };
+		561BE44A2B34E9200092D4DF /* mapfile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3D82B33857F0092D4DF /* mapfile.cpp */; };
+		561BE4522B35D7AA0092D4DF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE4512B35D7AA0092D4DF /* main.cpp */; };
+		561BE4562B35D9B40092D4DF /* noppacket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3A42B337EF20092D4DF /* noppacket.cpp */; };
+		561BE4572B35D9B40092D4DF /* playpacket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE39F2B337EF20092D4DF /* playpacket.cpp */; };
+		561BE4582B35D9B40092D4DF /* syncpacket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3AD2B337EF20092D4DF /* syncpacket.cpp */; };
+		561BE4592B35D9B40092D4DF /* packet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3A32B337EF20092D4DF /* packet.cpp */; };
+		561BE45A2B35D9B40092D4DF /* showpacket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3A22B337EF20092D4DF /* showpacket.cpp */; };
+		561BE45B2B35D9B40092D4DF /* client.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE39B2B337EF20092D4DF /* client.cpp */; };
+		561BE45C2B35D9B40092D4DF /* identpacket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE39D2B337EF20092D4DF /* identpacket.cpp */; };
+		561BE45D2B35D9B40092D4DF /* loadpacket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3A82B337EF20092D4DF /* loadpacket.cpp */; };
+		561BE45E2B35D9BE0092D4DF /* mapfile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3D82B33857F0092D4DF /* mapfile.cpp */; };
+		561BE45F2B35D9BE0092D4DF /* timeutil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3B32B337F0C0092D4DF /* timeutil.cpp */; };
+		561BE4602B35D9BE0092D4DF /* buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3B22B337F0C0092D4DF /* buffer.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -58,6 +91,15 @@
 			runOnlyForDeploymentPostprocessing = 1;
 		};
 		561BE4272B347C870092D4DF /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		561BE44D2B35D7AA0092D4DF /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -765,9 +807,7 @@
 		561BE3992B337EF20092D4DF /* loadpacket.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = loadpacket.hpp; sourceTree = "<group>"; };
 		561BE39A2B337EF20092D4DF /* syncpacket.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = syncpacket.hpp; sourceTree = "<group>"; };
 		561BE39B2B337EF20092D4DF /* client.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = client.cpp; sourceTree = "<group>"; };
-		561BE39C2B337EF20092D4DF /* blinkclient.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = blinkclient.hpp; sourceTree = "<group>"; };
 		561BE39D2B337EF20092D4DF /* identpacket.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = identpacket.cpp; sourceTree = "<group>"; };
-		561BE39E2B337EF20092D4DF /* blinkclient.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = blinkclient.cpp; sourceTree = "<group>"; };
 		561BE39F2B337EF20092D4DF /* playpacket.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = playpacket.cpp; sourceTree = "<group>"; };
 		561BE3A02B337EF20092D4DF /* packet.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = packet.hpp; sourceTree = "<group>"; };
 		561BE3A12B337EF20092D4DF /* identpacket.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = identpacket.hpp; sourceTree = "<group>"; };
@@ -841,6 +881,8 @@
 		561BE42B2B347C880092D4DF /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		561BE4302B34B7770092D4DF /* lightcontroller.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = lightcontroller.cpp; sourceTree = "<group>"; };
 		561BE4312B34B7770092D4DF /* lightcontroller.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = lightcontroller.hpp; sourceTree = "<group>"; };
+		561BE44F2B35D7AA0092D4DF /* teststuff */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = teststuff; sourceTree = BUILT_PRODUCTS_DIR; };
+		561BE4512B35D7AA0092D4DF /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -867,6 +909,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		561BE44C2B35D7AA0092D4DF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -886,6 +935,7 @@
 				561BE3C92B3380820092D4DF /* ShowClient */,
 				561BE41F2B347C710092D4DF /* ShowServer */,
 				561BE42A2B347C880092D4DF /* ServerEmu */,
+				561BE4502B35D7AA0092D4DF /* teststuff */,
 				561BE0B52B337DC20092D4DF /* Products */,
 				561BE3CF2B3380900092D4DF /* Frameworks */,
 			);
@@ -897,6 +947,7 @@
 				561BE3C82B3380820092D4DF /* ShowClient */,
 				561BE41E2B347C710092D4DF /* ShowServer */,
 				561BE4292B347C870092D4DF /* ServerEmu */,
+				561BE44F2B35D7AA0092D4DF /* teststuff */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -905,13 +956,13 @@
 			isa = PBXGroup;
 			children = (
 				561BE3B22B337F0C0092D4DF /* buffer.cpp */,
+				561BE3D82B33857F0092D4DF /* mapfile.cpp */,
+				561BE3B32B337F0C0092D4DF /* timeutil.cpp */,
 				561BE3B02B337F0C0092D4DF /* buffer.hpp */,
 				561BE3B12B337F0C0092D4DF /* dbgutil.hpp */,
-				561BE3AF2B337F0C0092D4DF /* strutil.hpp */,
-				561BE3B32B337F0C0092D4DF /* timeutil.cpp */,
-				561BE3AE2B337F0C0092D4DF /* timeutil.hpp */,
-				561BE3D82B33857F0092D4DF /* mapfile.cpp */,
 				561BE3D92B33857F0092D4DF /* mapfile.hpp */,
+				561BE3AF2B337F0C0092D4DF /* strutil.hpp */,
+				561BE3AE2B337F0C0092D4DF /* timeutil.hpp */,
 			);
 			path = utility;
 			sourceTree = "<group>";
@@ -946,8 +997,6 @@
 			isa = PBXGroup;
 			children = (
 				561BE3A72B337EF20092D4DF /* allpackets.hpp */,
-				561BE39E2B337EF20092D4DF /* blinkclient.cpp */,
-				561BE39C2B337EF20092D4DF /* blinkclient.hpp */,
 				561BE39B2B337EF20092D4DF /* client.cpp */,
 				561BE3AC2B337EF20092D4DF /* client.hpp */,
 				561BE39D2B337EF20092D4DF /* identpacket.cpp */,
@@ -2056,6 +2105,14 @@
 			path = ServerEmu;
 			sourceTree = "<group>";
 		};
+		561BE4502B35D7AA0092D4DF /* teststuff */ = {
+			isa = PBXGroup;
+			children = (
+				561BE4512B35D7AA0092D4DF /* main.cpp */,
+			);
+			path = teststuff;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2110,6 +2167,23 @@
 			productReference = 561BE4292B347C870092D4DF /* ServerEmu */;
 			productType = "com.apple.product-type.tool";
 		};
+		561BE44E2B35D7AA0092D4DF /* teststuff */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 561BE4532B35D7AA0092D4DF /* Build configuration list for PBXNativeTarget "teststuff" */;
+			buildPhases = (
+				561BE44B2B35D7AA0092D4DF /* Sources */,
+				561BE44C2B35D7AA0092D4DF /* Frameworks */,
+				561BE44D2B35D7AA0092D4DF /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = teststuff;
+			productName = teststuff;
+			productReference = 561BE44F2B35D7AA0092D4DF /* teststuff */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -2127,6 +2201,9 @@
 						CreatedOnToolsVersion = 15.0.1;
 					};
 					561BE4282B347C870092D4DF = {
+						CreatedOnToolsVersion = 15.0.1;
+					};
+					561BE44E2B35D7AA0092D4DF = {
 						CreatedOnToolsVersion = 15.0.1;
 					};
 				};
@@ -2147,6 +2224,7 @@
 				561BE3C72B3380820092D4DF /* ShowClient */,
 				561BE41D2B347C710092D4DF /* ShowServer */,
 				561BE4282B347C870092D4DF /* ServerEmu */,
+				561BE44E2B35D7AA0092D4DF /* teststuff */,
 			);
 		};
 /* End PBXProject section */
@@ -2166,7 +2244,6 @@
 				561BE3DA2B338B8F0092D4DF /* buffer.cpp in Sources */,
 				561BE3ED2B33BFF20092D4DF /* lightfile.cpp in Sources */,
 				561BE3E22B338DE00092D4DF /* noppacket.cpp in Sources */,
-				561BE3F52B3400B80092D4DF /* blinkclient.cpp in Sources */,
 				561BE3E02B338DE00092D4DF /* identpacket.cpp in Sources */,
 				561BE3EF2B33FE0E0092D4DF /* RtAudio.cpp in Sources */,
 				561BE3E52B338DE00092D4DF /* loadpacket.cpp in Sources */,
@@ -2188,7 +2265,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				561BE43E2B34E9020092D4DF /* showpacket.cpp in Sources */,
+				561BE4442B34E9020092D4DF /* packet.cpp in Sources */,
+				561BE4402B34E9020092D4DF /* noppacket.cpp in Sources */,
+				561BE43C2B34E9020092D4DF /* identpacket.cpp in Sources */,
+				561BE4472B34E91F0092D4DF /* mapfile.cpp in Sources */,
+				561BE43D2B34E9020092D4DF /* playpacket.cpp in Sources */,
+				561BE4422B34E9020092D4DF /* syncpacket.cpp in Sources */,
+				561BE4452B34E91F0092D4DF /* timeutil.cpp in Sources */,
+				561BE43F2B34E9020092D4DF /* loadpacket.cpp in Sources */,
+				561BE4462B34E91F0092D4DF /* buffer.cpp in Sources */,
 				561BE4212B347C710092D4DF /* main.cpp in Sources */,
+				561BE4432B34E9020092D4DF /* client.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2196,7 +2284,37 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				561BE4352B34E9010092D4DF /* showpacket.cpp in Sources */,
+				561BE43B2B34E9010092D4DF /* packet.cpp in Sources */,
+				561BE4372B34E9010092D4DF /* noppacket.cpp in Sources */,
+				561BE4332B34E9010092D4DF /* identpacket.cpp in Sources */,
+				561BE44A2B34E9200092D4DF /* mapfile.cpp in Sources */,
+				561BE4342B34E9010092D4DF /* playpacket.cpp in Sources */,
+				561BE4392B34E9010092D4DF /* syncpacket.cpp in Sources */,
+				561BE4482B34E9200092D4DF /* timeutil.cpp in Sources */,
+				561BE4362B34E9010092D4DF /* loadpacket.cpp in Sources */,
+				561BE4492B34E9200092D4DF /* buffer.cpp in Sources */,
 				561BE42C2B347C880092D4DF /* main.cpp in Sources */,
+				561BE43A2B34E9010092D4DF /* client.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		561BE44B2B35D7AA0092D4DF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				561BE45D2B35D9B40092D4DF /* loadpacket.cpp in Sources */,
+				561BE4582B35D9B40092D4DF /* syncpacket.cpp in Sources */,
+				561BE4592B35D9B40092D4DF /* packet.cpp in Sources */,
+				561BE45A2B35D9B40092D4DF /* showpacket.cpp in Sources */,
+				561BE45B2B35D9B40092D4DF /* client.cpp in Sources */,
+				561BE45C2B35D9B40092D4DF /* identpacket.cpp in Sources */,
+				561BE45F2B35D9BE0092D4DF /* timeutil.cpp in Sources */,
+				561BE45E2B35D9BE0092D4DF /* mapfile.cpp in Sources */,
+				561BE4522B35D7AA0092D4DF /* main.cpp in Sources */,
+				561BE4602B35D9BE0092D4DF /* buffer.cpp in Sources */,
+				561BE4572B35D9B40092D4DF /* playpacket.cpp in Sources */,
+				561BE4562B35D9B40092D4DF /* noppacket.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2368,7 +2486,7 @@
 		561BE4232B347C710092D4DF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CF264WE69M;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -2376,6 +2494,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -2383,10 +2502,11 @@
 		561BE4242B347C710092D4DF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CF264WE69M;
 				ENABLE_HARDENED_RUNTIME = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -2394,7 +2514,7 @@
 		561BE42E2B347C880092D4DF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CF264WE69M;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -2402,6 +2522,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -2409,10 +2530,39 @@
 		561BE42F2B347C880092D4DF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CF264WE69M;
 				ENABLE_HARDENED_RUNTIME = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		561BE4542B35D7AA0092D4DF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CF264WE69M;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		561BE4552B35D7AA0092D4DF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CF264WE69M;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -2452,6 +2602,15 @@
 			buildConfigurations = (
 				561BE42E2B347C880092D4DF /* Debug */,
 				561BE42F2B347C880092D4DF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		561BE4532B35D7AA0092D4DF /* Build configuration list for PBXNativeTarget "teststuff" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				561BE4542B35D7AA0092D4DF /* Debug */,
+				561BE4552B35D7AA0092D4DF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

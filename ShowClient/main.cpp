@@ -17,7 +17,7 @@
 #include "utility/strutil.hpp"
 #include "utility/timeutil.hpp"
 
-#include "network/blinkclient.hpp"
+#include "network/client.hpp"
 #include "network/allpackets.hpp"
 
 #include "controllers/mediacontroller.hpp"
@@ -55,7 +55,7 @@ StatusLed status ;
 LightController lights ;
 
 asio::io_context io_context ;
-BlinkClient myClient(io_context) ;
+Client myClient(io_context) ;
 std::thread runThread ;
 
 bool useAudio = false ;
@@ -100,7 +100,7 @@ int main(int argc, const char * argv[]) {
                     std::this_thread::sleep_for(std::chrono::milliseconds(250)) ;
                 }
                 io_context.stop() ;
-                io_context.reset() ;
+                io_context.restart() ;
                 if (runThread.joinable()){
                     runThread.join() ;
                     runThread = std::thread() ;
@@ -116,13 +116,13 @@ int main(int argc, const char * argv[]) {
                 
                 // What about status?
                 status.setLed(StatusLed::SHOWSTATUS, StatusLed::OFF) ; // The issue, is we would wipe out error status?
-                                                                        // Maybe show error status should exit, but just that error indicator
+                // Maybe show error status should exit, but just that error indicator
                 status.setLed(StatusLed::PLAYSTATUS, StatusLed::OFF) ;
-
+                
             }
             status.setLed(StatusLed::CONNECTSTATUS, StatusLed::OFF) ;
-
-
+            
+            
         }
     }
     catch (const std::exception& e) {
@@ -158,14 +158,15 @@ auto clientLoad( const Packet &packet) -> bool {
             // I am not sure here
             // But in theory, we should get the error on the play (not loaded), so probably ok
         }
-        // Load the light file
-        if (::lights.load(lights)){
-            // WE had an issue loading?
-            
-        }
+    }
+    
+    // Load the light file
+    if (::lights.load(lights)){
+        // WE had an issue loading?
         
     }
-
+    
+    
     return true;
 }
 
@@ -202,9 +203,9 @@ auto clientPlay( const Packet &packet) -> bool {
         }
         // Set the light controller to stop play here
         lights.play(false) ;
-
+        
         status.setLed(StatusLed::PLAYSTATUS, StatusLed::OFF) ;
-
+        
     }
     return true;
 }
@@ -263,11 +264,11 @@ auto cleanup() -> void {
 
 //======================================================================
 auto initClient() -> void {
-    myClient.setPacketRountine(Packet::LOAD, &clientLoad);
-    myClient.setPacketRountine(Packet::NOP, &clientNop);
-    myClient.setPacketRountine(Packet::PLAY, &clientPlay);
-    myClient.setPacketRountine(Packet::SHOW, &clientShow);
-    myClient.setPacketRountine(Packet::SYNC, &clientSync);
+    myClient.setPacketRoutine(Packet::LOAD, &clientLoad);
+    myClient.setPacketRoutine(Packet::NOP, &clientNop);
+    myClient.setPacketRoutine(Packet::PLAY, &clientPlay);
+    myClient.setPacketRoutine(Packet::SHOW, &clientShow);
+    myClient.setPacketRoutine(Packet::SYNC, &clientSync);
 }
 
 //======================================================================

@@ -6,15 +6,23 @@
 #include <cstdint>
 #include <iostream>
 #include <string>
+#include <memory>
+#include <functional>
+#include <unordered_map>
 
 #include "asio/asio.hpp"
-#include "allpackets.hpp"
+#include "packet.hpp"
+#include "identpacket.hpp"
 #include "utility/timeutil.hpp"
+
+
 //======================================================================
-class Client {
-    
+class Client : public std::enable_shared_from_this<Client> {
+public:
+    using ClientPointer = std::shared_ptr<Client> ;
+    using PacketProcessing = std::function<bool( const Packet &)>  ;
+
 protected:
-    asio::ip::tcp::socket netSocket ;
     
     Packet incomingPacket ;
     size_t bytesAsked ;
@@ -25,15 +33,27 @@ protected:
     util::ourclock::time_point connect_time ;
     util::ourclock::time_point receive_time ;
     util::ourclock::time_point send_time ;
-    
+
+    std::string name ;
+    IdentPacket::ClientType type ;
+    std::uint32_t server_key ;
+
+    std::unordered_map<Packet::PacketType,Client::PacketProcessing > packetRoutines ;
+
+
     auto packetRead(const asio::error_code& err, size_t bytes_transferred) -> void ;
-    virtual auto processPacket(const Packet &packet) -> bool ;
+    auto processPacket(const Packet &packet) -> bool ;
+    auto processIdentPacket(const Packet &packet) -> bool ;
 
 public:
-    Client(asio::io_context &context) ;
-    virtual ~Client() ;
 
-    auto socket() -> asio::ip::tcp::socket& ;
+    asio::ip::tcp::socket netSocket ;
+    static auto createPointer(asio::io_context &io_context) -> ClientPointer ;
+
+    Client(asio::io_context &context) ;
+    Client(asio::io_context &context, IdentPacket::ClientType clienttype, std::uint32_t key = 0xDEADBEEF);
+     ~Client() ;
+
     
     auto is_open() const -> bool ;
     auto shutdown() -> void ;
@@ -59,6 +79,13 @@ public:
     auto millSinceSend(const util::ourclock::time_point &time  = util::ourclock::now()) -> size_t ;
  
     auto initialRead() -> void ;
+
+    auto setPacketRoutine(Packet::PacketType type, PacketProcessing routine) -> void ;
+    auto setServerKey( std::uint32_t key) -> void ;
+    auto setClientType(IdentPacket::ClientType clienttype) -> void ;
+    
+    auto handle() const -> const std::string& ;
+    auto clientType() const -> const std::string& ;
 
 };
 

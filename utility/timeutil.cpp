@@ -80,10 +80,7 @@ namespace util {
     
     //====================================================================================
     auto HourMinute::operator>(const HourMinute &value) const -> bool {
-        if ( this->hour >= value.hour) {
-            return this->minute > value.minute;
-        }
-        return false ;
+        return !operator<=(value) ;
     }
     
     //====================================================================================
@@ -186,9 +183,16 @@ namespace util {
     // ===========================================================================================
     auto HourRange::inRange(const ourclock::time_point &now ) const -> bool {
         auto hnow = HourMinute(now) ;
-        return startTime >= hnow && endTime < hnow ;
+        auto value = startTime <= hnow ;
+        value = value &&  (endTime > hnow );
+        return value ;
     }
-    
+    // ===========================================================================================
+    auto HourRange::inRange(const HourMinute &value) const -> bool {
+        auto rvalue = startTime <= value ;
+        rvalue = rvalue && ( this->endTime > value) ;
+        return rvalue ;
+    }
     // ===========================================================================================
     // MonthDay
     // ===========================================================================================

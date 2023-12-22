@@ -23,7 +23,7 @@ namespace util {
     ///     - t: the time point
     ///     - format: the format string (defaults to Thu Dec 30 14:13:28 2021)
     /// - Returns: string value of the time point
-    inline auto sysTimeToString(const std::chrono::system_clock::time_point &t, const std::string &format = "%a %b %d %H:%M:%S %Y") -> std::string {
+    inline auto sysTimeToString(const ourclock::time_point &t, const std::string &format = "%a %b %d %H:%M:%S %Y") -> std::string {
         std::stringstream output;
         auto time = ourclock::to_time_t(t);
         tm myvalue;
@@ -114,6 +114,7 @@ namespace util {
         HourRange(const HourMinute &start, const HourMinute &end) ;
         HourRange(const std::string & line ) ;
         auto inRange(const ourclock::time_point &now = ourclock::now() ) const -> bool ;
+        auto inRange(const HourMinute &value) const -> bool ;
     };
     // ===========================================================================================
     // MonthDay

@@ -32,6 +32,7 @@ public:
     enum ClientType {
         UNKNOWN,CLIENT,STATUS,MASTER,TYPECOUNT
     };
+    static auto nameForType(ClientType type) -> const std::string & ;
     static auto clientTypeFor(int clientid) -> ClientType ;
     IdentPacket()  ;
     IdentPacket(const std::vector<std::uint8_t> &data)  ;

@@ -30,7 +30,7 @@ auto FrameClock::close() -> void {
         runThread.join() ;
         runThread = std::thread() ;
     }
-    io_context.reset() ;
+    io_context.restart() ;
 }
 
 //======================================================================
