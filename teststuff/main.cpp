@@ -20,9 +20,8 @@ using namespace std::string_literals ;
 
 
 int main(int argc, const char * argv[]) {
-    util::HourRange one("10:10,12:12") ;
-    util::HourMinute two("10:40") ;
-    auto value  = one.inRange(two) ;
     
+    auto now = util::ourclock::now() ;
+    std::cout << util::sysTimeToString(now,"%b %d %H:%M") << std::endl;
      return 0;
 }

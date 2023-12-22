@@ -28,12 +28,14 @@ class IdentPacket : public Packet {
     static constexpr auto HANDLEOFFSET = KEYOFFSET + 4 ;
     static constexpr auto PACKETSIZE = HANDLEOFFSET + 4 ;
     static constexpr auto HANDLESIZE = 20 ;
+    static const std::vector<std::string> CLIENTNAMES ;
 public:
     enum ClientType {
         UNKNOWN,CLIENT,STATUS,MASTER,TYPECOUNT
     };
-    static auto nameForType(ClientType type) -> const std::string & ;
+    static auto nameForClient(ClientType type) -> const std::string & ;
     static auto clientTypeFor(int clientid) -> ClientType ;
+    
     IdentPacket()  ;
     IdentPacket(const std::vector<std::uint8_t> &data)  ;
 

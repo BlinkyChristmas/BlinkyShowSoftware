@@ -21,12 +21,12 @@ PlayPacket::PlayPacket(const std::vector<std::uint8_t> &data) : Packet(data) {
 }
 
 //======================================================================
-auto PlayPacket::play() const -> bool {
-    return (this->read<int>(PLAYOFFSET) != 0) ;
+auto PlayPacket::state() const -> bool {
+    return (this->read<int>(STATEOFFSET) != 0) ;
 }
 //======================================================================
-auto PlayPacket::setPlay(bool value) -> void {
-    this->write((value? 1: 0) , PLAYOFFSET) ;
+auto PlayPacket::setState(bool value) -> void {
+    this->write((value? 1: 0) , STATEOFFSET) ;
 }
 //======================================================================
 auto PlayPacket::frame() const -> std::uint32_t {

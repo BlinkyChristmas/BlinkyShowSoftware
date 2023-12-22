@@ -21,10 +21,10 @@ ShowPacket::ShowPacket(const std::vector<std::uint8_t> &data) : Packet(data) {
 }
 
 //======================================================================
-auto ShowPacket::show() const -> bool {
-    return (this->read<int>(SHOWOFFSET) != 0) ;
+auto ShowPacket::state() const -> bool {
+    return (this->read<int>(STATEOFFSET) != 0) ;
 }
 //======================================================================
-auto ShowPacket::setShow(bool value) -> void {
-    this->write((value? 1: 0) , SHOWOFFSET) ;
+auto ShowPacket::setState(bool value) -> void {
+    this->write((value? 1: 0) , STATEOFFSET) ;
 }

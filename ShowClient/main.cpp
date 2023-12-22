@@ -32,11 +32,11 @@
 using namespace std::string_literals ;
 
 // Foward declares, where the real action occurs
-auto clientLoad( const Packet &packet) -> bool;
-auto clientNop( const Packet &packet) -> bool;
-auto clientPlay( const Packet &packet) -> bool;
-auto clientShow( const Packet &packet) -> bool;
-auto clientSync( const Packet &packet) -> bool;
+auto clientLoad( const Packet &packet,Client *) -> bool;
+auto clientNop( const Packet &packet, Client *) -> bool;
+auto clientPlay( const Packet &packet, Client *) -> bool;
+auto clientShow( const Packet &packet, Client *) -> bool;
+auto clientSync( const Packet &packet, Client *) -> bool;
 
 auto clockUpdate(std::uint32_t frame) -> void ;
 
@@ -46,7 +46,7 @@ auto runLoop() -> void ;
 auto cleanup() -> void ;
 auto connect( const ClientConfig &config) -> bool ;
 auto usage() -> void ;
-auto initalize() -> void ;
+auto initialize() -> void ;
 // Globals
 FrameClock frameClock ;
 MediaController mediaController ;
@@ -74,7 +74,7 @@ int main(int argc, const char * argv[]) {
         if ( !config.load(path) ) {
             throw std::runtime_error("Unable to open: "s + path.string() ) ;
         }
-        
+        initialize() ;
         // Ok, we are "ready" in theory
         while (config.runSpan.inRange()){
             status.setLed(StatusLed::RUNSTATUS, StatusLed::FLASH);
@@ -90,14 +90,17 @@ int main(int argc, const char * argv[]) {
                 myClient.setServerKey(config.serverKey) ;
                 if (connect(config)){
                     // we connected!
+                    // Give it our routines
+                    
                     status.setLed(StatusLed::CONNECTSTATUS, StatusLed::ON) ;
                     // we need to start a read, and start our thread
                     myClient.initialRead() ;
                     runThread = std::thread(&runLoop) ;
                 }
-                while (myClient.isValid() && config.connectTime.inRange() && config.runSpan.inRange()){
+                while (myClient.is_open() && config.connectTime.inRange() && config.runSpan.inRange()){
                     // we dont do anything, but just hang around
                     std::this_thread::sleep_for(std::chrono::milliseconds(250)) ;
+                    //std::cout << "out of sleep"<< std::endl;
                 }
                 io_context.stop() ;
                 io_context.restart() ;
@@ -148,7 +151,7 @@ int main(int argc, const char * argv[]) {
 //======================================================================
 
 //======================================================================
-auto clientLoad( const Packet &packet) -> bool {
+auto clientLoad( const Packet &packet, Client *client) -> bool {
     auto ptr = static_cast<const LoadPacket*>(&packet) ;
     auto media = ptr->music() ;
     auto lights = ptr->light() ;
@@ -171,7 +174,7 @@ auto clientLoad( const Packet &packet) -> bool {
 }
 
 //======================================================================
-auto clientNop( const Packet &packet) -> bool {
+auto clientNop( const Packet &packet, Client *client) -> bool {
     auto ptr = static_cast<const NopPacket*>(&packet) ;
     if (ptr->respond()){
         // We need to send a response
@@ -181,9 +184,9 @@ auto clientNop( const Packet &packet) -> bool {
 }
 
 //======================================================================
-auto clientPlay( const Packet &packet) -> bool {
+auto clientPlay( const Packet &packet,  Client * client) -> bool {
     auto ptr = static_cast<const PlayPacket*>(&packet) ;
-    if (ptr->play()) {
+    if (ptr->state()) {
         status.setLed(StatusLed::PLAYSTATUS, StatusLed::ON) ;
         auto frame = ptr->frame() ;
         if (useAudio) {
@@ -211,9 +214,9 @@ auto clientPlay( const Packet &packet) -> bool {
 }
 
 //======================================================================
-auto clientShow( const Packet &packet) -> bool {
+auto clientShow( const Packet &packet,  Client *client) -> bool {
     auto ptr = static_cast<const ShowPacket*>(&packet) ;
-    if (ptr->show()){
+    if (ptr->state()){
         useAudio = config.useAudio ;
         status.setLed(StatusLed::SHOWSTATUS, StatusLed::ON) ;
         if (useAudio) {
@@ -237,7 +240,7 @@ auto clientShow( const Packet &packet) -> bool {
 }
 
 //======================================================================
-auto clientSync( const Packet  &packet) -> bool {
+auto clientSync( const Packet  &packet, Client * client) -> bool {
     // Just the frame clock
     auto ptr = static_cast<const SyncPacket*>(&packet) ;
     frameClock.sync(ptr->frame());
@@ -272,7 +275,7 @@ auto initClient() -> void {
 }
 
 //======================================================================
-auto intialize() -> void {
+auto initialize() -> void {
     initClient() ;
     // We need to add our callback
     frameClock.setUpdateCallback(&clockUpdate) ;
@@ -305,7 +308,7 @@ auto connect( const ClientConfig &config) -> bool {
     // Do we have a good endpoint ?
     if (serverEndpoint != asio::ip::tcp::endpoint()) {
         // We can attempt to connect
-        if (myClient.connect(serverEndpoint, config.serverPort) ) {
+        if (myClient.connect(serverEndpoint) ) {
             connectAttempts = 0 ;
             return true ;
         }

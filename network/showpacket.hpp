@@ -15,22 +15,22 @@
  
         packet id           4 bytes             0
         packet size         4 bytes             4
-        show                4 bytes             8  (0/1)
+        state               4 bytes             8  (0/1)
  */
 
 
 //======================================================================
 class ShowPacket : public Packet {
     
-    static constexpr auto SHOWOFFSET = 8 ;
+    static constexpr auto STATEOFFSET = 8 ;
     static constexpr auto PACKETSIZE = 12 ;
     
 public:
     ShowPacket() ;
     ShowPacket(const std::vector<std::uint8_t> &data);
 
-    auto show() const -> bool ;
-    auto setShow(bool value) -> void ;
+    auto state() const -> bool ;
+    auto setState(bool value) -> void ;
 };
 
 

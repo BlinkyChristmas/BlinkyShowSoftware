@@ -9,6 +9,18 @@
 #include "utility/timeutil.hpp"
 using namespace std::string_literals ;
 
+// ===========================================================================
+const std::vector<std::string> Packet::TYPENAMES{
+    "INVALID"s,"IDENT"s,"SHOW"s,"PLAY"s,"SYNC"s,"LOAD"s,"NOP"s
+};
+// ===========================================================================
+auto Packet::nameForPacket(PacketType type) -> const std::string & {
+    if (type < TYPENAMES.size()) {
+        return TYPENAMES.at(static_cast<int>(type)) ;
+    }
+    return TYPENAMES.at(0) ;
+}
+
 //======================================================================
 Packet::Packet() : util::Buffer(8),packetTime(std::chrono::system_clock::now()) {
     extend = true ;
@@ -66,7 +78,7 @@ auto Packet::length() const -> size_t {
 }
 //======================================================================
 auto Packet::setLength(size_t value) -> void {
-    this->write(static_cast<std::uint32_t>(value),IDOFFSET);
+    this->write(static_cast<std::uint32_t>(value),LENGTHOFFSET);
 }
 
 //======================================================================

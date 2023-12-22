@@ -24,11 +24,14 @@
 class Packet : public util::Buffer {
     static constexpr auto IDOFFSET = 0 ;
     static constexpr auto LENGTHOFFSET = 4 ;
+protected:
+    static const std::vector<std::string> TYPENAMES ;
+
 public:
     enum PacketType {
         INVALID,IDENT,SHOW,PLAY,SYNC,LOAD,NOP,TYPECOUNT
     };
-    
+    static auto nameForPacket(PacketType type) -> const std::string & ;
     std::chrono::system_clock::time_point packetTime ;
     
     Packet() ;

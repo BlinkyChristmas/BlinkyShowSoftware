@@ -16,15 +16,15 @@ auto IdentPacket::clientTypeFor(int clientid) -> ClientType {
 }
 
 //======================================================================
-static const std::vector<std::string> TYPENAMES {
+const std::vector<std::string> IdentPacket::CLIENTNAMES {
     "UNKNOWN"s,"CLIENT"s,"STATUS"s,"MASTER"s
 };
 //======================================================================
-auto IdentPacket::nameForType(ClientType type) -> const std::string & {
-    if (static_cast<int>(type) >= static_cast<int>(TYPECOUNT)){
-        return TYPENAMES.at(0) ;
+auto IdentPacket::nameForClient(ClientType type) -> const std::string & {
+    if (static_cast<int>(type) >= static_cast<int>(CLIENTNAMES.size())){
+        return CLIENTNAMES.at(0) ;
     }
-    return TYPENAMES.at(static_cast<int>(type));
+    return CLIENTNAMES.at(static_cast<int>(type));
 }
 
 //======================================================================

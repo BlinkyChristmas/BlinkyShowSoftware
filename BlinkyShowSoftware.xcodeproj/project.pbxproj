@@ -883,6 +883,7 @@
 		561BE4312B34B7770092D4DF /* lightcontroller.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = lightcontroller.hpp; sourceTree = "<group>"; };
 		561BE44F2B35D7AA0092D4DF /* teststuff */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = teststuff; sourceTree = BUILT_PRODUCTS_DIR; };
 		561BE4512B35D7AA0092D4DF /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		561BE4612B36413E0092D4DF /* HowToCreateAnImage.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = HowToCreateAnImage.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2055,6 +2056,7 @@
 				561BE4072B3472540092D4DF /* MountingSDCard.txt */,
 				561BE40C2B3472540092D4DF /* PRUDevelopment.txt */,
 				561BE40D2B3472540092D4DF /* TimeZone.txt */,
+				561BE4612B36413E0092D4DF /* HowToCreateAnImage.txt */,
 			);
 			path = setup;
 			sourceTree = "<group>";
