@@ -294,7 +294,7 @@ namespace util {
         if (hnow >= startDay && hnow <= endDay) {
             return true ;
         }
-         else  if (startDay != endDay){
+        else  if (startDay != endDay){
             // So we are not in range, but, what if the startday is greater then endday year wrap
             if (endDay < startDay) {
                 if ( (hnow <= endDay) || (hnow >= startDay) ) {

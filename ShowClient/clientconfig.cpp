@@ -87,10 +87,10 @@ auto ClientConfig::processKeyValue(const std::string &ukey, const std::string &v
         }
         else if (ukey == "CONNECTHOURS") {
             connectTime = util::HourRange(value) ;
-       }
+        }
         else if (ukey == "RUNSPAN") {
             runSpan = util::MonthRange(value) ;
-       }
+        }
         else if (ukey == "AUDIO") {
             useAudio = std::stoi(value,nullptr,0) != 0 ;
         }

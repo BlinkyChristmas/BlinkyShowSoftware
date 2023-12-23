@@ -25,9 +25,9 @@ namespace util {
         int length;
         std::int64_t buffersize;
         BufferRangeError(std::int64_t offset, int length, std::int64_t buffersize);
-
+        
     };
-
+    
     //=================================================================================
     /** General purpose buffer class.  This allows for reading/writing intergral types from a
      position in the buffer.
@@ -67,11 +67,11 @@ namespace util {
         /// - Parameters:
         ///     - value: vector to move
         Buffer( std::vector<std::uint8_t> &&value) ;
-
+        
         //=================================================================================
         // Size/position related
         //=================================================================================
-
+        
         //=================================================================================
         /// Determines the size of the buffer (bytes)
         /// - Returns: The size of the buffer
@@ -87,7 +87,7 @@ namespace util {
         /// Determines the remaining size of the buffer from the current position
         /// - Returns: The remaining size of the buffer
         auto remaining() const ->std::int64_t ;
-
+        
         //=================================================================================
         /// Determines the current position in the buffer
         /// - Returns: The current position
@@ -107,11 +107,11 @@ namespace util {
         /// - Parameters:
         ///     - expand: if true, the buffer will expand on writes
         auto setExtend(bool expand) ->void ;
-
+        
         //=================================================================================
         // General utility
         //=================================================================================
-
+        
         //=================================================================================
         /// Return a reference to the underlying vector
         /// - Returns: Reference to vector
@@ -131,7 +131,7 @@ namespace util {
         //=================================================================================
         // Read/write strings
         //=================================================================================
-
+        
         //=================================================================================
         /// Reads a string type from the buffer at the specified position
         /// Will reverse the byte order (endian) based on the status of reverse
@@ -190,7 +190,7 @@ namespace util {
             if (position <0){
                 position = this->offset ;
             }
-
+            
             auto charsize = static_cast<int>(sizeof( typename T::value_type)) ;
             auto bytesize = length * charsize ;
             if (!checkExtend(position, bytesize, this->extend)){
@@ -226,11 +226,11 @@ namespace util {
             }
             
         }
-
+        
         //=================================================================================
         // Read/write integrals
         //=================================================================================
-
+        
         //=================================================================================
         /// Read an integral
         ///     - offset: optional, defaults to -1. If nonnegative, the offset to read from. Otherwise will use the internal offset
@@ -289,7 +289,7 @@ namespace util {
                 this->offset += amount ;
             }
         }
-
+        
         //=================================================================================
         // Read/write vector of integrals
         //=================================================================================
@@ -353,7 +353,7 @@ namespace util {
             if (offset <0) {
                 this->offset += amount ;
             }
-
+            
         }
         //=================================================================================
         // Read/write a pointer to data
@@ -369,7 +369,7 @@ namespace util {
         ///     - length: the number of bytes to write
         ///     - offset: optional, defaults to -1.  The offset in the buffer. If -1, defaults to the internal offset
         auto read(std::uint8_t *value,int length,std::int64_t offset = -1) const ->void ;
-
-   };
+        
+    };
 }
 #endif /* buffer_hpp */

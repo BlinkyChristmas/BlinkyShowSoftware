@@ -43,7 +43,7 @@ auto Packet::operator=(const Packet &value) -> Packet& {
     this->data = value.data ;
     this->extend = value.extend ;
     this->offset = value.offset ;
-
+    
     return *this ;
 }
 
@@ -74,7 +74,7 @@ auto Packet::length() const -> size_t {
         return 0 ;
     }
     return static_cast<size_t>(this->read<std::uint32_t>(LENGTHOFFSET)) ;
-
+    
 }
 //======================================================================
 auto Packet::setLength(size_t value) -> void {

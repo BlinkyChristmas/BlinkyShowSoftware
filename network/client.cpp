@@ -54,15 +54,15 @@ auto Client::processPacket(const Packet &packet) -> bool {
         }
         DBGMSG(std::cerr, "Packet registured, but null routine for: "s + Packet::nameForPacket(id)) ;
         return true ;
-
+        
     }
     else if(id == IdentPacket::IDENT){
         // We will run our internal ident handler
         return processIdentPacket(packet) ;
     }
     DBGMSG(std::cerr, "No packet routine for: "s + Packet::nameForPacket(id)) ;
-
-   return true ;
+    
+    return true ;
 }
 // ========================================================================================
 auto Client::processIdentPacket(const Packet &packet) -> bool {
@@ -135,7 +135,7 @@ auto Client::close() -> void {
                 netSocket.shutdown( asio::ip::tcp::socket::shutdown_type::shutdown_both ) ;
                 is_connected = false ;
             }
-             netSocket.close() ;
+            netSocket.close() ;
         }
         catch(...) {
             DBGMSG(std::cerr, "Error closing client socket.");
@@ -167,16 +167,23 @@ auto Client::connect(asio::ip::tcp::endpoint &endpoint) -> bool {
 }
 
 // ========================================================================================
+auto Client::setIsConnected(bool state) -> void {
+    is_connected = state ;
+}
+// ========================================================================================
 auto Client::bind(int port) -> bool {
     asio::error_code ec ;
     try {
         if (!netSocket.is_open()){
+            netSocket.open(asio::ip::tcp::v4(),ec) ;
+            if (ec) {
                 DBGMSG(std::cerr, "Error on opening socket: "s + ec.message());
                 return false ;
+            }
         }
         asio::socket_base::reuse_address option(true) ;
         netSocket.set_option(option) ;
-
+        
         if (port > 0) {
             auto endpoint = asio::ip::tcp::endpoint(asio::ip::address_v4::any(),port) ;
             netSocket.bind(endpoint,ec) ;
@@ -270,6 +277,7 @@ auto Client::millSinceReceive(const util::ourclock::time_point &time ) -> size_t
 auto Client::lastSendTime() const -> util::ourclock::time_point {
     return send_time ;
 }
+
 // ========================================================================================
 auto Client::millSinceSend(const util::ourclock::time_point &time) -> size_t {
     return std::chrono::duration_cast<std::chrono::milliseconds>(time - send_time).count() ;
@@ -294,6 +302,11 @@ auto Client::setClientType(IdentPacket::ClientType clienttype) -> void {
 auto Client::handle() const -> const std::string& {
     return name ;
 }
+// ========================================================================================
+auto Client::setHandle(const std::string &handle)  -> void {
+    name = handle ;
+}
+
 // ========================================================================================
 auto Client::clientType() const -> const std::string&  {
     return IdentPacket::nameForClient(type) ;

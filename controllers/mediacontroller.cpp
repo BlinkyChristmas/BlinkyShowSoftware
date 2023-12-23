@@ -12,8 +12,8 @@ using namespace std::string_literals ;
 
 
 /* ************************************************************************************************************************************
-    This is our global callback, that then relays it to the instance version
-************************************************************************************************************************************ */
+ This is our global callback, that then relays it to the instance version
+ ************************************************************************************************************************************ */
 //======================================================================
 auto MediaController::rtCallback(void *outputBuffer, void *inputBuffer, unsigned int nFrames,double StreamTime, RtAudioStreamStatus status , void *ptr) -> int {
     // We pass the address to our instance in ptr!
@@ -65,7 +65,7 @@ auto MediaController::requestData(std::uint8_t *data,std::uint32_t frameCount, d
         return 2 ;
     }
     return 0 ;
-
+    
 }
 //======================================================================
 auto MediaController::setConfiguration(const std::filesystem::path &musicdir, const std::string &extension,bool usesync) -> void {

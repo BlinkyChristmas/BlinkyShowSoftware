@@ -23,7 +23,7 @@ namespace util {
         this->length = length ;
         this->buffersize = buffersize ;
     }
-
+    
     
     //======================================================================
     auto Buffer::checkSize(std::int64_t offset, int length) const ->bool {
@@ -32,7 +32,7 @@ namespace util {
         }
         return false ;
     }
-
+    
     //======================================================================
     auto Buffer::extendSize(std::int64_t offset, int length) ->void {
         auto amount = static_cast<std::int64_t>(data.size()) - (offset+static_cast<std::int64_t>(length)) ;
@@ -49,7 +49,7 @@ namespace util {
         }
         return rvalue ;
     }
-
+    
     //======================================================================
     Buffer::Buffer():offset(0),extend(false) {
     }
@@ -97,7 +97,7 @@ namespace util {
     auto Buffer::remaining() const ->std::int64_t {
         return static_cast<std::int64_t>(data.size() - offset) ;
     }
-
+    
     //======================================================================
     auto Buffer::at() const ->std::int64_t {
         return offset ;
@@ -150,7 +150,7 @@ namespace util {
         if (offset < 0) {
             this->offset += amount ;
         }
-
+        
     }
     //=================================================================================
     //======================================================================
@@ -167,7 +167,7 @@ namespace util {
         if (offset < 0) {
             this->offset += amount ;
         }
-
+        
     }
-
- }
+    
+}

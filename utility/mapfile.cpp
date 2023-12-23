@@ -66,8 +66,8 @@ namespace util {
         CloseHandle(hmap);
         CloseHandle(hfile);
         size = length;
-
-
+        
+        
 #else
         
         // we need to get a fd (and the size of the file)
@@ -147,11 +147,11 @@ namespace util {
             CloseHandle(hmap);
             CloseHandle(hfile);
             throw std::runtime_error("Error mapping file: "s + path.string());
-    }
+        }
         CloseHandle(hmap);
         CloseHandle(hfile);
         size = length;
-
+        
 #else
         
         // we need to get a fd (and the size of the file)
@@ -181,10 +181,10 @@ namespace util {
         }
 #if defined(_WIN32)
         UnmapViewOfFile(reinterpret_cast<void*>(const_cast<std::uint8_t*>(ptr)));
-
+        
 #else
         munmap(const_cast<std::uint8_t*>(ptr),size) ;
 #endif
     }
-
+    
 }

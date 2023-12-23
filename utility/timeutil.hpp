@@ -68,15 +68,15 @@ namespace util {
         int minute ;
         
     public:
-         
+        
         HourMinute() ;
         HourMinute(int hour, int minute);
         HourMinute(const ourclock::time_point &timePoint) ;
         HourMinute(const std::string &timeString) ;
-
+        
         auto load(const std::string &timeString) -> void ;
         auto load(const ourclock::time_point &timePoint) ->void  ;
-
+        
         auto describe() const -> std::string ;
         
         // So we can compare HourMinute values
@@ -99,7 +99,7 @@ namespace util {
         
         // We want to get time now in an HourMinute structure
         static auto now() -> HourMinute ;
-
+        
     } ;
     
     // ===========================================================================================

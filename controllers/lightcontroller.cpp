@@ -66,7 +66,7 @@ auto LightController::freePRU(int prunumber) -> void {
     }
 #endif
     pruBuffers[prunumber] = nullptr ;
-
+    
 }
 //======================================================================
 auto LightController::initPRU(int number) -> void {
@@ -84,7 +84,7 @@ auto LightController::initPRU(int number) -> void {
         std::copy(reinterpret_cast<char*>(&zero),reinterpret_cast<char*>(&zero)+4,pru + INDEX_DATAREADY) ;
         std::copy(buffer.begin(),buffer.end(),pru + INDEX_PRUOUTPUT) ;
     }
-
+    
 }
 
 //======================================================================

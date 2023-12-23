@@ -51,10 +51,9 @@ protected:
     auto packetRead(const asio::error_code& err, size_t bytes_transferred) -> void ;
     auto processPacket(const Packet &packet) -> bool ;
     
-    //We have an
-    auto processIdentPacket(const Packet &packet) -> bool ;
-
+ 
 public:
+    auto processIdentPacket(const Packet &packet) -> bool ;
 
     asio::ip::tcp::socket netSocket ; // We expose this just for convienence, if we ever need it (we shouldn't)
     
@@ -73,6 +72,10 @@ public:
     auto close() -> void ;
     // A way to connect to a server , and its port
     auto connect(asio::ip::tcp::endpoint &endpoint) -> bool ;
+    
+    // A way to set if connected if from an acceptor
+    auto setIsConnected(bool state) -> void ;
+    
     // If one needs to bind our socket
     auto bind(int port) -> bool ;
    

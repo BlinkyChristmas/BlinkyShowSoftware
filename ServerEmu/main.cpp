@@ -25,12 +25,12 @@
 using namespace std::string_literals ;
 
 // Foward declares, where the real action occurs
-auto clientLoad( const Packet &packet) -> bool;
-auto clientNop( const Packet &packet) -> bool;
-auto clientPlay( const Packet &packet) -> bool;
-auto clientShow( const Packet &packet) -> bool;
-auto clientSync( const Packet &packet) -> bool;
-auto clientIdent( const Packet &packet) -> bool;
+auto clientLoad( const Packet &packet, Client *) -> bool;
+auto clientNop( const Packet &packet, Client *) -> bool;
+auto clientPlay( const Packet &packet, Client *) -> bool;
+auto clientShow( const Packet &packet, Client *) -> bool;
+auto clientSync( const Packet &packet, Client *) -> bool;
+auto clientIdent( const Packet &packet, Client *) -> bool;
 
 auto  process(const std::string &cmd, const std::string &value) -> bool ;
 
@@ -39,7 +39,12 @@ auto sendPacket(const Packet &packet) -> void ;
 asio::io_context io_context ;
 asio::ip::tcp::acceptor acceptor{io_context} ;
 std::thread threadConnect;
+auto isListening = false ;
 
+asio::io_context client_context ;
+std::thread threadClient;
+
+constexpr std::uint32_t server_key = 0xDEADBEEF ;
 
 std::vector<std::shared_ptr<Client> > connections ;
 std::mutex connectionAccess ;
@@ -51,6 +56,10 @@ std::mutex connectionAccess ;
 auto runConnect() {
     io_context.run() ;
 }
+// ===============================================================================
+auto runClient() {
+    client_context.run() ;
+}
 
 
 // ===============================================================================
@@ -59,22 +68,30 @@ auto handleAccept(Client::ClientPointer connection,const asio::error_code& ec) -
     if (ec) {
         // we got an error?
         std::cout << "Error on connection: "<<ec.message() << std::endl;
+        io_context.stop() ;
+        io_context.restart() ;
         return ;
     }
+    connection->setIsConnected(true ) ;
     connection->setPeerInformation() ;
     std::cout << "Connection from " << connection->address() << std::endl;
-    connection->setPacketRoutine(Packet::LOAD, &clientLoad);
-    connection->setPacketRoutine(Packet::NOP, &clientNop);
-    connection->setPacketRoutine(Packet::PLAY, &clientPlay);
-    connection->setPacketRoutine(Packet::SHOW, &clientShow);
-    connection->setPacketRoutine(Packet::SYNC, &clientSync);
-    connection->setPacketRoutine(Packet::IDENT, &clientIdent);
     connection->initialRead() ;
+    if (!threadClient.joinable()) {
+        threadClient = std::thread(&runClient) ;
+    }
     auto lock = std::lock_guard(connectionAccess) ;
     connections.push_back(connection) ;
     // Requeue another
-    auto conn = Client::createPointer(io_context) ;
-    acceptor.async_accept(conn->netSocket, std::bind(&handleAccept, conn, std::placeholders::_1));
+    auto client = Client::createPointer(client_context) ;
+    client->setPacketRoutine(Packet::LOAD, &clientLoad);
+    client->setPacketRoutine(Packet::NOP, &clientNop);
+    client->setPacketRoutine(Packet::PLAY, &clientPlay);
+    client->setPacketRoutine(Packet::SHOW, &clientShow);
+    client->setPacketRoutine(Packet::SYNC, &clientSync);
+    client->setPacketRoutine(Packet::IDENT, &clientIdent);
+    client->setServerKey(server_key) ;
+    
+    acceptor.async_accept(client->netSocket, std::bind(&handleAccept, client, std::placeholders::_1));
     
 }
 
@@ -107,7 +124,14 @@ int main(int argc, const char * argv[]) {
         std::cerr << "Unknown error!" << std::endl;
         statuscode = EXIT_FAILURE;
     }
-    
+    if (threadClient.joinable()) {
+        client_context.stop() ;
+        threadClient.join() ;
+    }
+    if (threadConnect.joinable()) {
+        io_context.stop() ;
+        threadConnect.join() ;
+    }
     return statuscode ;
 }
 // ===============================================================================
@@ -126,7 +150,8 @@ auto  process(const std::string &cmd, const std::string &value) -> bool {
                     else {
                         asio::error_code ec ;
                         auto port = std::stoi(pt,nullptr,0) ;
-
+                        
+                        
                         acceptor.open(asio::ip::tcp::v4(),ec);
                         if (ec) {
                             std::cerr << "Error opening acceptor"<< ec.message() << std::endl;
@@ -140,14 +165,16 @@ auto  process(const std::string &cmd, const std::string &value) -> bool {
                             acceptor.close() ;
                             return false ;
                         }
+                        
+                        //                        acceptor = asio::ip::tcp::acceptor(io_context, asio::ip::tcp::endpoint(asio::ip::address_v4::any(), port ));
                         acceptor.listen(50, ec) ;
                         if (ec) {
                             std::cerr << "Error listening: " << ec.message() << std::endl;
                             acceptor.close() ;
                             return false ;
-
+                            
                         }
-                        auto connection = Client::createPointer(io_context);
+                        auto connection = Client::createPointer(client_context);
                         acceptor.async_accept(connection->netSocket, std::bind(&handleAccept, connection, std::placeholders::_1));
                         threadConnect = std::thread(&runConnect) ;
                     }
@@ -161,25 +188,31 @@ auto  process(const std::string &cmd, const std::string &value) -> bool {
                     std::cout << "All ready not listening" << std::endl;
                 }
                 else {
-                    io_context.stop() ;
+                    acceptor.cancel() ;
                     acceptor.close() ;
+                    io_context.stop() ;
+                    
                     auto lock = std::lock_guard(connectionAccess) ;
                     for (auto iter = connections.begin(); iter != connections.end();) {
                         (*iter)->close() ;
                         iter = connections.erase(iter) ;
                     }
                     io_context.restart() ;
-                    /*
+                    // Frankly, we will stop all our clients as well
+                    
+                    
                     client_context.stop() ;
                     if (threadClient.joinable()){
                         threadClient.join() ;
                         threadClient = std::thread() ;
                     }
-                     */
+                    client_context.restart() ;
+                    
                     if (threadConnect.joinable()){
                         threadConnect.join() ;
                         threadConnect = std::thread() ;
                     }
+                    io_context.restart() ;
                     
                 }
             }
@@ -206,7 +239,7 @@ auto  process(const std::string &cmd, const std::string &value) -> bool {
                 if (!f.empty()) {
                     frame = std::stoi(f,nullptr,0) ;
                 }
-                packet.setPlay(state) ;
+                packet.setState(state) ;
                 packet.setFrame(frame) ;
                 sendPacket(packet) ;
                 
@@ -222,7 +255,7 @@ auto  process(const std::string &cmd, const std::string &value) -> bool {
         if (!value.empty()) {
             try {
                 auto state = std::stoi(value,nullptr,0) != 0;
-                packet.setShow(state) ;
+                packet.setState(state) ;
                 sendPacket(packet) ;
                 
             }
@@ -266,7 +299,7 @@ auto  process(const std::string &cmd, const std::string &value) -> bool {
         auto lock = std::lock_guard(connectionAccess) ;
         
         for (auto iter = connections.begin(); iter != connections.end();) {
-            if ( (*iter)->isValid()) {
+            if ( (*iter)->is_open()) {
                 std::cout << (*iter)->address() << "\n" ;
                 std::cout << "\tConnected: " << util::sysTimeToString((*iter)->connectTime()) << "\n";
                 std::cout << "\tHandle: " << (*iter)->handle() << " Type: " << (*iter)->clientType() <<"n" ;
@@ -280,20 +313,24 @@ auto  process(const std::string &cmd, const std::string &value) -> bool {
         
     }
     else if (cmd == "EXIT") {
+        acceptor.cancel() ;
+        io_context.stop() ;
         acceptor.close() ;
+        io_context.restart() ;
         auto lock = std::lock_guard(connectionAccess) ;
         for (auto iter = connections.begin(); iter != connections.end();) {
             (*iter)->close() ;
             iter = connections.erase(iter) ;
         }
-        io_context.stop() ;
-        /*
+        client_context.stop() ;
+        client_context.restart() ;
+        
         client_context.stop() ;
         if (threadClient.joinable()){
             threadClient.join() ;
             threadClient = std::thread() ;
         }
-         */
+        
         if (threadConnect.joinable()){
             threadConnect.join() ;
             threadConnect = std::thread() ;
@@ -308,7 +345,7 @@ auto sendPacket(const Packet &packet) -> void {
     auto lock = std::lock_guard(connectionAccess) ;
     
     for (auto iter = connections.begin(); iter != connections.end();) {
-        if ( (*iter)->isValid()) {
+        if ( (*iter)->is_open()) {
             (*iter)->sendPacket(packet) ;
             iter++ ;
         }
@@ -323,36 +360,36 @@ auto sendPacket(const Packet &packet) -> void {
 // ===============================================================================
 // Client routines
 // ===============================================================================
-auto clientLoad( const Packet &packet) -> bool{
+auto clientLoad( const Packet &packet, Client *client) -> bool{
     std::cout << "received load packet?" << std::endl;
     return true ;
 }
-auto clientNop( const Packet &packet) -> bool{
+auto clientNop( const Packet &packet, Client *client) -> bool{
     auto ptr = static_cast<const NopPacket*>(&packet) ;
     std::cout << "received nop packet with response: " << ptr->respond() << std::endl;
     return true ;
 }
-auto clientPlay( const Packet &packet) -> bool{
+auto clientPlay( const Packet &packet, Client *client) -> bool{
     auto ptr = static_cast<const PlayPacket*>(&packet) ;
-    std::cout << "received play packet with state: " << ptr->play() << " frame: " << ptr->frame() << std::endl;
+    std::cout << "received play packet with state: " << ptr->state() << " frame: " << ptr->frame() << std::endl;
     return true ;
     
 }
-auto clientShow( const Packet &packet) -> bool{
+auto clientShow( const Packet &packet, Client *client) -> bool{
     auto ptr = static_cast<const ShowPacket*>(&packet) ;
-    std::cout << "received show packet with state: " << ptr->show() << std::endl;
+    std::cout << "received show packet with state: " << ptr->state() << std::endl;
     return true ;
     
 }
-auto clientSync( const Packet &packet) -> bool{
+auto clientSync( const Packet &packet, Client *client) -> bool{
     auto ptr = static_cast<const SyncPacket*>(&packet) ;
     std::cout << "received sync packet with frame: " << ptr->frame() << std::endl;
     return true ;
     
 }
-auto clientIdent( const Packet &packet) -> bool{
-    auto ptr = static_cast<const IdentPacket*>(&packet) ;
-    std::cout << "received ident packet with name: " << ptr->handle() << " Type: "<< ptr->clientType() << std::endl;
+auto clientIdent( const Packet &packet, Client *client) -> bool{
+    client->processIdentPacket(packet) ;
+    std::cout << client->information() << std::endl ;
     return true ;
     
 }

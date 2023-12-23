@@ -68,7 +68,7 @@ auto FrameClock::frame() const -> std::uint32_t {
 }
 
 //======================================================================
-auto FrameClock::setUpdateCallback( const std::function<void(std::uint32_t)> &function ) -> void {
+auto FrameClock::setUpdateCallback( const FrameCallback &function ) -> void {
     updateCallback = function ;
 }
 

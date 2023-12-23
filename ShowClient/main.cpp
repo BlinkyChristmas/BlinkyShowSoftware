@@ -38,6 +38,7 @@ auto clientPlay( const Packet &packet, Client *) -> bool;
 auto clientShow( const Packet &packet, Client *) -> bool;
 auto clientSync( const Packet &packet, Client *) -> bool;
 
+// Setup our frame clock callback
 auto clockUpdate(std::uint32_t frame) -> void ;
 
 // Now some stuff we use
@@ -47,6 +48,7 @@ auto cleanup() -> void ;
 auto connect( const ClientConfig &config) -> bool ;
 auto usage() -> void ;
 auto initialize() -> void ;
+
 // Globals
 FrameClock frameClock ;
 MediaController mediaController ;
@@ -59,6 +61,11 @@ Client myClient(io_context) ;
 std::thread runThread ;
 
 bool useAudio = false ;
+
+auto isPlaying = false ;
+auto inShow = false ;
+
+auto identificationPacket = IdentPacket() ;
 
 //======================================================================
 // Main
@@ -81,6 +88,7 @@ int main(int argc, const char * argv[]) {
             while(config.connectTime.inRange()) {
                 status.setLed(StatusLed::RUNSTATUS, StatusLed::ON);
                 status.setLed(StatusLed::CONNECTSTATUS, StatusLed::FLASH) ;
+                
                 // First bind
                 // We should bind right now
                 if (!myClient.bind(config.clientPort)){
@@ -90,7 +98,9 @@ int main(int argc, const char * argv[]) {
                 myClient.setServerKey(config.serverKey) ;
                 if (connect(config)){
                     // we connected!
-                    // Give it our routines
+                    if (!myClient.sendPacket(identificationPacket)) {
+                        DBGMSG(std::cerr, "Error sending identification packet") ;
+                    }
                     
                     status.setLed(StatusLed::CONNECTSTATUS, StatusLed::ON) ;
                     // we need to start a read, and start our thread
@@ -142,6 +152,7 @@ int main(int argc, const char * argv[]) {
     }
     cleanup();
     status.clearAll() ;
+    DBGMSG(std::cout, "Exiting ShowClient");
     return 0;
 }
 
@@ -187,6 +198,7 @@ auto clientNop( const Packet &packet, Client *client) -> bool {
 auto clientPlay( const Packet &packet,  Client * client) -> bool {
     auto ptr = static_cast<const PlayPacket*>(&packet) ;
     if (ptr->state()) {
+        isPlaying = true ;
         status.setLed(StatusLed::PLAYSTATUS, StatusLed::ON) ;
         auto frame = ptr->frame() ;
         if (useAudio) {
@@ -194,18 +206,23 @@ auto clientPlay( const Packet &packet,  Client * client) -> bool {
                 status.setLed(StatusLed::PLAYSTATUS, StatusLed::FLASH) ;
             }
         }
-        // Set the light controller to play here
-        lights.play(true, frame) ;
+        if (config.useLights) {
+            // Set the light controller to play here
+            lights.play(true, frame) ;
+        }
         // and the frame clock ;
         frameClock.play(true,frame);
     }
     else {
+        isPlaying = false ;
         frameClock.play(false);
         if (useAudio) {
             mediaController.play(false) ;
         }
-        // Set the light controller to stop play here
-        lights.play(false) ;
+        if (config.useLights) {
+            // Set the light controller to stop play here
+            lights.play(false) ;
+        }
         
         status.setLed(StatusLed::PLAYSTATUS, StatusLed::OFF) ;
         
@@ -217,6 +234,7 @@ auto clientPlay( const Packet &packet,  Client * client) -> bool {
 auto clientShow( const Packet &packet,  Client *client) -> bool {
     auto ptr = static_cast<const ShowPacket*>(&packet) ;
     if (ptr->state()){
+        inShow = true ;
         useAudio = config.useAudio ;
         status.setLed(StatusLed::SHOWSTATUS, StatusLed::ON) ;
         if (useAudio) {
@@ -225,16 +243,20 @@ auto clientShow( const Packet &packet,  Client *client) -> bool {
                 status.setLed(StatusLed::SHOWSTATUS, StatusLed::FLASH) ;
             }
         }
-        // Do Light controller here
-        lights.setShow(true ) ;
+        if (config.useLights){
+            // Do Light controller here
+            lights.setShow(true ) ;
+        }
     }
     else {
         status.setLed(StatusLed::SHOWSTATUS, StatusLed::OFF) ;
         if (useAudio) {
             mediaController.setShow(false) ;
         }
-        // Set the light controller here
-        lights.setShow(false);
+        if (config.useLights) {
+            // Set the light controller here
+            lights.setShow(false);
+        }
     }
     return true;
 }
@@ -246,10 +268,24 @@ auto clientSync( const Packet  &packet, Client * client) -> bool {
     frameClock.sync(ptr->frame());
     return true;
 }
+
+
 //======================================================================
+auto syncPacket = SyncPacket() ;
 auto clockUpdate(std::uint32_t frame) -> void {
-    lights.sync(frame) ;
-    mediaController.sync(frame) ;
+    if (config.useLights){
+        lights.sync(frame) ;
+    }
+    if (useAudio){
+        mediaController.sync(frame) ;
+    }
+    if (config.masterSync){
+        if (frame%config.syncCount == 0) {
+            // Send out a sync
+            syncPacket.setFrame(frame) ;
+            myClient.sendPacket(syncPacket) ;
+        }
+    }
 }
 //======================================================================
 auto runLoop() -> void {
@@ -277,8 +313,21 @@ auto initClient() -> void {
 //======================================================================
 auto initialize() -> void {
     initClient() ;
+    myClient.setHandle(config.name) ;
+    myClient.setServerKey(config.serverKey) ;
+    if (config.masterSync) {
+        myClient.setClientType(IdentPacket::MASTER) ;
+        identificationPacket.setClientType(IdentPacket::MASTER) ;
+    }
+    
     // We need to add our callback
     frameClock.setUpdateCallback(&clockUpdate) ;
+    
+    // set up our identiciation packet
+    identificationPacket.setKey(config.serverKey);
+    identificationPacket.setHandle(config.name);
+    identificationPacket.setClientType(IdentPacket::CLIENT) ;
+    
 }
 
 //======================================================================
