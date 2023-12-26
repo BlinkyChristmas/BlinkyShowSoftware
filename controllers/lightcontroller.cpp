@@ -111,12 +111,18 @@ auto LightController::setShow(bool state) -> bool {
     }
 }
 //======================================================================
-auto LightController::load(const std::string &lightname) -> bool {
+auto LightController::load(const std::string &lightname) -> std::uint32_t {
     try {
-        return lightFile.loadFile( lightLocation / std::filesystem::path (lightname + lightExtension)) ;
+        if (lightname.empty()){
+            return 0 ;
+        }
+        if (!lightFile.loadFile( lightLocation / std::filesystem::path (lightname + lightExtension)) ){
+            return 0 ;
+        }
+        return lightFile.frameCount() ;
     }
     catch(...) {
-        return false ;
+        return 0 ;
     }
 }
 //======================================================================
@@ -136,4 +142,15 @@ auto LightController::play(bool state, std::uint32_t frame) -> bool {
 //======================================================================
 auto LightController::sync(std::uint32_t frame) -> void {
     // We should update the lights here!
+    if (frame < lightFile.frameCount()){
+        for (auto p=0 ; p < 2; p++) {
+            auto index = pruConfiguration.at(p).offset ;
+            auto length = pruConfiguration.at(p).length ;
+            auto maxlength = (lightFile.frameLength() - index) ;
+            if ( length > maxlength) {
+                length  = maxlength ;
+            }
+            lightFile.copy(frame, reinterpret_cast<char*>(const_cast<std::uint8_t*>(pruBuffers.at(p))),index,length) ;
+        }
+    }
 }

@@ -38,7 +38,7 @@ public:
     auto setLocation(const std::filesystem::path &path,const std::string &extension) -> void ;
     auto configurePRU(PRUConfig pru0,PRUConfig pru1) -> void ;
     auto setShow(bool state) -> bool ;
-    auto load(const std::string &lightname) -> bool ;
+    auto load(const std::string &lightname) -> std::uint32_t ;
     auto play(bool state, std::uint32_t frame = 0) -> bool ;
     auto sync(std::uint32_t frame) -> void ;
     

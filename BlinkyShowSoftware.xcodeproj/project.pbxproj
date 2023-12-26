@@ -20,7 +20,6 @@
 		561BE3E42B338DE00092D4DF /* packet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3A32B337EF20092D4DF /* packet.cpp */; };
 		561BE3E52B338DE00092D4DF /* loadpacket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3A82B337EF20092D4DF /* loadpacket.cpp */; };
 		561BE3E62B338DE00092D4DF /* syncpacket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3AD2B337EF20092D4DF /* syncpacket.cpp */; };
-		561BE3E82B338DFC0092D4DF /* wavdatachunk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3C02B337F240092D4DF /* wavdatachunk.cpp */; };
 		561BE3E92B338DFC0092D4DF /* wavfmtchunk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3BB2B337F240092D4DF /* wavfmtchunk.cpp */; };
 		561BE3EB2B338E050092D4DF /* lightheader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3B62B337F240092D4DF /* lightheader.cpp */; };
 		561BE3ED2B33BFF20092D4DF /* lightfile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3B52B337F240092D4DF /* lightfile.cpp */; };
@@ -69,6 +68,33 @@
 		561BE45E2B35D9BE0092D4DF /* mapfile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3D82B33857F0092D4DF /* mapfile.cpp */; };
 		561BE45F2B35D9BE0092D4DF /* timeutil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3B32B337F0C0092D4DF /* timeutil.cpp */; };
 		561BE4602B35D9BE0092D4DF /* buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3B22B337F0C0092D4DF /* buffer.cpp */; };
+		569244662B37396800B1A729 /* lightfile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3B52B337F240092D4DF /* lightfile.cpp */; };
+		569244672B37396800B1A729 /* lightheader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3B62B337F240092D4DF /* lightheader.cpp */; };
+		569244692B37397300B1A729 /* wavfmtchunk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3BB2B337F240092D4DF /* wavfmtchunk.cpp */; };
+		5692446A2B37397300B1A729 /* mwavfile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3BD2B337F240092D4DF /* mwavfile.cpp */; };
+		5692446B2B37398300B1A729 /* lightcontroller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE4302B34B7770092D4DF /* lightcontroller.cpp */; };
+		5692446C2B37398300B1A729 /* mediacontroller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3F62B34068C0092D4DF /* mediacontroller.cpp */; };
+		5692446D2B37398300B1A729 /* frameclock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3F02B33FE330092D4DF /* frameclock.cpp */; };
+		5692446E2B37398300B1A729 /* statusled.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE4182B347C420092D4DF /* statusled.cpp */; };
+		5692446F2B37398300B1A729 /* pruconfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE4142B3473A00092D4DF /* pruconfig.cpp */; };
+		569244702B373A7500B1A729 /* RtAudio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3982B337E960092D4DF /* RtAudio.cpp */; };
+		569244712B373AC200B1A729 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 561BE3D02B3380900092D4DF /* CoreAudio.framework */; };
+		569244722B373AC800B1A729 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 561BE3D22B33809A0092D4DF /* CoreFoundation.framework */; };
+		569244752B3748F400B1A729 /* chunkheader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 569244732B3748F400B1A729 /* chunkheader.cpp */; };
+		569244782B374AF100B1A729 /* fileheader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 569244762B374AF100B1A729 /* fileheader.cpp */; };
+		569244792B37590A00B1A729 /* fileheader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 569244762B374AF100B1A729 /* fileheader.cpp */; };
+		5692447A2B37591200B1A729 /* chunkheader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 569244732B3748F400B1A729 /* chunkheader.cpp */; };
+		56CE55082B39870200FD1DC3 /* showclient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56CE55062B39870200FD1DC3 /* showclient.cpp */; };
+		56CE550B2B39C03000FD1DC3 /* showserver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56CE55092B39C03000FD1DC3 /* showserver.cpp */; };
+		56CE550E2B39C71B00FD1DC3 /* serverclient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56CE550C2B39C71B00FD1DC3 /* serverclient.cpp */; };
+		56CE550F2B39F85A00FD1DC3 /* frameclock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3F02B33FE330092D4DF /* frameclock.cpp */; };
+		56CE55102B3A076500FD1DC3 /* serverclient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56CE550C2B39C71B00FD1DC3 /* serverclient.cpp */; };
+		56CE55112B3A076A00FD1DC3 /* showserver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56CE55092B39C03000FD1DC3 /* showserver.cpp */; };
+		56CE55122B3A0B4800FD1DC3 /* frameclock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3F02B33FE330092D4DF /* frameclock.cpp */; };
+		56CE55132B3A0B6600FD1DC3 /* mwavfile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3BD2B337F240092D4DF /* mwavfile.cpp */; };
+		56CE55152B3A0B7300FD1DC3 /* fileheader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 569244762B374AF100B1A729 /* fileheader.cpp */; };
+		56CE55162B3A0B7300FD1DC3 /* chunkheader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 569244732B3748F400B1A729 /* chunkheader.cpp */; };
+		56CE55172B3A0B7300FD1DC3 /* wavfmtchunk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3BB2B337F240092D4DF /* wavfmtchunk.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -831,11 +857,9 @@
 		561BE3B62B337F240092D4DF /* lightheader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = lightheader.cpp; sourceTree = "<group>"; };
 		561BE3B72B337F240092D4DF /* lightheader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = lightheader.hpp; sourceTree = "<group>"; };
 		561BE3B82B337F240092D4DF /* lightfile.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = lightfile.hpp; sourceTree = "<group>"; };
-		561BE3BA2B337F240092D4DF /* wavdatachunk.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = wavdatachunk.hpp; sourceTree = "<group>"; };
 		561BE3BB2B337F240092D4DF /* wavfmtchunk.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = wavfmtchunk.cpp; sourceTree = "<group>"; };
 		561BE3BD2B337F240092D4DF /* mwavfile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = mwavfile.cpp; sourceTree = "<group>"; };
 		561BE3BF2B337F240092D4DF /* mwavfile.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = mwavfile.hpp; sourceTree = "<group>"; };
-		561BE3C02B337F240092D4DF /* wavdatachunk.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = wavdatachunk.cpp; sourceTree = "<group>"; };
 		561BE3C12B337F240092D4DF /* wavfmtchunk.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = wavfmtchunk.hpp; sourceTree = "<group>"; };
 		561BE3C82B3380820092D4DF /* ShowClient */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ShowClient; sourceTree = BUILT_PRODUCTS_DIR; };
 		561BE3CA2B3380820092D4DF /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
@@ -884,6 +908,16 @@
 		561BE44F2B35D7AA0092D4DF /* teststuff */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = teststuff; sourceTree = BUILT_PRODUCTS_DIR; };
 		561BE4512B35D7AA0092D4DF /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		561BE4612B36413E0092D4DF /* HowToCreateAnImage.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = HowToCreateAnImage.txt; sourceTree = "<group>"; };
+		569244732B3748F400B1A729 /* chunkheader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = chunkheader.cpp; sourceTree = "<group>"; };
+		569244742B3748F400B1A729 /* chunkheader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = chunkheader.hpp; sourceTree = "<group>"; };
+		569244762B374AF100B1A729 /* fileheader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = fileheader.cpp; sourceTree = "<group>"; };
+		569244772B374AF100B1A729 /* fileheader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = fileheader.hpp; sourceTree = "<group>"; };
+		56CE55062B39870200FD1DC3 /* showclient.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = showclient.cpp; sourceTree = "<group>"; };
+		56CE55072B39870200FD1DC3 /* showclient.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = showclient.hpp; sourceTree = "<group>"; };
+		56CE55092B39C03000FD1DC3 /* showserver.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = showserver.cpp; sourceTree = "<group>"; };
+		56CE550A2B39C03000FD1DC3 /* showserver.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = showserver.hpp; sourceTree = "<group>"; };
+		56CE550C2B39C71B00FD1DC3 /* serverclient.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = serverclient.cpp; sourceTree = "<group>"; };
+		56CE550D2B39C71B00FD1DC3 /* serverclient.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = serverclient.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -914,6 +948,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				569244722B373AC800B1A729 /* CoreFoundation.framework in Frameworks */,
+				569244712B373AC200B1A729 /* CoreAudio.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -980,16 +1016,16 @@
 		561BE0C02B337DF40092D4DF /* controllers */ = {
 			isa = PBXGroup;
 			children = (
-				561BE4162B34743E0092D4DF /* pruconfig.hpp */,
-				561BE4142B3473A00092D4DF /* pruconfig.cpp */,
-				561BE4182B347C420092D4DF /* statusled.cpp */,
-				561BE4172B347C420092D4DF /* statusled.hpp */,
 				561BE3F02B33FE330092D4DF /* frameclock.cpp */,
 				561BE3F12B33FE330092D4DF /* frameclock.hpp */,
-				561BE3F62B34068C0092D4DF /* mediacontroller.cpp */,
-				561BE3F72B34068C0092D4DF /* mediacontroller.hpp */,
 				561BE4302B34B7770092D4DF /* lightcontroller.cpp */,
 				561BE4312B34B7770092D4DF /* lightcontroller.hpp */,
+				561BE3F62B34068C0092D4DF /* mediacontroller.cpp */,
+				561BE3F72B34068C0092D4DF /* mediacontroller.hpp */,
+				561BE4142B3473A00092D4DF /* pruconfig.cpp */,
+				561BE4162B34743E0092D4DF /* pruconfig.hpp */,
+				561BE4182B347C420092D4DF /* statusled.cpp */,
+				561BE4172B347C420092D4DF /* statusled.hpp */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -1996,11 +2032,13 @@
 		561BE3B92B337F240092D4DF /* wavfile */ = {
 			isa = PBXGroup;
 			children = (
-				561BE3BA2B337F240092D4DF /* wavdatachunk.hpp */,
-				561BE3BB2B337F240092D4DF /* wavfmtchunk.cpp */,
+				569244732B3748F400B1A729 /* chunkheader.cpp */,
+				569244742B3748F400B1A729 /* chunkheader.hpp */,
+				569244762B374AF100B1A729 /* fileheader.cpp */,
+				569244772B374AF100B1A729 /* fileheader.hpp */,
 				561BE3BD2B337F240092D4DF /* mwavfile.cpp */,
 				561BE3BF2B337F240092D4DF /* mwavfile.hpp */,
-				561BE3C02B337F240092D4DF /* wavdatachunk.cpp */,
+				561BE3BB2B337F240092D4DF /* wavfmtchunk.cpp */,
 				561BE3C12B337F240092D4DF /* wavfmtchunk.hpp */,
 			);
 			path = wavfile;
@@ -2011,8 +2049,10 @@
 			children = (
 				561BE4122B3473760092D4DF /* clientconfig.cpp */,
 				561BE4112B3473760092D4DF /* clientconfig.hpp */,
-				561BE3D42B3381000092D4DF /* CMakeLists.txt */,
+				56CE55062B39870200FD1DC3 /* showclient.cpp */,
+				56CE55072B39870200FD1DC3 /* showclient.hpp */,
 				561BE3CA2B3380820092D4DF /* main.cpp */,
+				561BE3D42B3381000092D4DF /* CMakeLists.txt */,
 			);
 			path = ShowClient;
 			sourceTree = "<group>";
@@ -2095,6 +2135,10 @@
 			isa = PBXGroup;
 			children = (
 				561BE4202B347C710092D4DF /* main.cpp */,
+				56CE550C2B39C71B00FD1DC3 /* serverclient.cpp */,
+				56CE550D2B39C71B00FD1DC3 /* serverclient.hpp */,
+				56CE55092B39C03000FD1DC3 /* showserver.cpp */,
+				56CE550A2B39C03000FD1DC3 /* showserver.hpp */,
 			);
 			path = ShowServer;
 			sourceTree = "<group>";
@@ -2238,9 +2282,9 @@
 			files = (
 				561BE3CB2B3380820092D4DF /* main.cpp in Sources */,
 				561BE3EB2B338E050092D4DF /* lightheader.cpp in Sources */,
+				569244752B3748F400B1A729 /* chunkheader.cpp in Sources */,
 				561BE3F22B33FE330092D4DF /* frameclock.cpp in Sources */,
 				561BE3EE2B33BFF90092D4DF /* mwavfile.cpp in Sources */,
-				561BE3E82B338DFC0092D4DF /* wavdatachunk.cpp in Sources */,
 				561BE3E12B338DE00092D4DF /* playpacket.cpp in Sources */,
 				561BE3E42B338DE00092D4DF /* packet.cpp in Sources */,
 				561BE3DA2B338B8F0092D4DF /* buffer.cpp in Sources */,
@@ -2251,9 +2295,11 @@
 				561BE3E52B338DE00092D4DF /* loadpacket.cpp in Sources */,
 				561BE4132B3473760092D4DF /* clientconfig.cpp in Sources */,
 				561BE4192B347C420092D4DF /* statusled.cpp in Sources */,
+				569244782B374AF100B1A729 /* fileheader.cpp in Sources */,
 				561BE3E62B338DE00092D4DF /* syncpacket.cpp in Sources */,
 				561BE3F42B3400AE0092D4DF /* client.cpp in Sources */,
 				561BE4322B34B7770092D4DF /* lightcontroller.cpp in Sources */,
+				56CE55082B39870200FD1DC3 /* showclient.cpp in Sources */,
 				561BE3DC2B338B970092D4DF /* mapfile.cpp in Sources */,
 				561BE3E92B338DFC0092D4DF /* wavfmtchunk.cpp in Sources */,
 				561BE4152B3473A00092D4DF /* pruconfig.cpp in Sources */,
@@ -2272,11 +2318,14 @@
 				561BE4402B34E9020092D4DF /* noppacket.cpp in Sources */,
 				561BE43C2B34E9020092D4DF /* identpacket.cpp in Sources */,
 				561BE4472B34E91F0092D4DF /* mapfile.cpp in Sources */,
+				56CE550B2B39C03000FD1DC3 /* showserver.cpp in Sources */,
 				561BE43D2B34E9020092D4DF /* playpacket.cpp in Sources */,
 				561BE4422B34E9020092D4DF /* syncpacket.cpp in Sources */,
 				561BE4452B34E91F0092D4DF /* timeutil.cpp in Sources */,
 				561BE43F2B34E9020092D4DF /* loadpacket.cpp in Sources */,
 				561BE4462B34E91F0092D4DF /* buffer.cpp in Sources */,
+				56CE550E2B39C71B00FD1DC3 /* serverclient.cpp in Sources */,
+				56CE550F2B39F85A00FD1DC3 /* frameclock.cpp in Sources */,
 				561BE4212B347C710092D4DF /* main.cpp in Sources */,
 				561BE4432B34E9020092D4DF /* client.cpp in Sources */,
 			);
@@ -2287,16 +2336,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				561BE4352B34E9010092D4DF /* showpacket.cpp in Sources */,
+				56CE55112B3A076A00FD1DC3 /* showserver.cpp in Sources */,
 				561BE43B2B34E9010092D4DF /* packet.cpp in Sources */,
 				561BE4372B34E9010092D4DF /* noppacket.cpp in Sources */,
 				561BE4332B34E9010092D4DF /* identpacket.cpp in Sources */,
+				56CE55172B3A0B7300FD1DC3 /* wavfmtchunk.cpp in Sources */,
 				561BE44A2B34E9200092D4DF /* mapfile.cpp in Sources */,
+				56CE55152B3A0B7300FD1DC3 /* fileheader.cpp in Sources */,
 				561BE4342B34E9010092D4DF /* playpacket.cpp in Sources */,
 				561BE4392B34E9010092D4DF /* syncpacket.cpp in Sources */,
+				56CE55132B3A0B6600FD1DC3 /* mwavfile.cpp in Sources */,
 				561BE4482B34E9200092D4DF /* timeutil.cpp in Sources */,
 				561BE4362B34E9010092D4DF /* loadpacket.cpp in Sources */,
+				56CE55102B3A076500FD1DC3 /* serverclient.cpp in Sources */,
 				561BE4492B34E9200092D4DF /* buffer.cpp in Sources */,
+				56CE55122B3A0B4800FD1DC3 /* frameclock.cpp in Sources */,
 				561BE42C2B347C880092D4DF /* main.cpp in Sources */,
+				56CE55162B3A0B7300FD1DC3 /* chunkheader.cpp in Sources */,
 				561BE43A2B34E9010092D4DF /* client.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2305,18 +2361,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5692446B2B37398300B1A729 /* lightcontroller.cpp in Sources */,
 				561BE45D2B35D9B40092D4DF /* loadpacket.cpp in Sources */,
+				5692446D2B37398300B1A729 /* frameclock.cpp in Sources */,
 				561BE4582B35D9B40092D4DF /* syncpacket.cpp in Sources */,
+				569244702B373A7500B1A729 /* RtAudio.cpp in Sources */,
+				5692446A2B37397300B1A729 /* mwavfile.cpp in Sources */,
+				569244792B37590A00B1A729 /* fileheader.cpp in Sources */,
 				561BE4592B35D9B40092D4DF /* packet.cpp in Sources */,
+				569244662B37396800B1A729 /* lightfile.cpp in Sources */,
+				5692446C2B37398300B1A729 /* mediacontroller.cpp in Sources */,
+				5692447A2B37591200B1A729 /* chunkheader.cpp in Sources */,
 				561BE45A2B35D9B40092D4DF /* showpacket.cpp in Sources */,
 				561BE45B2B35D9B40092D4DF /* client.cpp in Sources */,
 				561BE45C2B35D9B40092D4DF /* identpacket.cpp in Sources */,
+				5692446E2B37398300B1A729 /* statusled.cpp in Sources */,
 				561BE45F2B35D9BE0092D4DF /* timeutil.cpp in Sources */,
 				561BE45E2B35D9BE0092D4DF /* mapfile.cpp in Sources */,
 				561BE4522B35D7AA0092D4DF /* main.cpp in Sources */,
 				561BE4602B35D9BE0092D4DF /* buffer.cpp in Sources */,
 				561BE4572B35D9B40092D4DF /* playpacket.cpp in Sources */,
 				561BE4562B35D9B40092D4DF /* noppacket.cpp in Sources */,
+				569244692B37397300B1A729 /* wavfmtchunk.cpp in Sources */,
+				569244672B37396800B1A729 /* lightheader.cpp in Sources */,
+				5692446F2B37398300B1A729 /* pruconfig.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2369,6 +2437,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 					ASIO_STANDALONE,
+					__MACOSX_CORE__,
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -2430,7 +2499,10 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = ASIO_STANDALONE;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					ASIO_STANDALONE,
+					__MACOSX_CORE__,
+				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -2553,6 +2625,7 @@
 					"$(inherited)",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -2565,6 +2638,7 @@
 				DEVELOPMENT_TEAM = CF264WE69M;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

@@ -1,17 +1,13 @@
 //Copyright © 2023 Charles Kerr. All rights reserved.
 
-#ifndef mwavfile_hpp
-#define mwavfile_hpp
+#include "chunkheader.hpp"
 
-#include <cstdint>
-#include <iostream>
-#include <string>
-#include <filesystem>
-#include "utility/mapfile.hpp"
+#include <algorithm>
+#include <stdexcept>
 
-#include "wavfmtchunk.hpp"
 
-//======================================================================
+using namespace std::string_literals ;
+
 /* ************************************************************************************************
  Offset     Size    Name             Description
 
@@ -48,34 +44,35 @@
  Chunk type: LIST -  signature = "LIST" , (0x5453494c big-endian format)
  ************************************************************************************************ */
 
+
 //======================================================================
+ChunkHeader::ChunkHeader():size(0),signature(0){
+}
 
-class MWAVFile {
-private:
-    static constexpr auto SSDRATE = 0.037 ;
-    
-    util::MapFile memoryMap ;
-    size_t currentOffset ;
-    
-    WAVFmtChunk formatChunk ;
-    const std::uint8_t *ptrToData ;
-    std::uint32_t  dataSize ;
+//======================================================================
+ChunkHeader::ChunkHeader(const std::uint8_t *ptr):ChunkHeader(){
+    if (!load(ptr)) {
+        throw std::runtime_error("Error processing wav chunk header");
+    }
+}
 
-public:
-    MWAVFile()  ;
-    MWAVFile( const std::filesystem::path &filepath) ;
-    
-    auto load(const std::filesystem::path &filepath) -> bool ;
-    auto clear() -> void ;
-    
-    auto isLoaded() const -> bool ;
-    
-    auto setFrame(std::uint32_t frame) -> bool ;
-    
-    auto loadBuffer(std::uint8_t *buffer, std::uint32_t samplecount ) -> std::uint32_t ;
-    
-    auto frameCount() const -> std::uint32_t ;
-};
+//======================================================================
+auto ChunkHeader::load(const std::uint8_t *ptr) -> bool {
+    try{
+        std::copy(ptr,ptr+4, reinterpret_cast<std::uint8_t*>(&signature)) ;
+        std::copy(ptr+4,ptr+8, reinterpret_cast<std::uint8_t*>(&size)) ;
+        return true ;
+    }
+    catch(...) {
+        return false ;
+    }
+}
+//======================================================================
+auto ChunkHeader::isFormat() const -> bool {
+    return signature == FMTSIGNATURE ;
+}
+//======================================================================
+auto ChunkHeader::isData() const -> bool {
+    return signature == DATASIGNATURE ;
+}
 
-
-#endif /* mwavfile_hpp */

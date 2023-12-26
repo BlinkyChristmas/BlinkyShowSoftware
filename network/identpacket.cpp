@@ -45,7 +45,7 @@ auto IdentPacket::handle() const -> std::string {
 }
 //======================================================================
 auto IdentPacket::setHandle(const std::string &value) -> void {
-    this->write(value,HANDLEOFFSET,HANDLESIZE) ;
+    this->write(value,HANDLESIZE,HANDLEOFFSET) ;
 }
 
 //======================================================================

@@ -127,7 +127,7 @@ auto MediaController::isPlaying() const -> bool {
 
 
 //======================================================================
-auto MediaController::load(const std::string &media) -> bool {
+auto MediaController::load(const std::string &media) ->std::uint32_t{
     try {
         if (soundDac.isStreamRunning()) {
             soundDac.abortStream() ;
@@ -137,11 +137,17 @@ auto MediaController::load(const std::string &media) -> bool {
         }
         syncFrame = 0 ;
         currentFrame = 0 ;
-        return mediaFile.load( mediaLocation / std::filesystem::path(media + extension) ) ;
+        if (media.empty()) {
+            return 0 ;
+        }
+        if ( !mediaFile.load( mediaLocation / std::filesystem::path(media + extension) ) ) {
+            return 0 ;
+        }
+        return mediaFile.frameCount() ;
     }
     catch(...) {
         DBGMSG(std::cerr, "Error loading media file");
-        return false ;
+        return 0 ;
     }
 }
 
@@ -149,6 +155,9 @@ auto MediaController::load(const std::string &media) -> bool {
 //======================================================================
 auto MediaController::play(bool state, std::uint32_t frame ) -> bool{
     if (state) {
+        if (!mediaFile.isLoaded()){
+            return false ;
+        }
         if (!soundDac.isStreamOpen()) {
             return false ;
         }
@@ -172,4 +181,9 @@ auto MediaController::play(bool state, std::uint32_t frame ) -> bool{
 //======================================================================
 auto MediaController::sync( std::uint32_t frame) -> void {
     this->syncFrame = frame ;
+}
+
+//======================================================================
+auto MediaController::setUseSync(bool state) -> void {
+    useSync = state ;
 }

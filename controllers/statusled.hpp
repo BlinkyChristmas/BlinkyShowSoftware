@@ -11,9 +11,10 @@
 //======================================================================
 class StatusLed {
 public:
-    static constexpr auto  SHOWSTATUS = 0 ;
-    static constexpr auto  CONNECTSTATUS = 1 ;
-    static constexpr auto  PLAYSTATUS = 2 ;
+    // If these change, since we didn't use dictionary in our debug, dont forget to change the order in the array : LEDNAMES
+    static constexpr auto  PLAYSTATUS = 0 ;
+    static constexpr auto  SHOWSTATUS = 1 ;
+    static constexpr auto  CONNECTSTATUS = 2 ;
     static constexpr auto  RUNSTATUS = 3 ;
     static constexpr auto  LEDCOUNT = 4 ;
 

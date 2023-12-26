@@ -12,7 +12,7 @@
 using namespace std::string_literals ;
 
 //======================================================================
-ClientConfig::ClientConfig():clientPort(0),serverPort(0),masterSync(false),useAudio(false),useLights(false),musicExtension(".wav"),serverKey(0xDEADBEEF),name("Forgot"),syncCount(270),lightExtension(".light"){
+ClientConfig::ClientConfig():clientPort(0),serverPort(0),useAudio(false),useLights(false),musicExtension(".wav"),serverKey(0xDEADBEEF),name("Forgot"),lightExtension(".light"){
     
 }
 
@@ -96,12 +96,6 @@ auto ClientConfig::processKeyValue(const std::string &ukey, const std::string &v
         }
         else if (ukey == "LIGHTS") {
             useLights = std::stoi(value,nullptr,0) != 0 ;
-        }
-        else if (ukey == "MASTER") {
-            masterSync = std::stoi(value,nullptr,0) != 0 ;
-        }
-        else if (ukey == "FRAMEUPDATE") {
-            syncCount = std::stoi(value,nullptr,0) ;
         }
         else {
             return false ;

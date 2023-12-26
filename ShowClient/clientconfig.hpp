@@ -34,8 +34,6 @@ struct ClientConfig {
     
     bool useAudio ;
     bool useLights ;
-    bool masterSync ;
-    int syncCount ;
     
     ClientConfig() ;
     ClientConfig(const std::filesystem::path &configpath) ;

@@ -39,9 +39,10 @@ public:
     auto setShow(bool state) -> bool ;
 
     auto isPlaying() const -> bool ;
-    auto load(const std::string &media) -> bool ;
+    auto load(const std::string &media) ->std::uint32_t ;
     auto play(bool state, std::uint32_t frame = 0) -> bool ;
     auto sync( std::uint32_t frame) -> void ;
+    auto setUseSync(bool state) -> void ;
 };
 
 #endif /* mediacontroller_hpp */

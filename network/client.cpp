@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <stdexcept>
 #include <sstream>
+#include <utility>
 
 #include "utility/dbgutil.hpp"
 #include "utility/timeutil.hpp"
@@ -12,36 +13,103 @@
 using namespace std::string_literals ;
 
 
+// =======================================================================================
+// Client interrupt handlers for read/writing
+// =======================================================================================
 // ========================================================================================
-auto Client::packetRead(const asio::error_code& err, size_t bytes_transferred) -> void {
-    if (err) {
-        if (netSocket.is_open()) {
-            DBGMSG(std::cerr, "Error on read: "s + err.message());
-            this->close() ;
+auto Client::packetRead(const asio::error_code& ec, size_t bytes_transferred) -> void {
+    if (ec) {
+        // Ok, if we get an error in our read, it is probably something wrong on the other end
+        // So we just close it and bail
+        DBGMSG(std::cerr, "Error on read: "s + ec.message());
+        try {
+            netSocket.close() ;
+            // we should clear out queued output
+            auto empty = std::queue<Packet>() ;
+            sendInProgress = false ;
+            {
+                auto lock = std::lock_guard(outAccess);
+                std::swap(empty,outPackets) ;
+            }
+        }
+        catch(...) {
+            // Do nothing, we are still closing
+            DBGMSG(std::cerr,"Error closing our socket in read handler");
         }
         return ;
     }
-    if (bytesAsked != bytes_transferred){
-        auto amount = bytesAsked - bytes_transferred ;
+    if (inBytes != bytes_transferred){
+        auto amount = inBytes - bytes_transferred ;
         auto offset = incomingPacket.bufferData().size() - amount ;
-        bytesAsked = amount ;
-        netSocket.async_read_some(asio::buffer(incomingPacket.bufferData().data()+offset,bytesAsked),std::bind(&Client::packetRead,this,std::placeholders::_1,std::placeholders::_2));
+        inBytes = amount ;
+        netSocket.async_read_some(asio::buffer(incomingPacket.bufferData().data()+offset,inBytes),std::bind(&Client::packetRead,this,std::placeholders::_1,std::placeholders::_2));
         return ;
     }
     if (incomingPacket.size() != incomingPacket.length()) {
-        bytesAsked = incomingPacket.length() - incomingPacket.size() ;
+        inBytes = incomingPacket.length() - incomingPacket.size() ;
         incomingPacket.resize(incomingPacket.length()) ;
-        auto offset = incomingPacket.size() - bytesAsked ;
-        netSocket.async_read_some(asio::buffer(incomingPacket.bufferData().data()+offset,bytesAsked),std::bind(&Client::packetRead,this,std::placeholders::_1,std::placeholders::_2));
+        auto offset = incomingPacket.size() - inBytes ;
+        netSocket.async_read_some(asio::buffer(incomingPacket.bufferData().data()+offset,inBytes),std::bind(&Client::packetRead,this,std::placeholders::_1,std::placeholders::_2));
         return ;
     }
     incomingPacket.stamp() ;  // Timestamp the packet
     receive_time = util::ourclock::now() ;  // indicate the last time we got a packet
     if (processPacket(incomingPacket)) {
         incomingPacket = Packet() ;
-        bytesAsked = incomingPacket.size() ;
-        netSocket.async_read_some(asio::buffer(incomingPacket.bufferData().data(),bytesAsked),std::bind(&Client::packetRead,this,std::placeholders::_1,std::placeholders::_2));
+        inBytes = incomingPacket.size() ;
+        netSocket.async_read_some(asio::buffer(incomingPacket.bufferData().data(),inBytes),std::bind(&Client::packetRead,this,std::placeholders::_1,std::placeholders::_2));
     }
+}
+
+// ========================================================================================
+auto Client::packetWrite(const asio::error_code& ec, size_t bytes_transferred) -> void {
+    if (ec) {
+        // We had an error writing
+        DBGMSG(std::cerr, "We had error writing packet: "s + ec.message()) ;
+        // So what I think we are suppose to do here, is just shutdown the socket
+        try {
+            sendInProgress = false ;
+            auto empty = std::queue<Packet>() ;
+            sendInProgress = false ;
+            {
+                auto lock = std::lock_guard(outAccess);
+                std::swap(empty,outPackets) ;
+            }
+            if (ec.value() != asio::error::connection_aborted ){
+                netSocket.shutdown( asio::ip::tcp::socket::shutdown_type::shutdown_both );
+            }
+            else {
+                netSocket.close() ;
+            }
+        }
+        catch(...) {
+            DBGMSG(std::cerr, "We had error shutdowing our socket, but where sending: "s + ec.message()) ;
+        }
+        return ;
+    }
+    if (bytesOut != bytes_transferred) {
+        // we need to send some more
+        auto amount = bytesOut - bytes_transferred ;
+        auto offset = outgoingPacket.size() - amount ;
+        bytesOut = amount ;
+        netSocket.async_write_some(asio::buffer(outgoingPacket.bufferData().data()+offset,bytesOut),std::bind(&Client::packetWrite,this,std::placeholders::_1,std::placeholders::_2));
+        return ;
+    }
+    // We sent it! do we have anyother data
+    send_time = util::ourclock::now() ;
+    DBGMSG(std::cout, "We completed writing packet: "s + Packet::nameForPacket(outgoingPacket.packetID())) ;
+    auto lock = std::lock_guard(outAccess) ;
+    if (!outPackets.empty()) {
+        outgoingPacket = outPackets.front() ;
+        outPackets.pop() ;
+        bytesOut = outgoingPacket.size() ;
+        netSocket.async_write_some(asio::buffer(outgoingPacket.bufferData().data(),bytesOut),std::bind(&Client::packetWrite,this,std::placeholders::_1,std::placeholders::_2));
+        sendInProgress = true ;
+    }
+    else {
+        sendInProgress = false ;
+    }
+    
 }
 
 // ========================================================================================
@@ -56,24 +124,8 @@ auto Client::processPacket(const Packet &packet) -> bool {
         return true ;
         
     }
-    else if(id == IdentPacket::IDENT){
-        // We will run our internal ident handler
-        return processIdentPacket(packet) ;
-    }
     DBGMSG(std::cerr, "No packet routine for: "s + Packet::nameForPacket(id)) ;
     
-    return true ;
-}
-// ========================================================================================
-auto Client::processIdentPacket(const Packet &packet) -> bool {
-    auto ptr = static_cast<const IdentPacket*>(&packet) ;
-    name = ptr->handle() ;
-    type = ptr->clientType() ;
-    if (server_key != ptr->key()){
-        // This didn't match our key, lets get rid of this ;
-        this->close() ;
-        return false ; // Dont reissue the read
-    }
     return true ;
 }
 // =============================================================================================
@@ -106,20 +158,21 @@ auto Client::resolve(const std::string &ipaddress, int serverPort) -> asio::ip::
 // =============================================================================================
 
 // ========================================================================================
-Client::Client(asio::io_context &context): netSocket(context), bytesAsked(0), receive_time(util::ourclock::now()), send_time(util::ourclock::now()), connect_time(util::ourclock::now()), type(IdentPacket::CLIENT), server_key(0XDEADBEEF), is_connected(false){
+Client::Client(asio::io_context &context): netSocket(context), inBytes(0), receive_time(util::ourclock::now()), send_time(util::ourclock::now()), connect_time(util::ourclock::now()), client_type(IdentPacket::UNKNOWN){
 }
 
 // ========================================================================================
-Client::Client(asio::io_context &context, IdentPacket::ClientType clienttype, std::uint32_t key ):Client(context){
-    this->type = clienttype ;
-    this->server_key = key ;
+Client::Client(asio::io_context &context, IdentPacket::ClientType clienttype ):Client(context){
+    this->client_type = clienttype ;
 }
 
 // ========================================================================================
 Client::~Client() {
-    this->close() ;
+    if (netSocket.is_open()) {
+        netSocket.cancel() ;
+        netSocket.close() ;
+    }
 }
-
 
 // ========================================================================================
 auto Client::is_open() const -> bool {
@@ -129,18 +182,8 @@ auto Client::is_open() const -> bool {
 // ========================================================================================
 auto Client::close() -> void {
     if (netSocket.is_open()) {
-        try {
-            netSocket.cancel();
-            if (is_connected){
-                netSocket.shutdown( asio::ip::tcp::socket::shutdown_type::shutdown_both ) ;
-                is_connected = false ;
-            }
-            netSocket.close() ;
-        }
-        catch(...) {
-            DBGMSG(std::cerr, "Error closing client socket.");
-            netSocket.close() ;
-        }
+        netSocket.cancel() ;
+        netSocket.close() ;
     }
 }
 
@@ -148,28 +191,35 @@ auto Client::close() -> void {
 auto Client::connect(asio::ip::tcp::endpoint &endpoint) -> bool {
     try {
         asio::error_code ec ;
+        if (!netSocket.is_open()) {
+            netSocket.open(asio::ip::tcp::v4(), ec);
+            if (ec) {
+                // we had an error on the open?
+                DBGMSG(std::cerr, "Error opening the socket: "s + ec.message());
+                return false ;
+            }
+        }
         netSocket.connect(endpoint,ec) ;
         if (ec) {
             DBGMSG(std::cerr, "Error on connecting socket: "s + ec.message());
-            this->close() ;
+            if (netSocket.is_open()) {
+                netSocket.close() ;
+            }
             return false ;
         }
-        is_connected = true ;
         this->setPeerInformation() ;
         return true ;
     }
     catch(...) {
         DBGMSG(std::cerr, "Uknown error on connect") ;
-        this->close() ;
+        if (netSocket.is_open()) {
+            netSocket.close() ;
+        }
         return false ;
     }
     
 }
 
-// ========================================================================================
-auto Client::setIsConnected(bool state) -> void {
-    is_connected = state ;
-}
 // ========================================================================================
 auto Client::bind(int port) -> bool {
     asio::error_code ec ;
@@ -178,6 +228,7 @@ auto Client::bind(int port) -> bool {
             netSocket.open(asio::ip::tcp::v4(),ec) ;
             if (ec) {
                 DBGMSG(std::cerr, "Error on opening socket: "s + ec.message());
+                netSocket.close() ;
                 return false ;
             }
         }
@@ -189,7 +240,7 @@ auto Client::bind(int port) -> bool {
             netSocket.bind(endpoint,ec) ;
             if (ec) {
                 DBGMSG(std::cerr, "Error on binding socket: "s + ec.message());
-                this->close() ;
+                netSocket.close() ;
                 return false ;
             }
         }
@@ -197,7 +248,7 @@ auto Client::bind(int port) -> bool {
     }
     catch(...) {
         DBGMSG(std::cerr, "Unknown error on bind") ;
-        this->close() ;
+        netSocket.close() ;
         return false ;
     }
 }
@@ -206,40 +257,31 @@ auto Client::bind(int port) -> bool {
 auto Client::initialRead() -> void {
     if (netSocket.is_open()){
         incomingPacket = Packet();
-        bytesAsked = incomingPacket.size() ;
-        netSocket.async_read_some(asio::buffer(incomingPacket.data.data(),bytesAsked),std::bind(&Client::packetRead,this,std::placeholders::_1,std::placeholders::_2));
+        inBytes = incomingPacket.size() ;
+        netSocket.async_read_some(asio::buffer(incomingPacket.data.data(),inBytes),std::bind(&Client::packetRead,this,std::placeholders::_1,std::placeholders::_2));
     }
 }
 // ========================================================================================
 auto Client::sendPacket(const Packet &packet) -> bool {
-    auto rvalue = false ;
-    try {
-        if (netSocket.is_open()) {
-            asio::error_code ec ;
-            asio::write(netSocket,asio::buffer(packet.data.data(),packet.size()),ec) ;
-            if (!ec) {
-                send_time = util::ourclock::now() ;
-                rvalue = true ;
-            }
-            else {
-                DBGMSG(std::cerr, "Error on writing socket: "s + ec.message());
-                this->close() ;
-            }
-        }
-        return rvalue ;
+    DBGMSG(std::cout, "Queuing packet for sending: "s + Packet::nameForPacket(packet.packetID()));
+    auto lock = std::lock_guard(outAccess);
+    if (sendInProgress) {
+        outPackets.push(packet) ;
     }
-    catch (...) {
-        this->close() ;
-        DBGMSG(std::cerr, "Unknown error on send packet"s );
-        return false ;
+    else {
+        outgoingPacket = packet ;
+        bytesOut = packet.size() ;
+        netSocket.async_write_some(asio::buffer(outgoingPacket.bufferData().data(),bytesOut),std::bind(&Client::packetWrite,this,std::placeholders::_1,std::placeholders::_2));
+        sendInProgress = true ;
     }
+    return true ;
 }
 
 
 // ========================================================================================
 auto Client::setPeerInformation() -> void {
     try {
-        if (this->is_open() && is_connected){
+        if (this->is_open()){
             peer_address = netSocket.remote_endpoint().address().to_string() ;
             peer_port = std::to_string(netSocket.remote_endpoint().port()) ;
         }
@@ -256,10 +298,6 @@ auto Client::address() const -> std::string {
 }
 
 // ========================================================================================
-auto Client::setConnectTime(const util::ourclock::time_point &time) -> void {
-    connect_time = time ;
-}
-// ========================================================================================
 auto Client::connectTime() const -> util::ourclock::time_point {
     return connect_time ;
 }
@@ -269,8 +307,8 @@ auto Client::lastReceiveTime() const -> util::ourclock::time_point {
     return receive_time ;
 }
 // ========================================================================================
-auto Client::millSinceReceive(const util::ourclock::time_point &time ) -> size_t {
-    return std::chrono::duration_cast<std::chrono::milliseconds>(time - receive_time).count() ;
+auto Client::minutesSinceReceive(const util::ourclock::time_point &time ) -> size_t {
+    return std::chrono::duration_cast<std::chrono::minutes>(time - receive_time).count() ;
 }
 
 // ========================================================================================
@@ -279,7 +317,7 @@ auto Client::lastSendTime() const -> util::ourclock::time_point {
 }
 
 // ========================================================================================
-auto Client::millSinceSend(const util::ourclock::time_point &time) -> size_t {
+auto Client::milliSinceSend(const util::ourclock::time_point &time) -> size_t {
     return std::chrono::duration_cast<std::chrono::milliseconds>(time - send_time).count() ;
 }
 
@@ -289,31 +327,31 @@ auto Client::setPacketRoutine(Packet::PacketType type, PacketProcessing routine)
 }
 
 // ========================================================================================
-auto Client::setServerKey( std::uint32_t key) -> void {
-    this->server_key = key ;
-}
-
-// ========================================================================================
 auto Client::setClientType(IdentPacket::ClientType clienttype) -> void {
-    this->type = clienttype ;
+    this->client_type = clienttype ;
 }
 
-// ========================================================================================
-auto Client::handle() const -> const std::string& {
-    return name ;
-}
-// ========================================================================================
-auto Client::setHandle(const std::string &handle)  -> void {
-    name = handle ;
-}
 
 // ========================================================================================
 auto Client::clientType() const -> const std::string&  {
-    return IdentPacket::nameForClient(type) ;
+    return IdentPacket::nameForClient(client_type) ;
+}
+
+// ========================================================================================
+auto Client::type() const -> IdentPacket::ClientType {
+    return client_type ;
 }
 
 // ========================================================================================
 auto Client::information() const -> std::string {
-    const auto format = "%b %d %H:%M"s ;
-    return util::sysTimeToString(this->connect_time,format) + " , "s +  this->address() + " , " + this->name + " , " + IdentPacket::nameForClient(type) + " , " + util::sysTimeToString(this->receive_time,format) + " , "s + util::sysTimeToString(this->send_time,format) ;
+    const auto format = "%b %d %H:%M:%S"s ;
+    return util::sysTimeToString(this->connect_time,format) + " , "s +  this->address() + " , "  + IdentPacket::nameForClient(client_type) + " , " + util::sysTimeToString(this->receive_time,format) + " , "s + util::sysTimeToString(this->send_time,format) ;
+}
+
+// ========================================================================================
+auto Client::clearSendBuffer() -> void {
+    auto empty = std::queue<Packet>() ;
+    auto lock = std::lock_guard(outAccess) ;
+    std::swap(empty,outPackets) ;
+    sendInProgress = false ;
 }

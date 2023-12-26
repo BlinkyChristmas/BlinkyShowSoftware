@@ -1,17 +1,13 @@
 //Copyright © 2023 Charles Kerr. All rights reserved.
 
-#ifndef mwavfile_hpp
-#define mwavfile_hpp
+#ifndef chunkheader_hpp
+#define chunkheader_hpp
 
 #include <cstdint>
 #include <iostream>
 #include <string>
-#include <filesystem>
-#include "utility/mapfile.hpp"
 
-#include "wavfmtchunk.hpp"
 
-//======================================================================
 /* ************************************************************************************************
  Offset     Size    Name             Description
 
@@ -49,33 +45,18 @@
  ************************************************************************************************ */
 
 //======================================================================
-
-class MWAVFile {
-private:
-    static constexpr auto SSDRATE = 0.037 ;
+struct ChunkHeader {
+    static constexpr std::uint32_t DATASIGNATURE = 0x61746164 ; // "data" big endian
+    static constexpr std::uint32_t FMTSIGNATURE = 0x20746D66 ; // "fmt " big endian
+    static constexpr std::uint32_t LISTSIGNATURE = 0x5453494c  ; // "LIST"
     
-    util::MapFile memoryMap ;
-    size_t currentOffset ;
-    
-    WAVFmtChunk formatChunk ;
-    const std::uint8_t *ptrToData ;
-    std::uint32_t  dataSize ;
-
-public:
-    MWAVFile()  ;
-    MWAVFile( const std::filesystem::path &filepath) ;
-    
-    auto load(const std::filesystem::path &filepath) -> bool ;
-    auto clear() -> void ;
-    
-    auto isLoaded() const -> bool ;
-    
-    auto setFrame(std::uint32_t frame) -> bool ;
-    
-    auto loadBuffer(std::uint8_t *buffer, std::uint32_t samplecount ) -> std::uint32_t ;
-    
-    auto frameCount() const -> std::uint32_t ;
+    std::uint32_t size ;
+    std::uint32_t signature ;
+    ChunkHeader();
+    ChunkHeader(const std::uint8_t *ptr) ;
+    auto load(const std::uint8_t *ptr) -> bool ;
+    auto isFormat() const -> bool ;
+    auto isData() const -> bool ;
 };
 
-
-#endif /* mwavfile_hpp */
+#endif /* chunkheader_hpp */

@@ -1,17 +1,14 @@
 //Copyright © 2023 Charles Kerr. All rights reserved.
 
-#ifndef mwavfile_hpp
-#define mwavfile_hpp
+#include "fileheader.hpp"
 
-#include <cstdint>
-#include <iostream>
-#include <string>
-#include <filesystem>
-#include "utility/mapfile.hpp"
+#include <algorithm>
+#include <stdexcept>
 
-#include "wavfmtchunk.hpp"
 
-//======================================================================
+using namespace std::string_literals ;
+
+
 /* ************************************************************************************************
  Offset     Size    Name             Description
 
@@ -50,32 +47,35 @@
 
 //======================================================================
 
-class MWAVFile {
-private:
-    static constexpr auto SSDRATE = 0.037 ;
+//======================================================================
+FileHeader::FileHeader():size(0),wavSignature(0),fileSignature(0){
     
-    util::MapFile memoryMap ;
-    size_t currentOffset ;
+}
+//======================================================================
+FileHeader::FileHeader(const std::uint8_t *ptr):FileHeader(){
+    try{
+        if (!load(ptr)) {
+            throw std::runtime_error("Not a valid wav file");
+        }
+    }
+    catch(...){
+        throw;
+    }
+}
     
-    WAVFmtChunk formatChunk ;
-    const std::uint8_t *ptrToData ;
-    std::uint32_t  dataSize ;
-
-public:
-    MWAVFile()  ;
-    MWAVFile( const std::filesystem::path &filepath) ;
-    
-    auto load(const std::filesystem::path &filepath) -> bool ;
-    auto clear() -> void ;
-    
-    auto isLoaded() const -> bool ;
-    
-    auto setFrame(std::uint32_t frame) -> bool ;
-    
-    auto loadBuffer(std::uint8_t *buffer, std::uint32_t samplecount ) -> std::uint32_t ;
-    
-    auto frameCount() const -> std::uint32_t ;
-};
-
-
-#endif /* mwavfile_hpp */
+//======================================================================
+auto FileHeader::load(const std::uint8_t *ptr) -> bool {
+    try{
+        std::copy(ptr,ptr+4, reinterpret_cast<std::uint8_t*>(&fileSignature));
+        std::copy(ptr+4,ptr+8, reinterpret_cast<std::uint8_t*>(&size));
+        std::copy(ptr+8,ptr+12, reinterpret_cast<std::uint8_t*>(&wavSignature));
+        return true ;
+    }
+    catch(...){
+        throw std::runtime_error("Error loading wav file header");
+    }
+}
+//======================================================================
+auto FileHeader::valid() const -> bool {
+    return wavSignature == WAVSIGNATURE && fileSignature == FILESIGNATURE ;
+}

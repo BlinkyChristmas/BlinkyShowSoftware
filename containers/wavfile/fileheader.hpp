@@ -1,17 +1,12 @@
 //Copyright © 2023 Charles Kerr. All rights reserved.
 
-#ifndef mwavfile_hpp
-#define mwavfile_hpp
+#ifndef fileheader_hpp
+#define fileheader_hpp
 
 #include <cstdint>
 #include <iostream>
 #include <string>
-#include <filesystem>
-#include "utility/mapfile.hpp"
 
-#include "wavfmtchunk.hpp"
-
-//======================================================================
 /* ************************************************************************************************
  Offset     Size    Name             Description
 
@@ -49,33 +44,19 @@
  ************************************************************************************************ */
 
 //======================================================================
-
-class MWAVFile {
-private:
-    static constexpr auto SSDRATE = 0.037 ;
+struct FileHeader {
     
-    util::MapFile memoryMap ;
-    size_t currentOffset ;
+    static constexpr std::uint32_t FILESIGNATURE = 0x46464952 ; // "RIFF"
+    static constexpr std::uint32_t WAVSIGNATURE = 0x45564157  ; // "WAVE"  ;
     
-    WAVFmtChunk formatChunk ;
-    const std::uint8_t *ptrToData ;
-    std::uint32_t  dataSize ;
-
-public:
-    MWAVFile()  ;
-    MWAVFile( const std::filesystem::path &filepath) ;
+    std::uint32_t fileSignature ;
+    std::uint32_t wavSignature ;
+    std::uint32_t size ;
     
-    auto load(const std::filesystem::path &filepath) -> bool ;
-    auto clear() -> void ;
-    
-    auto isLoaded() const -> bool ;
-    
-    auto setFrame(std::uint32_t frame) -> bool ;
-    
-    auto loadBuffer(std::uint8_t *buffer, std::uint32_t samplecount ) -> std::uint32_t ;
-    
-    auto frameCount() const -> std::uint32_t ;
+    FileHeader() ;
+    FileHeader(const std::uint8_t *ptr);
+    auto load(const std::uint8_t *ptr) -> bool ;
+    auto valid() const -> bool ;
 };
 
-
-#endif /* mwavfile_hpp */
+#endif /* fileheader_hpp */

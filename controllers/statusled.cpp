@@ -19,7 +19,7 @@ const std::vector<std::string> StatusLed::LEDLOCATION = {
 };
 
 const std::vector<std::string> StatusLed::LEDNAMES{
-    "SHOWSTATUS"s,"CONNECTSTATUS"s,"PLAYSTATUS"s,"RUNSTATUS"s
+   "PLAYSTATUS"s,"SHOWSTATUS"s, "CONNECTSTATUS"s,"RUNSTATUS"s
 };
 
 //======================================================================

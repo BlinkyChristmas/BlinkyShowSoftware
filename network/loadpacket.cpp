@@ -25,7 +25,7 @@ auto LoadPacket::music() const -> std::string {
 }
 //======================================================================
 auto LoadPacket::setMusic(const std::string &value) -> void {
-    this->write(value,MUSICOFFSET,MUSICSIZE) ;
+    this->write(value,MUSICSIZE,MUSICOFFSET) ;
 }
 //======================================================================
 auto LoadPacket::light() const -> std::string {
@@ -34,7 +34,7 @@ auto LoadPacket::light() const -> std::string {
 }
 //======================================================================
 auto LoadPacket::setLight(const std::string &value) -> void {
-    this->write(value,LIGHTOFFSET,LIGHTSIZE) ;
+    this->write(value,LIGHTSIZE,LIGHTOFFSET) ;
     
 }
 
