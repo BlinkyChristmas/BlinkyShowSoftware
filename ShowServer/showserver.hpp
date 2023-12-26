@@ -90,7 +90,7 @@ public:
     auto clockUpdate(std::uint32_t frame) -> void ;
     auto clockStop(std::uint32_t frame ) -> void ;
     
-    auto run(const std::string &serverip, int port) -> bool ;
+    auto run( int port) -> bool ;
     auto stop() -> void ;
     
     auto show(bool state) -> void ;

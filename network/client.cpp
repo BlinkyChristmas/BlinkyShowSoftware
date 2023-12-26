@@ -18,19 +18,18 @@ using namespace std::string_literals ;
 // =======================================================================================
 // ========================================================================================
 auto Client::packetRead(const asio::error_code& ec, size_t bytes_transferred) -> void {
+    //DBGMSG(std::cout, "Client Read: "s + ec.message() + " Bytes: "s + std::to_string(bytes_transferred));
     if (ec) {
         // Ok, if we get an error in our read, it is probably something wrong on the other end
         // So we just close it and bail
         DBGMSG(std::cerr, "Error on read: "s + ec.message());
         try {
-            netSocket.close() ;
+            if (ec.value() != asio::error::operation_aborted){
+                netSocket.close() ;
+            }
             // we should clear out queued output
             auto empty = std::queue<Packet>() ;
             sendInProgress = false ;
-            {
-                auto lock = std::lock_guard(outAccess);
-                std::swap(empty,outPackets) ;
-            }
         }
         catch(...) {
             // Do nothing, we are still closing
@@ -54,11 +53,16 @@ auto Client::packetRead(const asio::error_code& ec, size_t bytes_transferred) ->
     }
     incomingPacket.stamp() ;  // Timestamp the packet
     receive_time = util::ourclock::now() ;  // indicate the last time we got a packet
+    DBGMSG(std::cout, "Received packet: "s + Packet::nameForPacket(incomingPacket.packetID()));
+
     if (processPacket(incomingPacket)) {
         incomingPacket = Packet() ;
         inBytes = incomingPacket.size() ;
         netSocket.async_read_some(asio::buffer(incomingPacket.bufferData().data(),inBytes),std::bind(&Client::packetRead,this,std::placeholders::_1,std::placeholders::_2));
+        return ;
     }
+    DBGMSG(std::cout, "Client Read: did not requeue read!");
+
 }
 
 // ========================================================================================
@@ -71,19 +75,25 @@ auto Client::packetWrite(const asio::error_code& ec, size_t bytes_transferred) -
             sendInProgress = false ;
             auto empty = std::queue<Packet>() ;
             sendInProgress = false ;
+            DBGMSG(std::cerr, "Clearing our write packets "s ) ;
             {
                 auto lock = std::lock_guard(outAccess);
                 std::swap(empty,outPackets) ;
             }
-            if (ec.value() != asio::error::connection_aborted ){
+            if (ec.value() != asio::error::connection_aborted && ec.value() != asio::error::broken_pipe){
+                DBGMSG(std::cerr, "Shutting down"s ) ;
                 netSocket.shutdown( asio::ip::tcp::socket::shutdown_type::shutdown_both );
             }
             else {
+                DBGMSG(std::cerr, "Wasnt a connection abort, closing instead"s ) ;
+                
                 netSocket.close() ;
             }
         }
         catch(...) {
             DBGMSG(std::cerr, "We had error shutdowing our socket, but where sending: "s + ec.message()) ;
+            // Should we close?
+            netSocket.close() ;
         }
         return ;
     }
@@ -118,9 +128,10 @@ auto Client::processPacket(const Packet &packet) -> bool {
     auto iter = packetRoutines.find(id) ;
     if (iter != packetRoutines.end()) {
         if (iter->second != nullptr){
+//            DBGMSG(std::cerr, "Packet registered,for: "s + Packet::nameForPacket(id)) ;
             return iter->second(packet,this) ;
         }
-        DBGMSG(std::cerr, "Packet registured, but null routine for: "s + Packet::nameForPacket(id)) ;
+        DBGMSG(std::cerr, "Packet registered, but null routine for: "s + Packet::nameForPacket(id)) ;
         return true ;
         
     }
@@ -183,6 +194,12 @@ auto Client::is_open() const -> bool {
 auto Client::close() -> void {
     if (netSocket.is_open()) {
         netSocket.cancel() ;
+        try {
+            netSocket.shutdown( asio::ip::tcp::socket::shutdown_type::shutdown_both );
+        }
+        catch (...) {
+            
+        }
         netSocket.close() ;
     }
 }
@@ -190,6 +207,7 @@ auto Client::close() -> void {
 // ========================================================================================
 auto Client::connect(asio::ip::tcp::endpoint &endpoint) -> bool {
     try {
+        
         asio::error_code ec ;
         if (!netSocket.is_open()) {
             netSocket.open(asio::ip::tcp::v4(), ec);
@@ -199,6 +217,11 @@ auto Client::connect(asio::ip::tcp::endpoint &endpoint) -> bool {
                 return false ;
             }
         }
+        // Just to be sure, lets clear out any send packets
+        auto empty = std::queue<Packet>() ;
+        std::swap(empty,outPackets);
+        sendInProgress = false ;
+        
         netSocket.connect(endpoint,ec) ;
         if (ec) {
             DBGMSG(std::cerr, "Error on connecting socket: "s + ec.message());

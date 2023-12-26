@@ -8,17 +8,14 @@
 #include <string>
 
 #include "ShowServer/showserver.hpp"
-#include "containers/wavfile/mwavfile.hpp"
 #include "utility/strutil.hpp"
 #include "utility/dbgutil.hpp"
 
 using namespace std::string_literals ;
 
 ShowServer server ;
-MWAVFile mediaFile ;
 auto runForever = true ;
 
-auto mediaLocation = std::filesystem::path("/Users/charles/Documents/BlinkyChristmas/music");
 
 auto  process(const std::string &cmd, const std::string &value) -> bool;
 // ===============================================================================
@@ -34,10 +31,6 @@ int main(int argc, const char * argv[]) {
     auto statuscode = EXIT_SUCCESS ;
     auto buffer = std::vector<char>(2048,0) ;
     try {
-        if (!server.run(ipaddress, 50)) {
-            std::cout << "Error trying to start server listening" << std::endl;
-        }
-        
          while(runForever) {
             std::cin.getline(buffer.data(), buffer.size()-1) ;
             buffer[std::cin.gcount()] = 0 ;
@@ -70,9 +63,8 @@ auto commandListen(const std::string &value) -> bool {
         auto state = std::stoi(st,nullptr,0) != 0 ;
         if (state) {
             try {
-                auto [ip,sp] = util::split(pt," ") ;
-                auto port = std::stoi(sp,nullptr,0) ;
-                server.run(ip,port) ;
+                 auto port = std::stoi(pt,nullptr,0) ;
+                server.run(port) ;
             }
             catch(...) {
                 std::cerr << "Bad parameter" << std::endl;
@@ -89,12 +81,17 @@ auto commandListen(const std::string &value) -> bool {
 }
 // ===============================================================================
 auto commandLoad(const std::string &value) -> bool {
-    auto [music,light] = util::split(value," ") ;
-    mediaFile.load(mediaLocation / std::filesystem::path(music + ".wav"s));
-    auto frame = mediaFile.frameCount() ;
-    DBGMSG(std::cout,value+" has "s+std::to_string(frame)+" frames"s);
-    server.load(frame, value, value);
-    return true ;
+    auto [sf,rs] = util::split(value," ");
+    auto [sm,sl] = util::split(rs," ") ;
+    try {
+        auto frame  = static_cast<std::uint32_t>(std::stoul(sf,nullptr,0)) ;
+        DBGMSG(std::cout,value+" has "s+std::to_string(frame)+" frames"s);
+        server.load(frame, sm, sl);
+    }
+    catch(...){
+        std::cerr << "Bad parameter" << std::endl;
+    }
+     return true ;
 }
 
 // ==============================================================================

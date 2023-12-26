@@ -55,6 +55,8 @@ class ShowClient {
     bool threadRunning ;
     auto runLoop() ;
     
+    util::ourclock::time_point nopRequestSent ;
+    
     util::ourclock::time_point last_resolved ;
     asio::ip::tcp::endpoint server_endpoint ;
     std::uint32_t connect_failures ;

@@ -38,7 +38,7 @@ protected:
     Packet outgoingPacket ;
     size_t bytesOut ;
     std::queue<Packet> outPackets ;
-    std::mutex outAccess ;
+    mutable std::recursive_mutex outAccess ;
     std::atomic<bool> sendInProgress ;
     // And writing packets
     auto packetWrite(const asio::error_code& ec, size_t bytes_transferred) -> void ;

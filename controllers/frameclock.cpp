@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <stdexcept>
 
+#include "utility/dbgutil.hpp"
 //======================================================================
 auto FrameClock::tick(const asio::error_code &ec) -> void {
     if (ec) {
@@ -21,6 +22,8 @@ auto FrameClock::tick(const asio::error_code &ec) -> void {
     if (currentFrame >= stopFrame) {
         
         if (stopCallback != nullptr) {
+            DBGMSG(std::cout, "calling stop callback");
+            
             stopCallback(currentFrame) ;
         }
     }
@@ -28,6 +31,7 @@ auto FrameClock::tick(const asio::error_code &ec) -> void {
         timer.expires_at( timer.expiry() + asio::chrono::milliseconds( FrameClock::FRAMETIME ) ) ;
         timer.async_wait(std::bind(&FrameClock::tick,this,std::placeholders::_1) ) ;
         if (updateCallback != nullptr){
+            //DBGMSG(std::cout, "calling update callback");
             updateCallback(currentFrame) ;
         }
     }
@@ -82,15 +86,16 @@ auto FrameClock::run(bool state,std::uint32_t frame,std::uint32_t endFrame) -> b
             timer.expires_after(asio::chrono::milliseconds( FrameClock::FRAMETIME )) ;
             timer.async_wait(std::bind(&FrameClock::tick,this,std::placeholders::_1) ) ;
         }
-   }
+    }
     else {
         if (internal_state){
             internal_state = false ;
             timer.cancel() ;
             if (stopCallback != nullptr) {
+                DBGMSG(std::cout, "calling stop callback");
                 stopCallback(currentFrame) ;
             }
-         }
+        }
     }
     return true ;
 }
@@ -98,7 +103,7 @@ auto FrameClock::run(bool state,std::uint32_t frame,std::uint32_t endFrame) -> b
 auto FrameClock::sync(std::uint32_t frame) -> bool{
     auto lock = std::lock_guard(frameAccess) ;
     std::uint32_t  current = currentFrame ; // Get what we are actually on, and make it local in case other things are updating as we work
-    auto delta = std::abs(std::int64_t(current) - std::int64_t(frame)); // What is the differenc between where we should be, and where we are?
+    auto delta = std::abs(std::int64_t(current) - std::int64_t(frame)); // What is the difference between where we should be, and where we are?
     if ( delta > TOLERANCE) { // If that is within our tolerance, do nothing
         if (delta <= BAND) {  // Ok, it is outside our tolerance, is it out side our "band".  Band is the delta that we would only nudge the frame in the correct direction, so to avoid constant big jumps
             if (current > frame){

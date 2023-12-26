@@ -132,6 +132,9 @@ auto LightController::play(bool state, std::uint32_t frame) -> bool {
             return false ;
         }
         // Do something here?
+        for ( auto pru = 0 ; pru < 2; pru++ ){
+            lightFile.copy(frame, reinterpret_cast<char*>(const_cast<std::uint8_t*>(pruBuffers.at(pru))),pruConfiguration.at(pru).offset,pruConfiguration.at(pru).length) ;
+        }
     }
     else {
         lightFile.clear() ;

@@ -41,7 +41,7 @@ auto ShowClient::initRoutines() -> void {
 
 //======================================================================
 auto ShowClient::initialize(const ClientConfig &config) -> void {
-    initRoutines() ;
+    
     
     mediaController.setConfiguration(config.musicPath, config.musicExtension, true) ;
     mediaController.setUseSync(true) ;
@@ -51,9 +51,11 @@ auto ShowClient::initialize(const ClientConfig &config) -> void {
 }
 
 //======================================================================
-ShowClient::ShowClient():useAudio(false),useLight(false),showAudio(false),showLight(false),isPlaying(false),inShow(false),threadRunning(false),handle("Beagle"),server_key(0xDEADBEEF),connect_failures(0),last_resolved(util::ourclock::now()),run_forever(true),endFrame(0) {
+ShowClient::ShowClient():useAudio(false),useLight(false),showAudio(false),showLight(false),isPlaying(false),inShow(false),threadRunning(false),handle("Beagle"),server_key(0xDEADBEEF),connect_failures(0),last_resolved(util::ourclock::now()),run_forever(true),endFrame(0),nopRequestSent(util::ourclock::now()) {
     runThread = std::thread(&ShowClient::runLoop,this) ;
     ledController.clearAll() ;
+    initRoutines() ;
+    
 }
 //======================================================================
 ShowClient::~ShowClient() {
@@ -124,6 +126,8 @@ auto ShowClient::connect(const std::string &ip, int port, int clientPort) -> boo
     }
     DBGMSG(std::cout, "Connected, resetting failures");
     connect_failures = 0 ;
+    // start a read on the client!
+    myClient.initialRead() ;
     return true ;
 }
 
@@ -145,7 +149,11 @@ auto ShowClient::setConfiguration(const std::filesystem::path &path) -> bool {
     // are we good or not?
     if (good) {
         ledController.clearAll() ;
-        return configuration.load(path) ;
+        if (!configuration.load(path) ){
+            return false ;
+        }
+        this->initialize(configuration);
+        
     }
     return good ;
 }
@@ -192,9 +200,10 @@ auto ShowClient::run() -> void {
                         // Now, while we are open, we just periodic check our idleness
                         if (myClient.is_open()){
                             auto minutesIn = myClient.minutesSinceReceive() ;
-                            
-                            if ((minutesIn > 5) && (std::chrono::duration_cast<std::chrono::seconds>(util::ourclock::now() - lastKeepAlive ).count() > 60) ) {
+                            auto timeSinceLastRequest = std::chrono::duration_cast<std::chrono::minutes>(util::ourclock::now() - lastKeepAlive).count() ;
+                            if ((minutesIn > 5) && (std::chrono::duration_cast<std::chrono::seconds>(util::ourclock::now() - lastKeepAlive ).count() > 60) &&  timeSinceLastRequest> 5 ) {
                                 // We should send a keep alive
+                                lastKeepAlive = util::ourclock::now() ;
                                 DBGMSG(std::cout, "Sending keep alive request");
                                 auto packet = NopPacket() ;
                                 packet.setRespond(true) ;
@@ -222,16 +231,22 @@ auto ShowClient::run() -> void {
 
 // ==================================================================================
 auto ShowClient::clockUpdate(std::uint32_t frame) -> void {
+    DBGMSG(std::cout, "Clock update: "s + std::to_string(frame));
+    
     if (useAudio) {
+        DBGMSG(std::cout, "Clock update audio. "s );
         mediaController.sync(frame);
     }
     if (useLight) {
+        DBGMSG(std::cout, "Clock update light. "s );
         lightController.sync(frame);
     }
 }
 
 // ==================================================================================
 auto ShowClient::clockStop(std::uint32_t frame ) -> void {
+    DBGMSG(std::cout, "Clock stop : "s );
+    
     if (useAudio) {
         mediaController.play(false) ;
     }
@@ -255,6 +270,8 @@ auto ShowClient::clientLoad( const Packet &packet,Client *) -> bool{
     auto lights = ptr->light() ;
     endFrame = 0 ;
     if (showAudio) {
+        DBGMSG(std::cout, "Loading media: "s + music);
+        
         endFrame = mediaController.load(music);
         useAudio = endFrame != 0 ;
         
@@ -266,10 +283,13 @@ auto ShowClient::clientLoad( const Packet &packet,Client *) -> bool{
         auto temp  = lightController.load(lights);
         useLight = temp != 0 ;
         endFrame = std::max(temp,endFrame) ;
+        DBGMSG(std::cout, "Loading light: "s + lights);
         if (useLight != showLight){
             ledstate = StatusLed::FLASH ;
         }
     }
+    DBGMSG(std::cout, "End frame is "s+ std::to_string(endFrame));
+    
     ledController.setLed(StatusLed::PLAYSTATUS, ledstate);
     return true ;
     
@@ -281,6 +301,7 @@ auto ShowClient::clientNop( const Packet &packet, Client *) -> bool{
     DBGMSG(std::cout, "Received Nop Packet");
     auto respond = ptr->respond() ;
     if (respond){
+        DBGMSG(std::cout, "Sending Nop Response");
         myClient.sendPacket(nack);
     }
     return true ;

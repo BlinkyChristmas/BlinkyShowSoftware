@@ -27,7 +27,10 @@ auto ShowServer::runClient() ->void {
 //======================================================================
 auto ShowServer::clearConnections() -> void {
     auto lock = std::lock_guard(clientAccess) ;
-    connections.clear() ;
+    for (auto iter = connections.begin(); iter != connections.end();){
+        (*iter)->close() ;
+        iter = connections.erase(iter) ;
+    }
 }
 
 //======================================================================
@@ -62,9 +65,23 @@ auto ShowServer::checkBroken() -> std::vector<std::string> {
 //======================================================================
 auto ShowServer::sendAll(const Packet &packet) -> void {
     auto lock = std::lock_guard(clientAccess) ;
-    for ( auto &entry : connections) {
-        if ( entry->type() == IdentPacket::CLIENT) {
-            entry->sendPacket(packet) ;
+    /*
+#if defined(DEBUG) || defined(_DEBUG)
+    std::cout << "Packet to be sent: "s << Packet::nameForPacket(packet.packetID()) << std::endl;
+    packet.dump(std::cout);
+    std::cout << std::endl;
+#endif
+     */
+    for (auto iter = connections.begin();iter!= connections.end();) {
+        if ((*iter)->is_open()) {
+            if ((*iter)->type() == IdentPacket::CLIENT) {
+                DBGMSG(std::cout, "Sending packet to: "s + (*iter)->information());
+                (*iter)->sendPacket(packet) ;
+            }
+            iter++;
+        }
+        else {
+            iter = connections.erase(iter) ;
         }
     }
 }
@@ -79,14 +96,28 @@ auto ShowServer::createClient() -> ServerClient::Pointer {
 auto ShowServer::handleConnect( ServerClient::Pointer client ,const asio::error_code& ec) -> void {
     if (ec) {
         DBGMSG(std::cerr,"Error on accepting: "s + ec.message()) ;
-        
+        if ((ec.value() == asio::error::connection_aborted) || (ec.value() == asio::error::operation_aborted)) {
+            // Should we do something special?
+        }
+        acceptor.close() ;
+        // and we should close all of our connections
+        auto lock = std::lock_guard(clientAccess) ;
+        for (auto iter = connections.begin();iter != connections.end();){
+            (*iter)->close() ;
+            iter = connections.erase(iter) ;
+        }
+
         return ;
     }
+    DBGMSG(std::cout,"Connection: "s ) ;
     client->setPeerInformation() ;
+    DBGMSG(std::cout,"Connection: "s + client->address() ) ;
     {
         auto lock = std::lock_guard(clientAccess) ;
         connections.push_back(client) ;
     }
+    client->initialRead() ;
+    DBGMSG(std::cout, "queuing another accept");
     client = createClient() ;
     // Now we need to queue another accept
     acceptor.async_accept(client->netSocket, std::bind(&ShowServer::handleConnect, this,client, std::placeholders::_1));
@@ -94,7 +125,7 @@ auto ShowServer::handleConnect( ServerClient::Pointer client ,const asio::error_
 //======================================================================
 ShowServer::ShowServer():stopPlayingCallback(nullptr),clientIsRunning(false),connectIsRunning(false),inShow(false),isPlaying(false),server_key(0xdeadbeef) {
     threadConnect = std::thread(&ShowServer::runConnect,this);
-    threadClient = std::thread(&ShowServer::runConnect,this);
+    threadClient = std::thread(&ShowServer::runClient,this);
     
     clock.setUpdateCallback(std::bind(&ShowServer::clockUpdate,this,std::placeholders::_1));
     clock.setStopCallback(std::bind(&ShowServer::clockStop,this,std::placeholders::_1));
@@ -102,6 +133,8 @@ ShowServer::ShowServer():stopPlayingCallback(nullptr),clientIsRunning(false),con
 
 //======================================================================
 ShowServer::~ShowServer() {
+    acceptor.cancel() ;
+    acceptor.close() ;
     connectContext.stop();
     clientContext.stop() ;
     serverShouldRun = false ;
@@ -137,20 +170,24 @@ auto ShowServer::informationOnConnections()  -> std::vector<std::string> {
 // ============================================================================
 // ============================================================================
 auto ShowServer::identify(ServerClient *client) -> void{
+    DBGMSG(std::cout, "A client identified itself: "s + client->handle);
     // we should do something here, like if in a show, load, play, etc;
     if (inShow){
+        DBGMSG(std::cout, "Sending show setting ");
         auto packet = ShowPacket();
         packet.setState(true);
         client->sendPacket(packet);
     }
     if (framecount != 0) {
+        DBGMSG(std::cout, "Sending load ");
         auto packet = LoadPacket();
         packet.setLight(lights);
         packet.setMusic(music) ;
         client->sendPacket(packet) ;
     }
     if (isPlaying) {
-        auto packet = PlayPacket();
+        DBGMSG(std::cout, "Sending play ");
+       auto packet = PlayPacket();
         packet.setState(true);
         packet.setFrame(clock.frame());
         client->sendPacket(packet);
@@ -181,7 +218,7 @@ auto ShowServer::clockStop(std::uint32_t frame ) -> void {
 }
 
 // ============================================================================
-auto ShowServer::run(const std::string &serverip, int port) -> bool {
+auto ShowServer::run( int port) -> bool {
     asio::error_code ec;
     if (acceptor.is_open()) {
         // We all ready have an acceptor
@@ -221,6 +258,7 @@ auto ShowServer::run(const std::string &serverip, int port) -> bool {
 // ============================================================================
 auto ShowServer::stop() -> void {
     if (acceptor.is_open()){
+        acceptor.cancel() ;
         acceptor.close() ;
     }
     clearConnections() ;
@@ -229,6 +267,7 @@ auto ShowServer::stop() -> void {
 
 // ============================================================================
 auto ShowServer::show(bool state) -> void {
+    DBGMSG(std::cout, "Show called with: "s + std::to_string(state));
     auto packet = ShowPacket() ;
     packet.setState(state) ;
     sendAll(packet);
