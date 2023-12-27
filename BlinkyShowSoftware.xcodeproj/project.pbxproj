@@ -921,6 +921,7 @@
 		561DE51D2B3C715800F0824C /* showmanager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = showmanager.hpp; sourceTree = "<group>"; };
 		561DE51F2B3C94FE00F0824C /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
 		561DE5202B3C960A00F0824C /* BUILDING.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = BUILDING.txt; sourceTree = "<group>"; };
+		561DE5212B3C9C9E00F0824C /* BuildingMicrocode */ = {isa = PBXFileReference; lastKnownFileType = text; path = BuildingMicrocode; sourceTree = "<group>"; };
 		569244732B3748F400B1A729 /* chunkheader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = chunkheader.cpp; sourceTree = "<group>"; };
 		569244742B3748F400B1A729 /* chunkheader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = chunkheader.hpp; sourceTree = "<group>"; };
 		569244762B374AF100B1A729 /* fileheader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = fileheader.cpp; sourceTree = "<group>"; };
@@ -2113,6 +2114,7 @@
 				561BE40C2B3472540092D4DF /* PRUDevelopment.txt */,
 				561BE40D2B3472540092D4DF /* TimeZone.txt */,
 				561BE4612B36413E0092D4DF /* HowToCreateAnImage.txt */,
+				561DE5212B3C9C9E00F0824C /* BuildingMicrocode */,
 			);
 			path = setup;
 			sourceTree = "<group>";
