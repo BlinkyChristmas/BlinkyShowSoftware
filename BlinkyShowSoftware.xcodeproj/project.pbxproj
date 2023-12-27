@@ -2097,7 +2097,7 @@
 				561BE3FF2B3472170092D4DF /* pruconfig.hpp */,
 				561BE3FE2B3472020092D4DF /* deviceoverlay */,
 				561BE3FD2B3471F90092D4DF /* startup */,
-				561BE3FC2B3471EC0092D4DF /* microcode */,
+				561BE3FC2B3471EC0092D4DF /* BeaglePRU */,
 				561BE3FB2B3471E00092D4DF /* setup */,
 			);
 			path = beagle;
@@ -2119,7 +2119,7 @@
 			path = setup;
 			sourceTree = "<group>";
 		};
-		561BE3FC2B3471EC0092D4DF /* microcode */ = {
+		561BE3FC2B3471EC0092D4DF /* BeaglePRU */ = {
 			isa = PBXGroup;
 			children = (
 				561BE4042B34723F0092D4DF /* AM335x_PRU.cmd */,
@@ -2128,7 +2128,7 @@
 				561BE4052B34723F0092D4DF /* PruCode.asm */,
 				561BE4022B34723F0092D4DF /* resource_table_empty.h */,
 			);
-			path = microcode;
+			path = BeaglePRU;
 			sourceTree = "<group>";
 		};
 		561BE3FD2B3471F90092D4DF /* startup */ = {
