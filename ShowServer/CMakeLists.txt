@@ -2,12 +2,18 @@ cmake_minimum_required(VERSION 3.24)
 project(showclient VERSION 1.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(showclient
+add_executable(showserver
     main.cpp
-    clientconfig.cpp
-    clientconfig.hpp
-    showclient.cpp
-    showclient.hpp
+    configfile.cpp
+    configfile.hpp
+    serverclient.cpp
+    serverclient.hpp
+    playlist.hpp
+    playlist.cpp
+    configfile.cpp
+    configfile.hpp
+    showmanager.cpp
+    showmanager.hpp
     
     ../utility/buffer.cpp
     ../utility/buffer.hpp
@@ -61,41 +67,39 @@ add_executable(showclient
     ../network/allpackets.hpp
 
     ../support/rtaudio/RtAudio.cpp
-    ../support/rtaudio/RtAudio.h
-
 )
-target_compile_definitions(showclient PRIVATE
+target_compile_definitions(showserver PRIVATE
         ASIO_STANDALONE
 )
 
 if (WIN32)
-    target_compile_definitions(showclient PRIVATE
+    target_compile_definitions(showserver PRIVATE
         $<$<CONFIG:Release>:NDEBUG>
         $<$<CONFIG:Debug>:_DEBUG>
         __WINDOWS_DS__
         _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS
     )
 
-    target_compile_options(showclient PRIVATE
+    target_compile_options(showserver PRIVATE
        $<$<CONFIG::Release>:/02>
     )
 
-    target_link_libraries(showclient
+    target_link_libraries(showserver
         PUBLIC
             ole32
             winnm
             dsound
     )
 else()
-    target_compile_definitions(showclient PRIVATE
+    target_compile_definitions(showserver PRIVATE
         $<$<CONFIG:Debug>:_DEBUG>
     )
 
-    target_compile_options(showclient PRIVATE
+    target_compile_options(showserver PRIVATE
         $<$<CONFIG:Release>:-O2>
     )
     if (APPLE)
-        target_compile_definitions(showclient PRIVATE
+        target_compile_definitions(showserver PRIVATE
             __MACOSX_CORE__
         )
 
@@ -103,7 +107,7 @@ else()
         FIND_LIBRARY(COREFOUNDATION CoreFoundation )
         MARK_AS_ADVANCED ( COREAUDIO COREFOUNDATION )
 
-        target_link_libraries(showclient
+        target_link_libraries(showserver
             PUBLIC
                 pthread
                 ${COREAUDIO}
@@ -111,17 +115,17 @@ else()
         )
 
     else ()
-        target_compile_definitions(showclient PRIVATE
+        target_compile_definitions(showserver PRIVATE
             __LINUX_ALSA__
         )
 
         if (BEAGLE)
-            target_compile_definitions(showclient PRIVATE
+            target_compile_definitions(showserver PRIVATE
                 BEAGLE
             )
         endif (BEAGLE)
     
-        target_link_libraries(showclient
+        target_link_libraries(showserver
             PUBLIC
                 asound
                 pthread
@@ -131,7 +135,7 @@ else()
     
 endif (WIN32)
 
-target_include_directories(showclient
+target_include_directories(showserver
     PUBLIC
         ${PROJECT_SOURCE_DIR}/../
         ${PROJECT_SOURCE_DIR}/../support/

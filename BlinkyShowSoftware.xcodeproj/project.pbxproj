@@ -919,6 +919,7 @@
 		561DE51A2B3C6BBF00F0824C /* configfile.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = configfile.hpp; sourceTree = "<group>"; };
 		561DE51C2B3C715800F0824C /* showmanager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = showmanager.cpp; sourceTree = "<group>"; };
 		561DE51D2B3C715800F0824C /* showmanager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = showmanager.hpp; sourceTree = "<group>"; };
+		561DE51F2B3C94FE00F0824C /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
 		569244732B3748F400B1A729 /* chunkheader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = chunkheader.cpp; sourceTree = "<group>"; };
 		569244742B3748F400B1A729 /* chunkheader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = chunkheader.hpp; sourceTree = "<group>"; };
 		569244762B374AF100B1A729 /* fileheader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = fileheader.cpp; sourceTree = "<group>"; };
@@ -1004,12 +1005,12 @@
 			isa = PBXGroup;
 			children = (
 				561BE3B22B337F0C0092D4DF /* buffer.cpp */,
-				561BE3D82B33857F0092D4DF /* mapfile.cpp */,
-				561BE3B32B337F0C0092D4DF /* timeutil.cpp */,
 				561BE3B02B337F0C0092D4DF /* buffer.hpp */,
 				561BE3B12B337F0C0092D4DF /* dbgutil.hpp */,
+				561BE3D82B33857F0092D4DF /* mapfile.cpp */,
 				561BE3D92B33857F0092D4DF /* mapfile.hpp */,
 				561BE3AF2B337F0C0092D4DF /* strutil.hpp */,
+				561BE3B32B337F0C0092D4DF /* timeutil.cpp */,
 				561BE3AE2B337F0C0092D4DF /* timeutil.hpp */,
 			);
 			path = utility;
@@ -2147,6 +2148,7 @@
 		561BE41F2B347C710092D4DF /* ShowServer */ = {
 			isa = PBXGroup;
 			children = (
+				561DE51F2B3C94FE00F0824C /* CMakeLists.txt */,
 				561BE4202B347C710092D4DF /* main.cpp */,
 				56CE550C2B39C71B00FD1DC3 /* serverclient.cpp */,
 				56CE550D2B39C71B00FD1DC3 /* serverclient.hpp */,
