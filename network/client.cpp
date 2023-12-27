@@ -25,7 +25,9 @@ auto Client::packetRead(const asio::error_code& ec, size_t bytes_transferred) ->
         DBGMSG(std::cerr, "Error on read: "s + ec.message());
         try {
             if (ec.value() != asio::error::operation_aborted){
-                netSocket.close() ;
+                if (netSocket.is_open()){
+                    netSocket.close() ;
+                }
             }
             // we should clear out queued output
             auto empty = std::queue<Packet>() ;
@@ -86,14 +88,17 @@ auto Client::packetWrite(const asio::error_code& ec, size_t bytes_transferred) -
             }
             else {
                 DBGMSG(std::cerr, "Wasnt a connection abort, closing instead"s ) ;
-                
-                netSocket.close() ;
+                if (netSocket.is_open()){
+                    netSocket.close() ;
+                }
             }
         }
         catch(...) {
             DBGMSG(std::cerr, "We had error shutdowing our socket, but where sending: "s + ec.message()) ;
             // Should we close?
-            netSocket.close() ;
+            if (netSocket.is_open()){
+                netSocket.close() ;
+            }
         }
         return ;
     }
@@ -251,7 +256,9 @@ auto Client::bind(int port) -> bool {
             netSocket.open(asio::ip::tcp::v4(),ec) ;
             if (ec) {
                 DBGMSG(std::cerr, "Error on opening socket: "s + ec.message());
-                netSocket.close() ;
+                if (netSocket.is_open()){
+                    netSocket.close() ;
+                }
                 return false ;
             }
         }
@@ -271,7 +278,9 @@ auto Client::bind(int port) -> bool {
     }
     catch(...) {
         DBGMSG(std::cerr, "Unknown error on bind") ;
-        netSocket.close() ;
+        if (netSocket.is_open()){
+            netSocket.close() ;
+        }
         return false ;
     }
 }

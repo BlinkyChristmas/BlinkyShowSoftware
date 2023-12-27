@@ -99,7 +99,9 @@ auto ShowServer::handleConnect( ServerClient::Pointer client ,const asio::error_
         if ((ec.value() == asio::error::connection_aborted) || (ec.value() == asio::error::operation_aborted)) {
             // Should we do something special?
         }
-        acceptor.close() ;
+        if (acceptor.is_open()){
+            acceptor.close() ;
+        }
         // and we should close all of our connections
         auto lock = std::lock_guard(clientAccess) ;
         for (auto iter = connections.begin();iter != connections.end();){
@@ -162,6 +164,11 @@ auto ShowServer::setPlayStopCallback( const StopCallback &callback) -> void {
 //======================================================================
 auto ShowServer::informationOnConnections()  -> std::vector<std::string> {
     return checkBroken() ;
+}
+
+// ===================================================================
+auto ShowServer::is_open() const -> bool {
+    return acceptor.is_open() ;
 }
 //======================================================================
 

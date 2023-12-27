@@ -68,6 +68,9 @@
 		561BE45E2B35D9BE0092D4DF /* mapfile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3D82B33857F0092D4DF /* mapfile.cpp */; };
 		561BE45F2B35D9BE0092D4DF /* timeutil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3B32B337F0C0092D4DF /* timeutil.cpp */; };
 		561BE4602B35D9BE0092D4DF /* buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3B22B337F0C0092D4DF /* buffer.cpp */; };
+		561DE5162B3C5B0E00F0824C /* playlist.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561DE5142B3C5B0E00F0824C /* playlist.cpp */; };
+		561DE51B2B3C6BBF00F0824C /* configfile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561DE5192B3C6BBF00F0824C /* configfile.cpp */; };
+		561DE51E2B3C715800F0824C /* showmanager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561DE51C2B3C715800F0824C /* showmanager.cpp */; };
 		569244662B37396800B1A729 /* lightfile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3B52B337F240092D4DF /* lightfile.cpp */; };
 		569244672B37396800B1A729 /* lightheader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3B62B337F240092D4DF /* lightheader.cpp */; };
 		569244692B37397300B1A729 /* wavfmtchunk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561BE3BB2B337F240092D4DF /* wavfmtchunk.cpp */; };
@@ -908,6 +911,14 @@
 		561BE44F2B35D7AA0092D4DF /* teststuff */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = teststuff; sourceTree = BUILT_PRODUCTS_DIR; };
 		561BE4512B35D7AA0092D4DF /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		561BE4612B36413E0092D4DF /* HowToCreateAnImage.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = HowToCreateAnImage.txt; sourceTree = "<group>"; };
+		561DE5142B3C5B0E00F0824C /* playlist.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = playlist.cpp; sourceTree = "<group>"; };
+		561DE5152B3C5B0E00F0824C /* playlist.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = playlist.hpp; sourceTree = "<group>"; };
+		561DE5172B3C68C000F0824C /* playlist.cfg */ = {isa = PBXFileReference; lastKnownFileType = text; path = playlist.cfg; sourceTree = "<group>"; };
+		561DE5182B3C69A800F0824C /* server.cfg */ = {isa = PBXFileReference; lastKnownFileType = text; path = server.cfg; sourceTree = "<group>"; };
+		561DE5192B3C6BBF00F0824C /* configfile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = configfile.cpp; sourceTree = "<group>"; };
+		561DE51A2B3C6BBF00F0824C /* configfile.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = configfile.hpp; sourceTree = "<group>"; };
+		561DE51C2B3C715800F0824C /* showmanager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = showmanager.cpp; sourceTree = "<group>"; };
+		561DE51D2B3C715800F0824C /* showmanager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = showmanager.hpp; sourceTree = "<group>"; };
 		569244732B3748F400B1A729 /* chunkheader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = chunkheader.cpp; sourceTree = "<group>"; };
 		569244742B3748F400B1A729 /* chunkheader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = chunkheader.hpp; sourceTree = "<group>"; };
 		569244762B374AF100B1A729 /* fileheader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = fileheader.cpp; sourceTree = "<group>"; };
@@ -2022,9 +2033,9 @@
 			isa = PBXGroup;
 			children = (
 				561BE3B52B337F240092D4DF /* lightfile.cpp */,
+				561BE3B82B337F240092D4DF /* lightfile.hpp */,
 				561BE3B62B337F240092D4DF /* lightheader.cpp */,
 				561BE3B72B337F240092D4DF /* lightheader.hpp */,
-				561BE3B82B337F240092D4DF /* lightfile.hpp */,
 			);
 			path = lightfile;
 			sourceTree = "<group>";
@@ -2070,6 +2081,8 @@
 			isa = PBXGroup;
 			children = (
 				561BE4102B3472780092D4DF /* client.cfg */,
+				561DE5172B3C68C000F0824C /* playlist.cfg */,
+				561DE5182B3C69A800F0824C /* server.cfg */,
 			);
 			path = examples;
 			sourceTree = "<group>";
@@ -2139,6 +2152,12 @@
 				56CE550D2B39C71B00FD1DC3 /* serverclient.hpp */,
 				56CE55092B39C03000FD1DC3 /* showserver.cpp */,
 				56CE550A2B39C03000FD1DC3 /* showserver.hpp */,
+				561DE5142B3C5B0E00F0824C /* playlist.cpp */,
+				561DE5152B3C5B0E00F0824C /* playlist.hpp */,
+				561DE5192B3C6BBF00F0824C /* configfile.cpp */,
+				561DE51A2B3C6BBF00F0824C /* configfile.hpp */,
+				561DE51C2B3C715800F0824C /* showmanager.cpp */,
+				561DE51D2B3C715800F0824C /* showmanager.hpp */,
 			);
 			path = ShowServer;
 			sourceTree = "<group>";
@@ -2313,6 +2332,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				561DE51E2B3C715800F0824C /* showmanager.cpp in Sources */,
 				561BE43E2B34E9020092D4DF /* showpacket.cpp in Sources */,
 				561BE4442B34E9020092D4DF /* packet.cpp in Sources */,
 				561BE4402B34E9020092D4DF /* noppacket.cpp in Sources */,
@@ -2321,6 +2341,7 @@
 				56CE550B2B39C03000FD1DC3 /* showserver.cpp in Sources */,
 				561BE43D2B34E9020092D4DF /* playpacket.cpp in Sources */,
 				561BE4422B34E9020092D4DF /* syncpacket.cpp in Sources */,
+				561DE51B2B3C6BBF00F0824C /* configfile.cpp in Sources */,
 				561BE4452B34E91F0092D4DF /* timeutil.cpp in Sources */,
 				561BE43F2B34E9020092D4DF /* loadpacket.cpp in Sources */,
 				561BE4462B34E91F0092D4DF /* buffer.cpp in Sources */,
@@ -2328,6 +2349,7 @@
 				56CE550F2B39F85A00FD1DC3 /* frameclock.cpp in Sources */,
 				561BE4212B347C710092D4DF /* main.cpp in Sources */,
 				561BE4432B34E9020092D4DF /* client.cpp in Sources */,
+				561DE5162B3C5B0E00F0824C /* playlist.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,7 +11,7 @@
  Offset             Size                    Name                Description
  0                  4                       signature           Indicates it is a blinky light file ("lght" big endian)
  4                  4                       version             Version of the light file
- 8                  4                       header size         Size in bytes of the header (does not include the 4 bytes for the header)
+ 8                  4                       dataOffset          Offset to the light data in bytes
  
  For Version 0 header
  
@@ -22,7 +22,7 @@
  
  Data
  
- 12 + headersize    framecount*framelength  frame data          stream of bytes structured as:
+ dataOffset         Nominally (6*4)+30      frame data          stream of bytes structured as:
  
  frame = [std::uint8_t]  where the length is "framelength"
  and then data is [frame] where the size is the "frame count"
@@ -31,7 +31,12 @@
 //======================================================================
 struct LightHeader {
     static constexpr auto NAMESIZE = 30 ;
-    std::uint32_t headerSize ;
+    static constexpr auto OFFSETTODATA = (6 * 4) + NAMESIZE ;
+    static constexpr auto SIGNATURE = 0x7468676c ; //'lgth' in big endian
+
+    std::uint32_t signature ;
+    std::uint32_t version ;
+    std::uint32_t offsetToData ;
     std::uint32_t sampleRate ;
     std::uint32_t frameCount ;
     std::uint32_t frameLength ;
@@ -40,9 +45,10 @@ struct LightHeader {
     auto clear() -> void ;
     LightHeader() ;
     LightHeader( const char *ptr) ;
+    LightHeader( std::istream &input) ;
     auto load(const char *ptr) -> void ;
-     
-
+    auto load(std::istream &input) -> void ;
+    auto write(std::ostream &output) -> void ;
 } ;
 
 #endif /* lightheader_hpp */

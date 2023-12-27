@@ -279,14 +279,21 @@ auto ShowClient::clientLoad( const Packet &packet,Client *) -> bool{
             ledstate = StatusLed::FLASH ;
         }
     }
+    std::uint32_t temp = 0 ;
     if(showLight) {
-        auto temp  = lightController.load(lights);
+        try {
+            temp = lightController.load(lights);
+        }
+        catch(...) {
+            temp  = 0 ;
+        }
         useLight = temp != 0 ;
         endFrame = std::max(temp,endFrame) ;
         DBGMSG(std::cout, "Loading light: "s + lights);
         if (useLight != showLight){
             ledstate = StatusLed::FLASH ;
         }
+        
     }
     DBGMSG(std::cout, "End frame is "s+ std::to_string(endFrame));
     

@@ -82,7 +82,7 @@ public:
     auto setServerKey(std::uint32_t key) -> void ;
     auto informationOnConnections()  -> std::vector<std::string> ;
     
-    
+    auto is_open() const -> bool ;
     // Clent callbacks ;
     auto identify(ServerClient *client) -> void ;
     

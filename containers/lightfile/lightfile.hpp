@@ -36,12 +36,10 @@
 //======================================================================
 class LightFile {
 private:
-    static constexpr auto SIGNATURE = 0x7468676c ; //'lgth' in big endian
 
     LightHeader lightHeader ;
     util::MapFile lightData ;
     
-    auto isValidFile(const void *ptr) const -> bool ;
 public:
     LightFile() ;
     LightFile(const std::filesystem::path &lightfile) ;

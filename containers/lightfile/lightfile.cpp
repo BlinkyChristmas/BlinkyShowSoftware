@@ -9,21 +9,6 @@
 
 using namespace std::string_literals ;
 
-//======================================================================
-auto LightFile::isValidFile(const void *ptr) const -> bool {
-    std::uint32_t signature ;
-    std::uint32_t version ;
-    const std::uint32_t *dataPtr = reinterpret_cast<const std::uint32_t *>(ptr) ;
-    if (dataPtr == nullptr) {
-        return false ;
-    }
-    std::copy(dataPtr,dataPtr+1,&signature) ;
-    std::copy(dataPtr+1,dataPtr+2,&version) ;
-    if (signature == SIGNATURE && version == 0) {
-        return true ;
-    }
-    return false ;
-}
 
 //======================================================================
 LightFile::LightFile() {
@@ -44,11 +29,14 @@ auto LightFile::loadFile(const std::filesystem::path &lightfile) -> bool {
         if (ptr == nullptr) {
             return false ;
         }
-        if (!isValidFile(ptr)) {
+        try {
+            lightHeader.load(reinterpret_cast<const char *>(lightData.ptr)) ;
+        }
+        catch (...) {
             lightData.unmap() ;
             return false ;
+
         }
-        lightHeader.load(reinterpret_cast<const char *>(lightData.ptr)) ;
         return true ;
     }
     catch (const std::exception &e){
@@ -77,6 +65,9 @@ auto LightFile::copy(std::uint32_t frame,  char *buffer, int offset, int length 
     if (lightData.ptr == nullptr) {
         return 0 ;
     }
+    if (buffer == nullptr) {
+        return 0 ;
+    }
     if (frame >= lightHeader.frameCount) {
         return 0 ;
     }
@@ -86,7 +77,7 @@ auto LightFile::copy(std::uint32_t frame,  char *buffer, int offset, int length 
     if ( offset + length > lightHeader.frameLength) {
         length = lightHeader.frameLength - offset ;
     }
-    auto dataoffset = std::uint32_t(12) + lightHeader.headerSize  + frame * lightHeader.frameLength + offset;
+    auto dataoffset = lightHeader.offsetToData  + (frame * lightHeader.frameLength) + offset;
     std::copy( reinterpret_cast<const char *>(lightData.ptr) + dataoffset,reinterpret_cast<const char *>(lightData.ptr) + dataoffset + length, buffer ) ;
     return length ;
 }
