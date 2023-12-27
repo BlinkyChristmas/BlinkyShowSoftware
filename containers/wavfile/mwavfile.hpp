@@ -7,6 +7,7 @@
 #include <iostream>
 #include <string>
 #include <filesystem>
+
 #include "utility/mapfile.hpp"
 
 #include "wavfmtchunk.hpp"
@@ -64,6 +65,7 @@ private:
 public:
     MWAVFile()  ;
     MWAVFile( const std::filesystem::path &filepath) ;
+    ~MWAVFile() ;
     
     auto load(const std::filesystem::path &filepath) -> bool ;
     auto clear() -> void ;

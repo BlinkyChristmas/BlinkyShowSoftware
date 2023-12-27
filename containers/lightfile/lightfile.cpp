@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <stdexcept>
 
+#include "utility/mapfile.hpp"
 #include "utility/dbgutil.hpp"
 
 using namespace std::string_literals ;

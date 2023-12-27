@@ -7,6 +7,7 @@
 #include <cmath>
 
 #include "utility/dbgutil.hpp"
+#include "utility/mapfile.hpp"
 
 #include "fileheader.hpp"
 #include "chunkheader.hpp"
@@ -60,6 +61,11 @@ MWAVFile::MWAVFile( const std::filesystem::path &filepath) : MWAVFile() {
     if (!load(filepath) ) {
         throw std::runtime_error("Invalid file type: "s + filepath.string());
     }
+}
+
+//=====================================================================
+MWAVFile::~MWAVFile() {
+    memoryMap.unmap() ;
 }
 //======================================================================
 auto MWAVFile::load(const std::filesystem::path &filepath) -> bool {

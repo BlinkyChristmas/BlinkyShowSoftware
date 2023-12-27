@@ -920,6 +920,7 @@
 		561DE51C2B3C715800F0824C /* showmanager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = showmanager.cpp; sourceTree = "<group>"; };
 		561DE51D2B3C715800F0824C /* showmanager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = showmanager.hpp; sourceTree = "<group>"; };
 		561DE51F2B3C94FE00F0824C /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
+		561DE5202B3C960A00F0824C /* BUILDING.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = BUILDING.txt; sourceTree = "<group>"; };
 		569244732B3748F400B1A729 /* chunkheader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = chunkheader.cpp; sourceTree = "<group>"; };
 		569244742B3748F400B1A729 /* chunkheader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = chunkheader.hpp; sourceTree = "<group>"; };
 		569244762B374AF100B1A729 /* fileheader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = fileheader.cpp; sourceTree = "<group>"; };
@@ -971,6 +972,7 @@
 		561BE0AB2B337DC20092D4DF = {
 			isa = PBXGroup;
 			children = (
+				561DE5202B3C960A00F0824C /* BUILDING.txt */,
 				561BE3D72B3382770092D4DF /* AUTHORS */,
 				561BE3D62B33825C0092D4DF /* LICENSE */,
 				561BE3D52B33815C0092D4DF /* .gitignore */,

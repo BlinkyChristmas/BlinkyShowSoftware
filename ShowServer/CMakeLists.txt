@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.24)
 project(showclient VERSION 1.0 LANGUAGES CXX)
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 
 add_executable(showserver
     main.cpp
@@ -8,6 +8,8 @@ add_executable(showserver
     configfile.hpp
     serverclient.cpp
     serverclient.hpp
+    showserver.cpp
+    showserver.hpp
     playlist.hpp
     playlist.cpp
     configfile.cpp
@@ -21,7 +23,7 @@ add_executable(showserver
     ../utility/timeutil.hpp
     ../utility/strutil.hpp
     ../utility/dbgutil.hpp
-    ../utility/mapfile.hpp
+    ../utility/mapfile.cpp
     ../utility/mapfile.hpp
     
     ../containers/lightfile/lightfile.cpp

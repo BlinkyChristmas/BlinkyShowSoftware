@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.24)
 project(showclient VERSION 1.0 LANGUAGES CXX)
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 
 add_executable(showclient
     main.cpp
@@ -15,7 +15,7 @@ add_executable(showclient
     ../utility/timeutil.hpp
     ../utility/strutil.hpp
     ../utility/dbgutil.hpp
-    ../utility/mapfile.hpp
+    ../utility/mapfile.cpp
     ../utility/mapfile.hpp
     
     ../containers/lightfile/lightfile.cpp
@@ -93,6 +93,7 @@ else()
 
     target_compile_options(showclient PRIVATE
         $<$<CONFIG:Release>:-O2>
+        -Wno-deprecated-declarations
     )
     if (APPLE)
         target_compile_definitions(showclient PRIVATE
