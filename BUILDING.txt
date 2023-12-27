@@ -9,4 +9,4 @@ Then enter:;
 
   cmake --build ./build --config Release
   
-  The exectuable should now be in the ./build directory
+  The executable should now be in the ./build directory

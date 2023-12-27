@@ -61,7 +61,7 @@ auto LightController::freePRU(int prunumber) -> void {
     [[maybe_unused]] auto pru = pruBuffers[prunumber] ;
 #if defined(BEAGLE)
     if (pru != nullptr) {
-        auto ptr = reinterpret_cast<void*>(const_cast<char*>(pru)) ; // the const cast gets rids of volatile
+        auto ptr = reinterpret_cast<void*>(const_cast<unsigned char*>(pru)) ; // the const cast gets rids of volatile
         munmap(ptr, PRUMAPSIZE) ;
     }
 #endif
