@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShowClient", "ShowClient\Sh
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShowServer", "ShowServer\ShowServer.vcxproj", "{B01E5194-6B31-4FE9-B7B8-7687D34823D5}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ServerEmu", "ServerEmu\ServerEmu.vcxproj", "{9E2BB84E-9830-4CEA-AC68-4BA826B90ADA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{B01E5194-6B31-4FE9-B7B8-7687D34823D5}.Release|x64.Build.0 = Release|x64
 		{B01E5194-6B31-4FE9-B7B8-7687D34823D5}.Release|x86.ActiveCfg = Release|x64
 		{B01E5194-6B31-4FE9-B7B8-7687D34823D5}.Release|x86.Build.0 = Release|x64
+		{9E2BB84E-9830-4CEA-AC68-4BA826B90ADA}.Debug|x64.ActiveCfg = Debug|x64
+		{9E2BB84E-9830-4CEA-AC68-4BA826B90ADA}.Debug|x64.Build.0 = Debug|x64
+		{9E2BB84E-9830-4CEA-AC68-4BA826B90ADA}.Debug|x86.ActiveCfg = Debug|x64
+		{9E2BB84E-9830-4CEA-AC68-4BA826B90ADA}.Debug|x86.Build.0 = Debug|x64
+		{9E2BB84E-9830-4CEA-AC68-4BA826B90ADA}.Release|x64.ActiveCfg = Release|x64
+		{9E2BB84E-9830-4CEA-AC68-4BA826B90ADA}.Release|x64.Build.0 = Release|x64
+		{9E2BB84E-9830-4CEA-AC68-4BA826B90ADA}.Release|x86.ActiveCfg = Release|x64
+		{9E2BB84E-9830-4CEA-AC68-4BA826B90ADA}.Release|x86.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

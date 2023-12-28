@@ -73,6 +73,7 @@ if (WIN32)
         $<$<CONFIG:Debug>:_DEBUG>
         __WINDOWS_DS__
         _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS
+        _WIN32_WINNT=0x0A00
     )
 
     target_compile_options(ServerEmu PRIVATE

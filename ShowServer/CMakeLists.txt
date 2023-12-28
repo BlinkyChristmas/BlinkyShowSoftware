@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.24)
-project(showclient VERSION 1.0 LANGUAGES CXX)
+project(ShowServer VERSION 1.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(showserver
+add_executable(ShowServer
     main.cpp
     configfile.cpp
     configfile.hpp
@@ -70,39 +70,40 @@ add_executable(showserver
 
     ../support/rtaudio/RtAudio.cpp
 )
-target_compile_definitions(showserver PRIVATE
+target_compile_definitions(ShowServer PRIVATE
         ASIO_STANDALONE
 )
 
 if (WIN32)
-    target_compile_definitions(showserver PRIVATE
+    target_compile_definitions(ShowServer PRIVATE
         $<$<CONFIG:Release>:NDEBUG>
         $<$<CONFIG:Debug>:_DEBUG>
         __WINDOWS_DS__
         _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS
+	_WIN32_WINNT=0x0A00
     )
 
-    target_compile_options(showserver PRIVATE
+    target_compile_options(ShowServer PRIVATE
        $<$<CONFIG::Release>:/02>
     )
 
-    target_link_libraries(showserver
+    target_link_libraries(ShowServer
         PUBLIC
             ole32
             winnm
             dsound
     )
 else()
-    target_compile_definitions(showserver PRIVATE
+    target_compile_definitions(ShowServer PRIVATE
         $<$<CONFIG:Debug>:_DEBUG>
     )
 
-    target_compile_options(showserver PRIVATE
+    target_compile_options(ShowServer PRIVATE
         $<$<CONFIG:Release>:-O2>
         -Wno-deprecated-declarations
     )
     if (APPLE)
-        target_compile_definitions(showserver PRIVATE
+        target_compile_definitions(ShowServer PRIVATE
             __MACOSX_CORE__
         )
 
@@ -110,7 +111,7 @@ else()
         FIND_LIBRARY(COREFOUNDATION CoreFoundation )
         MARK_AS_ADVANCED ( COREAUDIO COREFOUNDATION )
 
-        target_link_libraries(showserver
+        target_link_libraries(ShowServer
             PUBLIC
                 pthread
                 ${COREAUDIO}
@@ -118,17 +119,17 @@ else()
         )
 
     else ()
-        target_compile_definitions(showserver PRIVATE
+        target_compile_definitions(ShowServer PRIVATE
             __LINUX_ALSA__
         )
 
         if (BEAGLE)
-            target_compile_definitions(showserver PRIVATE
+            target_compile_definitions(ShowServer PRIVATE
                 BEAGLE
             )
         endif (BEAGLE)
     
-        target_link_libraries(showserver
+        target_link_libraries(ShowServer
             PUBLIC
                 asound
                 pthread
@@ -138,7 +139,7 @@ else()
     
 endif (WIN32)
 
-target_include_directories(showserver
+target_include_directories(ShowServer
     PUBLIC
         ${PROJECT_SOURCE_DIR}/../
         ${PROJECT_SOURCE_DIR}/../support/

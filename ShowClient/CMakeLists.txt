@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.24)
-project(showclient VERSION 1.0 LANGUAGES CXX)
+project(ShowClient VERSION 1.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(showclient
+add_executable(ShowClient
     main.cpp
     clientconfig.cpp
     clientconfig.hpp
@@ -64,39 +64,40 @@ add_executable(showclient
     ../support/rtaudio/RtAudio.h
 
 )
-target_compile_definitions(showclient PRIVATE
+target_compile_definitions(ShowClient PRIVATE
         ASIO_STANDALONE
 )
 
 if (WIN32)
-    target_compile_definitions(showclient PRIVATE
+    target_compile_definitions(ShowClient PRIVATE
         $<$<CONFIG:Release>:NDEBUG>
         $<$<CONFIG:Debug>:_DEBUG>
         __WINDOWS_DS__
         _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS
+	_WIN32_WINNT=0x0A00
     )
 
-    target_compile_options(showclient PRIVATE
+    target_compile_options(ShowClient PRIVATE
        $<$<CONFIG::Release>:/02>
     )
 
-    target_link_libraries(showclient
+    target_link_libraries(ShowClient
         PUBLIC
             ole32
             winnm
             dsound
     )
 else()
-    target_compile_definitions(showclient PRIVATE
+    target_compile_definitions(ShowClient PRIVATE
         $<$<CONFIG:Debug>:_DEBUG>
     )
 
-    target_compile_options(showclient PRIVATE
+    target_compile_options(ShowClient PRIVATE
         $<$<CONFIG:Release>:-O2>
         -Wno-deprecated-declarations
     )
     if (APPLE)
-        target_compile_definitions(showclient PRIVATE
+        target_compile_definitions(ShowClient PRIVATE
             __MACOSX_CORE__
         )
 
@@ -104,7 +105,7 @@ else()
         FIND_LIBRARY(COREFOUNDATION CoreFoundation )
         MARK_AS_ADVANCED ( COREAUDIO COREFOUNDATION )
 
-        target_link_libraries(showclient
+        target_link_libraries(ShowClient
             PUBLIC
                 pthread
                 ${COREAUDIO}
@@ -112,17 +113,17 @@ else()
         )
 
     else ()
-        target_compile_definitions(showclient PRIVATE
+        target_compile_definitions(ShowClient PRIVATE
             __LINUX_ALSA__
         )
 
         if (BEAGLE)
-            target_compile_definitions(showclient PRIVATE
+            target_compile_definitions(ShowClient PRIVATE
                 BEAGLE
             )
         endif (BEAGLE)
     
-        target_link_libraries(showclient
+        target_link_libraries(ShowClient
             PUBLIC
                 asound
                 pthread
@@ -132,7 +133,7 @@ else()
     
 endif (WIN32)
 
-target_include_directories(showclient
+target_include_directories(ShowClient
     PUBLIC
         ${PROJECT_SOURCE_DIR}/../
         ${PROJECT_SOURCE_DIR}/../support/
