@@ -125,7 +125,7 @@ auto ShowServer::handleConnect( ServerClient::Pointer client ,const asio::error_
     acceptor.async_accept(client->netSocket, std::bind(&ShowServer::handleConnect, this,client, std::placeholders::_1));
 }
 //======================================================================
-ShowServer::ShowServer():stopPlayingCallback(nullptr),clientIsRunning(false),connectIsRunning(false),inShow(false),isPlaying(false),server_key(0xdeadbeef) {
+ShowServer::ShowServer():stopPlayingCallback(nullptr),clientIsRunning(false),connectIsRunning(false),inShow(false),isPlaying(false),server_key(0xdeadbeef),frameUpdate(300) {
     threadConnect = std::thread(&ShowServer::runConnect,this);
     threadClient = std::thread(&ShowServer::runClient,this);
     
@@ -205,7 +205,7 @@ auto ShowServer::identify(ServerClient *client) -> void{
 auto syncPacket = SyncPacket() ;
 // ============================================================================
 auto ShowServer::clockUpdate(std::uint32_t frame) -> void {
-    if (frame%300 == 0 || frame == 3) {
+    if (frame % frameUpdate == 0 || frame == 3) {
         syncPacket.setFrame(frame) ;
         sendAll(syncPacket);
     }

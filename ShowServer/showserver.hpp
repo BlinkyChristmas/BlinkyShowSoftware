@@ -74,7 +74,7 @@ private:
     auto handleConnect( ServerClient::Pointer client ,const asio::error_code& ec) -> void ;
     
 public:
-    
+    std::uint32_t frameUpdate ;
     ShowServer() ;
     ~ShowServer() ;
     auto setPlayStopCallback( const StopCallback &callback) -> void ;

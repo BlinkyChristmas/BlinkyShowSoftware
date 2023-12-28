@@ -19,6 +19,7 @@ struct ConfigFile {
     int delay ;
     int port ;
     std::uint32_t key ;
+    std::uint32_t frameupdate;
     
     std::filesystem::file_time_type lastRead ;
     auto reset() -> void ;

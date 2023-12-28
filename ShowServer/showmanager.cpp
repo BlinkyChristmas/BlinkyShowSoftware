@@ -61,6 +61,8 @@ auto ShowManager::run(const std::filesystem::path &path) -> bool {
     if (!config.load(path) ) {
         return false ;
     }
+    DBGMSG(std::cout, "Setting sync rate to "s + std::to_string(config.frameupdate) + " frames"s);
+    server.frameUpdate = config.frameupdate ;
     // we have at least an intial load
     while (config.runTime.inRange()){
         // We should be running
@@ -108,7 +110,9 @@ auto ShowManager::run(const std::filesystem::path &path) -> bool {
 
             }
         }
-        server.stop() ;
+        if (server.is_open()){
+            server.stop() ;
+        }
         isListening = false ;
         if (config.hasBeenUpdated(path)){
             DBGMSG(std::cout ,"Reloading "s + path.string() );

@@ -23,7 +23,7 @@ auto ConfigFile::reset() -> void {
     lastRead =  std::chrono::file_clock::now() ;
 }
 // ==========================================================================================
-ConfigFile::ConfigFile() : port(50000), delay(0), key(0xDEADBEEF), lastRead(std::chrono::file_clock::now()) {
+ConfigFile::ConfigFile() : port(50000), delay(0), key(0xDEADBEEF), lastRead(std::chrono::file_clock::now()),frameupdate(270) {
 }
 // ==========================================================================================
 auto ConfigFile::load(const std::filesystem::path &path) -> bool {
@@ -64,7 +64,10 @@ auto ConfigFile::load(const std::filesystem::path &path) -> bool {
                     else if (key == "PLAYLIST") {
                         playlist = std::filesystem::path(value) ;
                     }
-                }
+                    else if (key == "SYNCRATE") {
+                         frameupdate = static_cast<std::uint32_t>(std::stoul(value,nullptr,0)) ;
+                    }
+               }
                 catch(...) {
                     DBGMSG(std::cerr, "Error parsing line: "s + line);
                 }
