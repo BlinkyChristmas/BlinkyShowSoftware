@@ -1,0 +1,11 @@
+#
+# ******************************************************************
+# Building the ShowClient
+# *****************************************************************
+
+#Install cmake
+#
+1. Enter: apt install cmake
+2. cd into the ShowClient directory
+3. enter: cmake . -B ./build -DCMAKE_BUILD_TYPE=Release -DBEAGLE=1
+4. enter: cmake --build ./build --config Release

@@ -46,7 +46,7 @@ disable_uboot_overlay_video=1
 
 Now to enable the startup script
 
-    cp /media/startup/startBeagleClient.sh into the /root/startup directory
+    cp startBeagleClient.sh (BlinkyShowSoftware/beagle/startup) into the /root/startup directory
     (edit the startup script to point to where the showclient executable was placed )
 
 Make it executable
@@ -55,7 +55,7 @@ Make it executable
 
 
 Now for the service file
-    cp /media/startup/DIYBLIGHTS.service /usr/lib/systemd/system/
+    cp DIYBLIGHTS.service (BlinkyShowSoftware/beagle/startup) into  /usr/lib/systemd/system/
     cd /usr/lib/systemd/system
     systemd-analyze verify DIYBLIGHTS.service
     systemctl daemon-reload
