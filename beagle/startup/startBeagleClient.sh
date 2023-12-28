@@ -1,5 +1,5 @@
 #!/bin/sh
-SLEEPSEC=15
+SLEEPSEC=8
 MAXLOOP=35
 
 
@@ -79,7 +79,7 @@ then
 	if [ $STARTLIGHTS  -eq 1 ]
 	then
 		echo "Starting the client" | tee -a /root/mystartupmessage
-		/root/code/BeagleClient/LightClient /media/Config.cfg
+		/root/ShowClient /media/Config.cfg
 		exit 0
 	else 
 		echo "'/media' never was mounted, loopcount was: $loopcount" | tee -a /root/mystartupmessage
