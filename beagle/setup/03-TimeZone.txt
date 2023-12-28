@@ -5,3 +5,9 @@
 1. Enter command to set the timezone
     dpkg-reconfigure tzdata
 2. Select your timezone from the menu
+
+//*****************************************************************************
+// Setting the motd
+//****************************************************************************
+enter: nano /etc/motd
+delete the contents and enter your message (i.e. BlinkyChristmas)

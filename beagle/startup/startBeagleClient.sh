@@ -79,7 +79,7 @@ then
 	if [ $STARTLIGHTS  -eq 1 ]
 	then
 		echo "Starting the client" | tee -a /root/mystartupmessage
-		/root/ShowClient /media/Config.cfg
+		/root/startup/ShowClient /media/Config.cfg
 		exit 0
 	else 
 		echo "'/media' never was mounted, loopcount was: $loopcount" | tee -a /root/mystartupmessage
