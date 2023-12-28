@@ -24,8 +24,9 @@ auto Client::packetRead(const asio::error_code& ec, size_t bytes_transferred) ->
         // So we just close it and bail
         DBGMSG(std::cerr, "Error on read: "s + ec.message());
         try {
-            if (ec.value() != asio::error::operation_aborted){
+            if (ec.value() == asio::error::operation_aborted || ec.value() == asio::error::eof){
                 if (netSocket.is_open()){
+                    DBGMSG(std::cerr,"Closing socket");
                     netSocket.close() ;
                 }
             }

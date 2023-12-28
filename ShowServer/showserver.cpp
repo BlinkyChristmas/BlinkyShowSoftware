@@ -268,6 +268,8 @@ auto ShowServer::stop() -> void {
         acceptor.cancel() ;
         acceptor.close() ;
     }
+    inShow = false ;
+    isPlaying = false ;
     clearConnections() ;
 }
 
