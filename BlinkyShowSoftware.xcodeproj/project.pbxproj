@@ -889,9 +889,9 @@
 		561BE4072B3472540092D4DF /* 6-MountingSDCard.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "6-MountingSDCard.txt"; sourceTree = "<group>"; };
 		561BE4082B3472540092D4DF /* 5-HowToSSHByRoot.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "5-HowToSSHByRoot.txt"; sourceTree = "<group>"; };
 		561BE4092B3472540092D4DF /* 1-FlashingTheBeaglebone.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "1-FlashingTheBeaglebone.txt"; sourceTree = "<group>"; };
-		561BE40A2B3472540092D4DF /* ALSASound.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = ALSASound.txt; sourceTree = "<group>"; };
+		561BE40A2B3472540092D4DF /* 8-ALSASound.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "8-ALSASound.txt"; sourceTree = "<group>"; };
 		561BE40B2B3472540092D4DF /* 2-AddingUserToSudo.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "2-AddingUserToSudo.txt"; sourceTree = "<group>"; };
-		561BE40C2B3472540092D4DF /* 3-PRUDevelopment.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "3-PRUDevelopment.txt"; sourceTree = "<group>"; };
+		561BE40C2B3472540092D4DF /* 7-PRUDevelopment.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "7-PRUDevelopment.txt"; sourceTree = "<group>"; };
 		561BE40D2B3472540092D4DF /* 3-TimeZone.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "3-TimeZone.txt"; sourceTree = "<group>"; };
 		561BE40E2B34725F0092D4DF /* startBeagleClient.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = startBeagleClient.sh; sourceTree = "<group>"; };
 		561BE40F2B34725F0092D4DF /* DIYBLIGHTS.service */ = {isa = PBXFileReference; lastKnownFileType = text; path = DIYBLIGHTS.service; sourceTree = "<group>"; };
@@ -2114,8 +2114,8 @@
 				561DE59F2B3DF14400F0824C /* 4-Passwords.txt */,
 				561BE4082B3472540092D4DF /* 5-HowToSSHByRoot.txt */,
 				561BE4072B3472540092D4DF /* 6-MountingSDCard.txt */,
-				561BE40C2B3472540092D4DF /* 3-PRUDevelopment.txt */,
-				561BE40A2B3472540092D4DF /* ALSASound.txt */,
+				561BE40C2B3472540092D4DF /* 7-PRUDevelopment.txt */,
+				561BE40A2B3472540092D4DF /* 8-ALSASound.txt */,
 				561DE5212B3C9C9E00F0824C /* BuildingMicrocode */,
 				561BE4612B36413E0092D4DF /* HowToCreateAnImage.txt */,
 			);

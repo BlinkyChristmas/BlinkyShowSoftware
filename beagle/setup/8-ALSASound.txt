@@ -3,7 +3,7 @@
 //****************************************************************************
 
 1. Added the needed software
-    sudo apt-get install alsa-firmware-loaders alsa-utils alsa-tools libasound2-dev
+    sudo apt-get install alsa-firmware-loaders }alsa-tools libasound2-dev
 
 
 
@@ -16,7 +16,7 @@
     cat /proc/asound/cards
 3. Create /etc/asound.conf
     nano /etc/asound.conf
-4. Add the following (replace card 1 witht he number or name of your card):
+4. Add the following (replace card 1 with the number or name of your card):
 
     pcm.!default {
         type hw
