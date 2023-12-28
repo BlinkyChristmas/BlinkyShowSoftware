@@ -922,6 +922,7 @@
 		561DE51F2B3C94FE00F0824C /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
 		561DE5202B3C960A00F0824C /* BUILDING.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = BUILDING.txt; sourceTree = "<group>"; };
 		561DE5212B3C9C9E00F0824C /* BuildingMicrocode */ = {isa = PBXFileReference; lastKnownFileType = text; path = BuildingMicrocode; sourceTree = "<group>"; };
+		561DE59E2B3DB54000F0824C /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
 		569244732B3748F400B1A729 /* chunkheader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = chunkheader.cpp; sourceTree = "<group>"; };
 		569244742B3748F400B1A729 /* chunkheader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = chunkheader.hpp; sourceTree = "<group>"; };
 		569244762B374AF100B1A729 /* fileheader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = fileheader.cpp; sourceTree = "<group>"; };
@@ -2171,6 +2172,7 @@
 		561BE42A2B347C880092D4DF /* ServerEmu */ = {
 			isa = PBXGroup;
 			children = (
+				561DE59E2B3DB54000F0824C /* CMakeLists.txt */,
 				561BE42B2B347C880092D4DF /* main.cpp */,
 			);
 			path = ServerEmu;
