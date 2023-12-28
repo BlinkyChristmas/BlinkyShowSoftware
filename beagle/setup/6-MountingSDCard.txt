@@ -21,8 +21,9 @@ To make mounting the sd card easier, and on boot up modify the /etc/fstab
     sudo nano /etc/fstab
 3. Add the following the line
     /dev/mmcblk0p1 /media  auto auto,rw,async,user,nofail 0 0
-4. restart the daemon
+4. Save the file and changes
+5. restart the daemon
     sudo systemctl daemon-reload
-5. One can now mount the sd card with
+6. One can now mount the sd card with
     mount /media
 

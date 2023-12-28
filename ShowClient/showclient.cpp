@@ -352,6 +352,7 @@ auto ShowClient::clientShow( const Packet &packet, Client *) -> bool{
     auto ptr = static_cast<const ShowPacket*>(&packet) ;
     DBGMSG(std::cout, "Received Show Packet");
     auto state = ptr->state() ;
+    auto ledstatus = StatusLed::ON ;
     if (state) {
         inShow = true ;
         showAudio = useAudio = configuration.useAudio ;
@@ -362,7 +363,10 @@ auto ShowClient::clientShow( const Packet &packet, Client *) -> bool{
         if (showLight){
             showLight = lightController.setShow(state) ;
         }
-        ledController.setLed(StatusLed::SHOWSTATUS, StatusLed::ON) ;
+        if (configuration.useAudio != showAudio || configuration.useLights != showLight){
+            ledstatus = StatusLed::FLASH ;
+        }
+        ledController.setLed(StatusLed::SHOWSTATUS, ledstatus) ;
     }
     else {
         inShow = false ;

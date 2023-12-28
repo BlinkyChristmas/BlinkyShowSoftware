@@ -1,5 +1,5 @@
 //********************************************************************************
-// Enable SSH by root
+// Enable SSH by root  (OPTIONAL)
 //********************************************************************************
 1. Log on, and "su"
 2. Enter the following:
@@ -10,4 +10,4 @@
         PermitRootLogin yes
     save the file
     restart the ssh daemon
-        systemctl restart ssh (this may disconnect you, if so, just reboot)
+        systemctl restart ssh (this may disconnect you, if so, just reboot)  (or wait if you have more steps to complete)

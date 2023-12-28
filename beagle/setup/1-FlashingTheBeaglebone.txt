@@ -45,3 +45,15 @@ Note:
     ssh debian@beagleipaddress
     Enter the password when asked
 
+//**************************************************************************
+// Updating the software
+//**************************************************************************
+1. Update the debian software by entering:
+    su
+    Then enter the root password
+    apt update
+    apt full-upgrade
+    
+2. FYI - To remove a package: apt purge packagename
+    
+    
