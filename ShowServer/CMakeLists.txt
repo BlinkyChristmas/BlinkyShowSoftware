@@ -99,6 +99,7 @@ else()
 
     target_compile_options(showserver PRIVATE
         $<$<CONFIG:Release>:-O2>
+        -Wno-deprecated-declarations
     )
     if (APPLE)
         target_compile_definitions(showserver PRIVATE
