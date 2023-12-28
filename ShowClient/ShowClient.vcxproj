@@ -21,14 +21,18 @@
   <ItemGroup>
     <ClCompile Include="..\containers\lightfile\lightfile.cpp" />
     <ClCompile Include="..\containers\lightfile\lightheader.cpp" />
+    <ClCompile Include="..\containers\wavfile\chunkheader.cpp" />
+    <ClCompile Include="..\containers\wavfile\fileheader.cpp" />
     <ClCompile Include="..\containers\wavfile\mwavfile.cpp" />
-    <ClCompile Include="..\containers\wavfile\wavdatachunk.cpp" />
     <ClCompile Include="..\containers\wavfile\wavfmtchunk.cpp" />
-    <ClCompile Include="..\network\blinkclient.cpp" />
+    <ClCompile Include="..\controllers\frameclock.cpp" />
+    <ClCompile Include="..\controllers\lightcontroller.cpp" />
+    <ClCompile Include="..\controllers\mediacontroller.cpp" />
+    <ClCompile Include="..\controllers\pruconfig.cpp" />
+    <ClCompile Include="..\controllers\statusled.cpp" />
     <ClCompile Include="..\network\client.cpp" />
     <ClCompile Include="..\network\identpacket.cpp" />
     <ClCompile Include="..\network\loadpacket.cpp" />
-    <ClCompile Include="..\network\nameclient.cpp" />
     <ClCompile Include="..\network\noppacket.cpp" />
     <ClCompile Include="..\network\packet.cpp" />
     <ClCompile Include="..\network\playpacket.cpp" />
@@ -38,20 +42,26 @@
     <ClCompile Include="..\utility\buffer.cpp" />
     <ClCompile Include="..\utility\mapfile.cpp" />
     <ClCompile Include="..\utility\timeutil.cpp" />
+    <ClCompile Include="clientconfig.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="showclient.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\containers\lightfile\lightfile.hpp" />
     <ClInclude Include="..\containers\lightfile\lightheader.hpp" />
+    <ClInclude Include="..\containers\wavfile\chunkheader.hpp" />
+    <ClInclude Include="..\containers\wavfile\fileheader.hpp" />
     <ClInclude Include="..\containers\wavfile\mwavfile.hpp" />
-    <ClInclude Include="..\containers\wavfile\wavdatachunk.hpp" />
     <ClInclude Include="..\containers\wavfile\wavfmtchunk.hpp" />
+    <ClInclude Include="..\controllers\frameclock.hpp" />
+    <ClInclude Include="..\controllers\lightcontroller.hpp" />
+    <ClInclude Include="..\controllers\mediacontroller.hpp" />
+    <ClInclude Include="..\controllers\pruconfig.hpp" />
+    <ClInclude Include="..\controllers\statusled.hpp" />
     <ClInclude Include="..\network\allpackets.hpp" />
-    <ClInclude Include="..\network\blinkclient.hpp" />
     <ClInclude Include="..\network\client.hpp" />
     <ClInclude Include="..\network\identpacket.hpp" />
     <ClInclude Include="..\network\loadpacket.hpp" />
-    <ClInclude Include="..\network\nameclient.hpp" />
     <ClInclude Include="..\network\noppacket.hpp" />
     <ClInclude Include="..\network\packet.hpp" />
     <ClInclude Include="..\network\playpacket.hpp" />
@@ -62,6 +72,8 @@
     <ClInclude Include="..\utility\mapfile.hpp" />
     <ClInclude Include="..\utility\strutil.hpp" />
     <ClInclude Include="..\utility\timeutil.hpp" />
+    <ClInclude Include="clientconfig.hpp" />
+    <ClInclude Include="showclient.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

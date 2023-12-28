@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="network">
+      <UniqueIdentifier>{f5953e67-a8cd-43a7-9c20-676cd9de0f85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="controllers">
+      <UniqueIdentifier>{c264f8f2-4fdc-4326-8aeb-630a8a881886}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utility">
+      <UniqueIdentifier>{d1caffaf-67bf-4c5a-acd1-2c73410d9496}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source">
+      <UniqueIdentifier>{1315f0f1-925f-4bf3-99b7-f342c1821b30}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\network\allpackets.hpp">
+      <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\network\client.hpp">
+      <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\network\identpacket.hpp">
+      <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\network\loadpacket.hpp">
+      <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\network\noppacket.hpp">
+      <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\network\packet.hpp">
+      <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\network\playpacket.hpp">
+      <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\network\showpacket.hpp">
+      <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\network\syncpacket.hpp">
+      <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\controllers\frameclock.hpp">
+      <Filter>controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\utility\buffer.hpp">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\utility\dbgutil.hpp">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\utility\strutil.hpp">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\utility\timeutil.hpp">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="configfile.hpp">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="playlist.hpp">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="serverclient.hpp">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="showmanager.hpp">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="showserver.hpp">
+      <Filter>source</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\network\client.cpp">
+      <Filter>network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\network\identpacket.cpp">
+      <Filter>network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\network\loadpacket.cpp">
+      <Filter>network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\network\noppacket.cpp">
+      <Filter>network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\network\packet.cpp">
+      <Filter>network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\network\playpacket.cpp">
+      <Filter>network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\network\showpacket.cpp">
+      <Filter>network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\network\syncpacket.cpp">
+      <Filter>network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\controllers\frameclock.cpp">
+      <Filter>controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\utility\buffer.cpp">
+      <Filter>utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\utility\timeutil.cpp">
+      <Filter>utility</Filter>
+    </ClCompile>
+    <ClCompile Include="configfile.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="playlist.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="serverclient.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="showmanager.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="showserver.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

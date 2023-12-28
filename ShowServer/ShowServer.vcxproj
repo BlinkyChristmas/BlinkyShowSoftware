@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\controllers\frameclock.hpp" />
+    <ClInclude Include="..\network\allpackets.hpp" />
+    <ClInclude Include="..\network\client.hpp" />
+    <ClInclude Include="..\network\identpacket.hpp" />
+    <ClInclude Include="..\network\loadpacket.hpp" />
+    <ClInclude Include="..\network\noppacket.hpp" />
+    <ClInclude Include="..\network\packet.hpp" />
+    <ClInclude Include="..\network\playpacket.hpp" />
+    <ClInclude Include="..\network\showpacket.hpp" />
+    <ClInclude Include="..\network\syncpacket.hpp" />
+    <ClInclude Include="..\utility\buffer.hpp" />
+    <ClInclude Include="..\utility\dbgutil.hpp" />
+    <ClInclude Include="..\utility\strutil.hpp" />
+    <ClInclude Include="..\utility\timeutil.hpp" />
+    <ClInclude Include="configfile.hpp" />
+    <ClInclude Include="playlist.hpp" />
+    <ClInclude Include="serverclient.hpp" />
+    <ClInclude Include="showmanager.hpp" />
+    <ClInclude Include="showserver.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\controllers\frameclock.cpp" />
+    <ClCompile Include="..\network\client.cpp" />
+    <ClCompile Include="..\network\identpacket.cpp" />
+    <ClCompile Include="..\network\loadpacket.cpp" />
+    <ClCompile Include="..\network\noppacket.cpp" />
+    <ClCompile Include="..\network\packet.cpp" />
+    <ClCompile Include="..\network\playpacket.cpp" />
+    <ClCompile Include="..\network\showpacket.cpp" />
+    <ClCompile Include="..\network\syncpacket.cpp" />
+    <ClCompile Include="..\utility\buffer.cpp" />
+    <ClCompile Include="..\utility\timeutil.cpp" />
+    <ClCompile Include="configfile.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="playlist.cpp" />
+    <ClCompile Include="serverclient.cpp" />
+    <ClCompile Include="showmanager.cpp" />
+    <ClCompile Include="showserver.cpp" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{b01e5194-6b31-4fe9-b7b8-7687d34823d5}</ProjectGuid>
+    <RootNamespace>ShowServer</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);ASIO_STANDALONE;NOMINMAX;WIN32_LEAN_AND_MEAN;__WINDOWS_DS__;_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc11</LanguageStandard_C>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)\..\;$(ProjectDir)\..\support;$(ProjectDir)\..\support\asio</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);ole32.lib;dsound.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);ASIO_STANDALONE;NOMINMAX;WIN32_LEAN_AND_MEAN;__WINDOWS_DS__;_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc11</LanguageStandard_C>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)\..\;$(ProjectDir)\..\support;$(ProjectDir)\..\support\asio</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);ole32.lib;dsound.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

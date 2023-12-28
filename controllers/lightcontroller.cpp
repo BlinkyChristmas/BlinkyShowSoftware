@@ -148,9 +148,9 @@ auto LightController::sync(std::uint32_t frame) -> void {
     if (frame < lightFile.frameCount()){
         for (auto p=0 ; p < 2; p++) {
             auto index = pruConfiguration.at(p).offset ;
-            auto length = pruConfiguration.at(p).length ;
+            auto length = static_cast<unsigned int>(pruConfiguration.at(p).length) ;
             auto maxlength = (lightFile.frameLength() - index) ;
-            if ( length > maxlength) {
+            if (length > maxlength) {
                 length  = maxlength ;
             }
             lightFile.copy(frame, reinterpret_cast<char*>(const_cast<std::uint8_t*>(pruBuffers.at(p))),index,length) ;

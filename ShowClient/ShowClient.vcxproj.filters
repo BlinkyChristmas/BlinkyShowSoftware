@@ -33,9 +33,6 @@
     <ClCompile Include="main.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="..\network\blinkclient.cpp">
-      <Filter>network</Filter>
-    </ClCompile>
     <ClCompile Include="..\network\client.cpp">
       <Filter>network</Filter>
     </ClCompile>
@@ -43,9 +40,6 @@
       <Filter>network</Filter>
     </ClCompile>
     <ClCompile Include="..\network\loadpacket.cpp">
-      <Filter>network</Filter>
-    </ClCompile>
-    <ClCompile Include="..\network\nameclient.cpp">
       <Filter>network</Filter>
     </ClCompile>
     <ClCompile Include="..\network\noppacket.cpp">
@@ -81,21 +75,42 @@
     <ClCompile Include="..\containers\wavfile\mwavfile.cpp">
       <Filter>containers\wavfile</Filter>
     </ClCompile>
-    <ClCompile Include="..\containers\wavfile\wavdatachunk.cpp">
-      <Filter>containers\wavfile</Filter>
-    </ClCompile>
     <ClCompile Include="..\containers\wavfile\wavfmtchunk.cpp">
       <Filter>containers\wavfile</Filter>
     </ClCompile>
     <ClCompile Include="..\support\rtaudio\RtAudio.cpp">
       <Filter>support\rtaudio</Filter>
     </ClCompile>
+    <ClCompile Include="clientconfig.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="showclient.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\containers\wavfile\chunkheader.cpp">
+      <Filter>containers\wavfile</Filter>
+    </ClCompile>
+    <ClCompile Include="..\containers\wavfile\fileheader.cpp">
+      <Filter>containers\wavfile</Filter>
+    </ClCompile>
+    <ClCompile Include="..\controllers\frameclock.cpp">
+      <Filter>controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\controllers\lightcontroller.cpp">
+      <Filter>controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\controllers\mediacontroller.cpp">
+      <Filter>controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\controllers\pruconfig.cpp">
+      <Filter>controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\controllers\statusled.cpp">
+      <Filter>controllers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\network\allpackets.hpp">
-      <Filter>network</Filter>
-    </ClInclude>
-    <ClInclude Include="..\network\blinkclient.hpp">
       <Filter>network</Filter>
     </ClInclude>
     <ClInclude Include="..\network\client.hpp">
@@ -105,9 +120,6 @@
       <Filter>network</Filter>
     </ClInclude>
     <ClInclude Include="..\network\loadpacket.hpp">
-      <Filter>network</Filter>
-    </ClInclude>
-    <ClInclude Include="..\network\nameclient.hpp">
       <Filter>network</Filter>
     </ClInclude>
     <ClInclude Include="..\network\noppacket.hpp">
@@ -149,11 +161,35 @@
     <ClInclude Include="..\containers\wavfile\mwavfile.hpp">
       <Filter>containers\wavfile</Filter>
     </ClInclude>
-    <ClInclude Include="..\containers\wavfile\wavdatachunk.hpp">
-      <Filter>containers\wavfile</Filter>
-    </ClInclude>
     <ClInclude Include="..\containers\wavfile\wavfmtchunk.hpp">
       <Filter>containers\wavfile</Filter>
+    </ClInclude>
+    <ClInclude Include="clientconfig.hpp">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="showclient.hpp">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\containers\wavfile\chunkheader.hpp">
+      <Filter>containers\wavfile</Filter>
+    </ClInclude>
+    <ClInclude Include="..\containers\wavfile\fileheader.hpp">
+      <Filter>containers\wavfile</Filter>
+    </ClInclude>
+    <ClInclude Include="..\controllers\frameclock.hpp">
+      <Filter>controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\controllers\lightcontroller.hpp">
+      <Filter>controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\controllers\mediacontroller.hpp">
+      <Filter>controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\controllers\pruconfig.hpp">
+      <Filter>controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\controllers\statusled.hpp">
+      <Filter>controllers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

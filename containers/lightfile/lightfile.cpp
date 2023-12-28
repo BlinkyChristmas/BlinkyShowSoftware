@@ -75,7 +75,7 @@ auto LightFile::copy(std::uint32_t frame,  char *buffer, int offset, int length 
     if (length == 0) {
         length = lightHeader.frameLength ;
     }
-    if ( offset + length > lightHeader.frameLength) {
+    if ( static_cast<unsigned int>(offset + length) > lightHeader.frameLength) {
         length = lightHeader.frameLength - offset ;
     }
     auto dataoffset = lightHeader.offsetToData  + (frame * lightHeader.frameLength) + offset;
