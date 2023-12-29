@@ -45,7 +45,7 @@ auto LightController::mapPRU(int number) -> void {
     off_t target = (number == 0 ? 0x4a300000 : 0x4a302000) ;
     DBGMSG(std::cout,"Offset is: "s +util::ntos(target,16,true,8) );
     auto fd = ::open("/dev/mem", O_RDWR | O_SYNC) ;
-    if (fd != -1) {
+    if (fd <0) {
         // we couldn't open it
         std::cerr << "unable to open PRU " << std::to_string(number)<<"\n"s;
         return  ;
