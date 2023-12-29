@@ -1,0 +1,39 @@
+// SPDX-License-Identifier: GPL-2.0-only
+/*
+ * Copyright (C) 2022 Robert Nelson <robertcnelson@gmail.com>
+ * modified by Charles Kerr
+ */
+
+/dts-v1/;
+/plugin/;
+
+#include <dt-bindings/pinctrl/am33xx.h>
+#include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/interrupt-controller/irq.h>
+
+/*
+ * Helper to show loaded overlays under: /proc/device-tree/chosen/overlays/
+ */
+&{/chosen} {
+    overlays {
+        DIYBLIGHTS.kernel = __TIMESTAMP__;
+    };
+};
+
+/*
+ * Free up the pins used by the cape from the pinmux helpers.
+ */
+&ocp {
+    P9_12_pinmux { status = "disabled"; };
+};
+
+&am33xx_pinmux {
+    diyblights: pinmux_pru_pru_pins {
+        pinctrl-single,pins = <
+            0x30 0x06  /* P8_12 GPIO:44 $PINS:12 MODE 6 -pru0 R30_14 */
+            0xA4 0x05  /* P8_46 GPIO:71 $PINS:41 MODE 5 - pru1 R30_1 */
+        >;
+    };
+};
+
+

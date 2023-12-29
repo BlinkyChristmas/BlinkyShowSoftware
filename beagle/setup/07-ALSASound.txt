@@ -3,9 +3,8 @@
 //****************************************************************************
 
 1. Added the needed software
-    sudo apt-get install alsa-firmware-loaders alsa-tools libasound2-dev
-
-cat
+    sudo apt install alsa-firmware-loaders alsa-tools libasound2-dev
+    Note, if using a minimal image, also install alsa-utils
 
 //*****************************************************************************
 // Making the card the default device

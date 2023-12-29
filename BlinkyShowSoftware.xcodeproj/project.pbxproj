@@ -921,11 +921,14 @@
 		561DE51D2B3C715800F0824C /* showmanager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = showmanager.hpp; sourceTree = "<group>"; };
 		561DE51F2B3C94FE00F0824C /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
 		561DE5202B3C960A00F0824C /* BUILDING.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = BUILDING.txt; sourceTree = "<group>"; };
-		561DE5212B3C9C9E00F0824C /* 09-BuildingMicrocode */ = {isa = PBXFileReference; lastKnownFileType = text; path = "09-BuildingMicrocode"; sourceTree = "<group>"; };
+		561DE5212B3C9C9E00F0824C /* 10-BuildingMicrocode */ = {isa = PBXFileReference; lastKnownFileType = text; path = "10-BuildingMicrocode"; sourceTree = "<group>"; };
 		561DE59E2B3DB54000F0824C /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
 		561DE59F2B3DF14400F0824C /* 03-Passwords.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "03-Passwords.txt"; sourceTree = "<group>"; };
 		561DE5A02B3E2D5300F0824C /* 10-BuildingClient.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "10-BuildingClient.txt"; sourceTree = "<group>"; };
 		561DE5A12B3E4DD600F0824C /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
+		561DE5A22B3F231700F0824C /* 09-DeviceTree.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "09-DeviceTree.txt"; sourceTree = "<group>"; };
+		561DE5A32B3F365F00F0824C /* DIYBLIGHTS.dts */ = {isa = PBXFileReference; lastKnownFileType = text; path = DIYBLIGHTS.dts; sourceTree = "<group>"; };
+		561DE5A42B3F827B00F0824C /* DIYBLIGHTS.dts */ = {isa = PBXFileReference; lastKnownFileType = text; name = DIYBLIGHTS.dts; path = ../../../../../../../../Volumes/BEAGLEDATA/DIYBLIGHTS.dts; sourceTree = "<group>"; };
 		569244732B3748F400B1A729 /* chunkheader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = chunkheader.cpp; sourceTree = "<group>"; };
 		569244742B3748F400B1A729 /* chunkheader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = chunkheader.hpp; sourceTree = "<group>"; };
 		569244762B374AF100B1A729 /* fileheader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = fileheader.cpp; sourceTree = "<group>"; };
@@ -2118,7 +2121,8 @@
 				561BE40D2B3472540092D4DF /* 06-TimeZone-Msg.txt */,
 				561BE40A2B3472540092D4DF /* 07-ALSASound.txt */,
 				561BE40C2B3472540092D4DF /* 08-PRUDevelopment.txt */,
-				561DE5212B3C9C9E00F0824C /* 09-BuildingMicrocode */,
+				561DE5A22B3F231700F0824C /* 09-DeviceTree.txt */,
+				561DE5212B3C9C9E00F0824C /* 10-BuildingMicrocode */,
 				561DE5A02B3E2D5300F0824C /* 10-BuildingClient.txt */,
 				561BE4612B36413E0092D4DF /* 11-HowToCreateAnImage.txt */,
 			);
@@ -2149,8 +2153,10 @@
 		561BE3FE2B3472020092D4DF /* deviceoverlay */ = {
 			isa = PBXGroup;
 			children = (
+				561DE5A42B3F827B00F0824C /* DIYBLIGHTS.dts */,
 				561BE4002B3472310092D4DF /* BeagleLights.dts */,
 				561BE4012B3472310092D4DF /* DIYBLIGHTS-00A0.dtbo */,
+				561DE5A32B3F365F00F0824C /* DIYBLIGHTS.dts */,
 			);
 			path = deviceoverlay;
 			sourceTree = "<group>";

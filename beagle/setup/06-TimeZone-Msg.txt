@@ -1,6 +1,7 @@
 //*****************************************************************************
 // Setting the time zone
 //****************************************************************************
+
 1. Ensure you are superuse (su)
 1. Enter command to set the timezone
     dpkg-reconfigure tzdata
@@ -9,6 +10,7 @@
 //*****************************************************************************
 // Setting the motd
 //****************************************************************************
+
 enter: nano /etc/motd
 delete the contents and enter your message (i.e. BlinkyChristmas)
 

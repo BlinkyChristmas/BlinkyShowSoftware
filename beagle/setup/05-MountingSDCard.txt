@@ -1,6 +1,7 @@
 //********************************************************************************
 // Needed file on SD Cards for mounting
 //*******************************************************************************
+
 1. If one is wanting to auto mount a SD card on the beaglebone, ensure
    the following file exists (on the SD card)
    

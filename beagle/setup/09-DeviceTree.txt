@@ -1,0 +1,83 @@
+//******************************************************************************
+// Device Tree
+// *****************************************************************************
+
+The system device tree is located:
+    /opt/source/dtb-5.10-ti
+    NOTE:
+        this is from:
+            git clone -b v5.10.x-ti-unified https://git.beagleboard.org/beagleboard/BeagleBoard-DeviceTrees.git ; \
+
+This may be need to be updated, so
+1. Enter:
+    git config --global --add safe.directory /opt/source/dtb-5.10-ti    // This adds ownership rights to update
+
+2. From the /opt/source/dtb-5.10-ti directory, Enter:
+    git pull
+    
+3. Now, copy the DIYBLIGHTS.dts into the /opt/source/dtb-5.10-ti/src/arm/overlays directory
+    NOTE: DIYBLIGHTS is in BlinkyShowSoftware/beagle/deviceoverlay
+4. From /opt/source/dtb-5.10-ti Enter:
+    make
+    
+The images are now built
+
+5. Copy /opt/source/dtb-5.10-ti/src/arm/overlays/DIYBLIGHTS.dtbo into /lib/firmware
+
+6. Update the initrd image:
+    update-initramfs -uk `uname -r`
+
+7. Edit /boot/uEnv.txt
+    Find the #PRUSS Options
+    add the following:
+    uboot_overlay_pru=DIYBLIGHTS.dtbo
+
+
+
+git clone -b v5.10.x-ti-unified https://git.beagleboard.org/beagleboard/BeagleBoard-DeviceTrees.git ; \
+cd ./BeagleBoard-DeviceTrees/ ; \
+make
+ DTC     src/arm/overlays/AM335X-PRU-RPROC-PRUCAPE-00A0.dtbo
+
+//*********************************
+
+There should be a shallow clone at:
+/opt/source/dtb-5.10-ti/
+
+To make an image:
+sudo update-initramfs -uk `uname -r`
+
+***********************************************
+// Device Tree overlay
+//*******************************************************************************
+// NOTE: example dts can be found:  https://git.beagleboard.org/beagleboard/BeagleBoard-DeviceTrees/-/tree/v5.10.x-ti-unified/src/arm/overlays?ref_type=heads
+1. The dts (source) is located in the BlinkShowSoftware/beagle/deviceoverlay
+2. Copy that to your home directory
+3.  Create the overlay with the following command:
+
+     dtc -O dtb -o DIYBLIGHTS-00A0.dtbo  -@ BeagleLights.dts
+
+
+Copy it into the firmware directory
+
+      cp DIYBLIGHTS-00A0.dtbo /lib/firmware/
+
+//********************************************************************************
+// Setting up overlay for boot
+//*******************************************************************************
+
+We need to install the Device Tree overlay at boot
+
+  nano /boot/uEnv.txt
+
+Add the following line under ### U-Boot Overlays###
+uboot_overlay_addr1=/lib/firmware/DIYBLIGHTS-00A0.dtbo
+
+If on the BeagleBone black (or a beaglebone that has HDMI) then in the section
+###Disable auto loading of virtual capes (emmc/video/wireless/adc)
+
+Uncomment (remove the #) from this line:
+disable_uboot_overlay_video=1
+
+Uncomment (remove the #) from this line:
+disable_uboot_overlay_video=1

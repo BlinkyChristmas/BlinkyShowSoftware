@@ -1,6 +1,7 @@
 //********************************************************************************
 // Installing pru development software
 //********************************************************************************
+
 1. If doing PRU development:
     The sofware is located here:
         https://www.ti.com/tool/PRU-CGT#downloads
@@ -20,6 +21,7 @@
 //********************************************************************************
 // Setting up symbols
 //********************************************************************************
+
 1. cd ~  (goto home directory)
 2. nano .bashrc
 3. add the following lines to the bottom
@@ -32,18 +34,11 @@
 5. Make them active
     source .bashrc
     
-//********************************************************************************
-// Installing pru development support software
-//********************************************************************************
-
- 
-git clone --depth=1 --branch v5.9.0 git://git.ti.com/pru-software-support-package/pru-software-support-package.git
-also available from:
-https://git.ti.com/cgit/pru-software-support-package/pru-software-support-package/
     
 //********************************************************************************
 // Installing pru development software
 //********************************************************************************
+
 1. Add the support software, create a directory for it
     mkdir /usr/lib/ti
 7. Change directory to it
@@ -56,8 +51,6 @@ https://git.ti.com/cgit/pru-software-support-package/pru-software-support-packag
     NOTE: If using kernel 5, then I "think"
     git clone --depth=1 --branch v5.9.0 git://git.ti.com/pru-software-support-package/pru-software-support-package.git
 
-    Probably the most effective way (if on a lower kernel)
-    https://git.ti.com/cgit/pru-software-support-package/pru-software-support-package/  and download the correct version, then untar it into the /usr/lib/ti directory
     
 9. Now, we need to link to the compiler/linker
     cd $PRU_CGT
