@@ -12,7 +12,13 @@ add_executable(teststuff
     ../utility/dbgutil.hpp
     ../utility/mapfile.cpp
     ../utility/mapfile.hpp
-    
+
+    ../containers/lightfile.cpp
+    ../containers/lightfile.hpp
+    ../containers/lightheader.cpp
+    ../containers/lightheader.hpp
+
+
     ../controllers/lightcontroller.cpp
     ../controllers/lightcontroller.hpp
     ../controllers/frameclock.cpp
