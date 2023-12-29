@@ -47,7 +47,7 @@ auto LightController::mapPRU(int number) -> void {
     auto fd = ::open("/dev/mem", O_RDWR | O_SYNC) ;
     if (fd != -1) {
         // we couldn't open it
-        std::cerr << "unable to open PRU\n";
+        std::cerr << "unable to open PRU " << std::to_string(number)<<"\n"s;
         return  ;
     }
     auto temp = mmap(0,PRUMAPSIZE,PROT_READ | PROT_WRITE, MAP_SHARED, fd, target) ;
@@ -107,8 +107,10 @@ auto LightController::setLocation(const std::filesystem::path &path,const std::s
 //======================================================================
 auto LightController::configurePRU(PRUConfig pru0,PRUConfig pru1) -> void {
     pruConfiguration[0] = pru0 ;
+    DBGMSG(std::cout, "Initializing pru 0");
     initPRU(0);
     pruConfiguration[1] = pru1 ;
+    DBGMSG(std::cout, "Initializing pru 1");
     initPRU(1) ;
     
 }
