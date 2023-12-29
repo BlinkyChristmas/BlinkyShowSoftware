@@ -15,6 +15,8 @@ add_executable(teststuff
     
     ../controllers/lightcontroller.cpp
     ../controllers/lightcontroller.hpp
+    ../controllers/frameclock.cpp
+    ../controllers/frameclock.hpp
     ../controllers/pruconfig.cpp
     ../controllers/pruconfig.hpp
     ../controllers/statusled.cpp
