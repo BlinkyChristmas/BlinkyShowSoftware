@@ -13,10 +13,10 @@ add_executable(teststuff
     ../utility/mapfile.cpp
     ../utility/mapfile.hpp
 
-    ../containers/lightfile.cpp
-    ../containers/lightfile.hpp
-    ../containers/lightheader.cpp
-    ../containers/lightheader.hpp
+    ../containers/lightfile/lightfile.cpp
+    ../containers/lightfile/lightfile.hpp
+    ../containers/lightfile/lightheader.cpp
+    ../containers/lightfile/lightheader.hpp
 
 
     ../controllers/lightcontroller.cpp
