@@ -34,7 +34,7 @@ PRUConfig::PRUConfig(const std::string &line):PRUConfig() {
                 [[fallthrough]] ;
             }
             case 1:{
-                pru = std::stoi(values[1],nullptr,0) ;
+                pru = std::stoi(values[0],nullptr,0) ;
                 [[fallthrough]] ;
             }
                 
@@ -50,3 +50,7 @@ PRUConfig::PRUConfig(const std::string &line):PRUConfig() {
     }
 }
 
+//======================================================================
+auto PRUConfig::describe() const -> std::string {
+    return std::to_string(pru) + ","s + std::to_string(mode) + ","s + std::to_string(offset) + ","s + std::to_string(length);
+}

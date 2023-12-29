@@ -16,6 +16,8 @@
 #include <errno.h>
 #endif
 
+#include "utility/dbgutil.hpp"
+#include "utility/strutil.hpp"
 using namespace std::string_literals ;
 
 //======================================================================
@@ -34,12 +36,14 @@ LightController::~LightController() {
 //======================================================================
 auto LightController::mapPRU(int number) -> void {
     auto pru = pruBuffers[number] ;
+    DBGMSG(std::cout, "mapping pru: " + std::to_string(number)) ;
     if (pru != nullptr){
         this->freePRU(number) ;
     }
     pru = nullptr ;
 #if defined(BEAGLE)
     off_t target = (number == 0 ? 0x4a300000 : 0x4a302000) ;
+    DBGMSG(std::cout,"Offset is: "s +util::ntos(target,16,true,8) );
     auto fd = ::open("/dev/mem", O_RDWR | O_SYNC) ;
     if (fd != -1) {
         // we couldn't open it
@@ -49,8 +53,11 @@ auto LightController::mapPRU(int number) -> void {
     auto temp = mmap(0,PRUMAPSIZE,PROT_READ | PROT_WRITE, MAP_SHARED, fd, target) ;
     ::close(fd) ;
     if (temp == MAP_FAILED ) {
+        DBGMSG(std::cerr,"Mapped failed!" );
+
         return  ;
     }
+    DBGMSG(std::cout,"Mapped success!" );
     pru = reinterpret_cast<std::uint8_t*>(temp) ;
     
 #endif
@@ -70,14 +77,19 @@ auto LightController::freePRU(int prunumber) -> void {
 }
 //======================================================================
 auto LightController::initPRU(int number) -> void {
+    DBGMSG(std::cout,"Initialize pru: "s+std::to_string(number) );
     mapPRU(number) ;
     auto pru = pruBuffers[number] ;
     auto bit = (number == 0 ? 1 : 14) ; // PRU 0 is on bit 0, pru 1 is on bit 14 ;
+    DBGMSG(std::cout,"Bit is: "s+std::to_string(bit) );
+
     auto mode = pruConfiguration[number].mode ;
     auto zero = 0 ;
     auto size = (mode == PRUConfig::MODE_SSD ? 3072 : 512) ;
     if (pru != nullptr) {
         auto buffer = std::vector<char>(3072, 0 ) ;
+        DBGMSG(std::cout,"Setting up pru memory header" );
+
         std::copy(reinterpret_cast<char*>(&mode),reinterpret_cast<char*>(&mode)+4,pru + INDEX_TYPE) ;
         std::copy(reinterpret_cast<char*>(&bit),reinterpret_cast<char*>(&bit)+4,pru + INDEX_BITREG) ;
         std::copy(reinterpret_cast<char*>(&size),reinterpret_cast<char*>(&size)+4,pru + INDEX_OUTPUTCOUNT) ;

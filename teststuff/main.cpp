@@ -8,50 +8,25 @@
 #include <filesystem>
 
 
-#include "asio/asio.hpp"
-#include "rtaudio/RtAudio.h"
-
 #include "utility/strutil.hpp"
 #include "utility/timeutil.hpp"
 #include "utility/dbgutil.hpp"
 
-#include "network/client.hpp"
-#include "network/allpackets.hpp"
 
-#include "containers/wavfile/mwavfile.hpp"
-#include "containers/lightfile/lightfile.hpp"
-
-#include "controllers/mediacontroller.hpp"
 #include "controllers/lightcontroller.hpp"
-#include "controllers/frameclock.hpp"
-#include "controllers/statusled.hpp"
-
+#include "controllers/pruconfig.hpp"
 
 using namespace std::string_literals ;
-asio::io_context io_context ;
-
-asio::ip::tcp::socket netSocket{io_context} ;
-
-Packet incomingPacket ;
-int incomingBytes = 0 ;
-std::thread runThread ;
-auto printHello() -> void {
-    std::cout << "hello" << std::endl;
-}
-auto packetRead(const asio::error_code& ec, size_t bytes_transferred) -> void {
-    if (ec) {
-        
-    }
-}
 
 int main(int argc, const char * argv[]) {
     try {
-        runThread = std::thread(&printHello) ;
-        runThread.join() ;
-        runThread = std::thread() ;
-        if (runThread.joinable()) {
-            std::cout <<"Joinable" << std::endl;
-        }
+        LightController lights ;
+        PRUConfig pru0("0,0,0,3072") ;
+        PRUConfig pru1("1,0,0,3072") ;
+        std::cout << "pru0 is: " << pru0.describe() << std::endl;
+        std::cout << "pru1 is: " << pru1.describe() << std::endl;
+        lights.configurePRU(pru0, pru1) ;
+
     }
     
     catch( const std::exception &e ) {

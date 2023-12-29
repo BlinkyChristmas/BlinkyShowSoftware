@@ -925,6 +925,7 @@
 		561DE59E2B3DB54000F0824C /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
 		561DE59F2B3DF14400F0824C /* 04-Passwords.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "04-Passwords.txt"; sourceTree = "<group>"; };
 		561DE5A02B3E2D5300F0824C /* 09-BuildingClient.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "09-BuildingClient.txt"; sourceTree = "<group>"; };
+		561DE5A12B3E4DD600F0824C /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
 		569244732B3748F400B1A729 /* chunkheader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = chunkheader.cpp; sourceTree = "<group>"; };
 		569244742B3748F400B1A729 /* chunkheader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = chunkheader.hpp; sourceTree = "<group>"; };
 		569244762B374AF100B1A729 /* fileheader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = fileheader.cpp; sourceTree = "<group>"; };
@@ -2185,6 +2186,7 @@
 		561BE4502B35D7AA0092D4DF /* teststuff */ = {
 			isa = PBXGroup;
 			children = (
+				561DE5A12B3E4DD600F0824C /* CMakeLists.txt */,
 				561BE4512B35D7AA0092D4DF /* main.cpp */,
 			);
 			path = teststuff;

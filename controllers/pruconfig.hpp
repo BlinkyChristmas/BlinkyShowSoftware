@@ -18,6 +18,7 @@ struct PRUConfig {
     int length ;
     PRUConfig() ;
     PRUConfig(const std::string &line) ;
+    auto describe() const -> std::string ;
 };
 
 #endif /* pruconfig_hpp */
