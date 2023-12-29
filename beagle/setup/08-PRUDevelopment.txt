@@ -48,7 +48,7 @@
     NOTE: The latest pru support software no longer supports kernel 5. Only use if using kernal 6
     git clone git://git.ti.com/pru-software-support-package/pru-software-support-package.git
     
-    NOTE: If using kernel 5, then I "think"
+    NOTE: If using kernel 5, then
     git clone --depth=1 --branch v5.9.0 git://git.ti.com/pru-software-support-package/pru-software-support-package.git
 
     
