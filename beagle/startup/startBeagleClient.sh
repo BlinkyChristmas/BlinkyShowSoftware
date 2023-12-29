@@ -1,17 +1,7 @@
 #!/bin/sh
 SLEEPSEC=8
 MAXLOOP=35
-
-
-
 ##################################################
-
-
-
-
-
-
-
 loopcount=0
 PRUREADY=0
 
@@ -40,14 +30,9 @@ done
 
 if [ $PRUREADY  -eq 1 ]
 then
-	
-	
 	loopcount=0
 
 	STARTLIGHTS=0
-
-
-
 
 	while [ $loopcount  -lt $MAXLOOP ]
 	do
@@ -79,7 +64,7 @@ then
 	if [ $STARTLIGHTS  -eq 1 ]
 	then
 		echo "Starting the client" | tee -a /root/mystartupmessage
-		/root/startup/ShowClient /media/Config.cfg
+		#/root/startup/ShowClient /media/Config.cfg
 		exit 0
 	else 
 		echo "'/media' never was mounted, loopcount was: $loopcount" | tee -a /root/mystartupmessage

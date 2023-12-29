@@ -1,0 +1,71 @@
+//********************************************************************************
+// Installing pru development software
+//********************************************************************************
+1. If doing PRU development:
+    The sofware is located here:
+        https://www.ti.com/tool/PRU-CGT#downloads
+    One wants the ARM-A8 installer for PRU CGT
+        Download this onto your computer , and transfer to a SD card, that will be used later
+1. Mount the sd card of the pru software you downloaded at the beginning of
+    mount /media
+2. in the root home directory (cd ~), make a support directory
+    mkdir ~/support
+3. Copy the ti_cgt_pru_2.3.3_armlinuxa8hf_busybox_installer.sh to the support directory
+    cp /media/ti_cgt_pru_2.3.3_armlinuxa8hf_busybox_installer.sh ~/support
+4. change directory to the support directory
+    cd ~/support
+5. Execute the installer
+    ./ti_cgt_pru_2.3.3_armlinuxa8hf_busybox_installer.sh
+
+//********************************************************************************
+// Setting up symbols
+//********************************************************************************
+1. cd ~  (goto home directory)
+2. nano .bashrc
+3. add the following lines to the bottom
+    export MYPRU0=/sys/class/remoteproc/remoteproc1
+    export MYPRU1=/sys/class/remoteproc/remoteproc2
+    export PINS=/sys/kernel/debug/pinctrl/44e10800.pinmux-pinctrl-single/pins
+    export PRU_CGT=/usr/share/ti/cgt-pru
+    export PRU_SUPPORT=/usr/lib/ti/pru-software-support-package
+4. Save the changes
+5. Make them active
+    source .bashrc
+    
+//********************************************************************************
+// Installing pru development support software
+//********************************************************************************
+
+ 
+git clone --depth=1 --branch v5.9.0 git://git.ti.com/pru-software-support-package/pru-software-support-package.git
+also available from:
+https://git.ti.com/cgit/pru-software-support-package/pru-software-support-package/
+    
+//********************************************************************************
+// Installing pru development software
+//********************************************************************************
+1. Add the support software, create a directory for it
+    mkdir /usr/lib/ti
+7. Change directory to it
+    cd /usr/lib/ti
+8. Acquire the softare
+
+    NOTE: The latest pru support software no longer supports kernel 5. Only use if using kernal 6
+    git clone git://git.ti.com/pru-software-support-package/pru-software-support-package.git
+    
+    NOTE: If using kernel 5, then I "think"
+    git clone --depth=1 --branch v5.9.0 git://git.ti.com/pru-software-support-package/pru-software-support-package.git
+
+    Probably the most effective way (if on a lower kernel)
+    https://git.ti.com/cgit/pru-software-support-package/pru-software-support-package/  and download the correct version, then untar it into the /usr/lib/ti directory
+    
+9. Now, we need to link to the compiler/linker
+    cd $PRU_CGT
+    mkdir -p bin
+    cd bin
+    ln -s `which clpru` .
+    ln -s `which lnkpru` .
+10. Now build the support package
+    cd /usr/lib/ti/pru-software-support-package
+    make (this may error out on the pru cape, that is ok)
+
