@@ -47,7 +47,7 @@ install_PRU0:
 		@echo 'Installing firmware'
 		@sudo cp $(TARGET) /lib/firmware/blinkylight-fw
 		@echo 'Deploying firmware'
-		@echo 'LIGHTS-pru0-fw' > $(PRU0)/firmware
+		@echo 'blinkylight-fw' > $(PRU0)/firmware
 		@echo 'Starting new PRU0 application'
 		@echo 'start' >  $(PRU0)/state
 
@@ -58,11 +58,11 @@ install_PRU1:
 		@echo 'Installing firmware'
 		@sudo cp $(TARGET) /lib/firmware/blinkylight-fw
 		@echo 'Deploying firmware'
-		@echo 'LIGHTS-pru1-fw > $(PRU1)/firmware
+		@echo 'blinkylight-fw > $(PRU1)/firmware
 		@echo 'Starting new PRU1 application'
 		@echo 'start >  $(PRU1)/state'
 
-$(GEN_DIR)/microcode.out:	$(GEN_DIR)/main.object $(GEN_DIR)/PruCode.object
+$(GEN_DIR)/microcode.out:	$(GEN_DIR)/main.object $(GEN_DIR)/microcode.object
 		@echo 'LD	$^'
 		@/usr/bin/lnkpru -i$(PRU_CGT)/lib -i$(PRU_CGT)/include $(LFLAGS) -o $@ $^  $(LINKER_COMMAND_FILE) --library=libc.a $(LIBS) $^
 
