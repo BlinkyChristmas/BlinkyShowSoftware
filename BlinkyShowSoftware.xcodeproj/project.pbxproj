@@ -883,7 +883,7 @@
 		561BE4022B34723F0092D4DF /* resource_table_empty.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = resource_table_empty.h; sourceTree = "<group>"; };
 		561BE4032B34723F0092D4DF /* makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = makefile; sourceTree = "<group>"; };
 		561BE4042B34723F0092D4DF /* AM335x_PRU.cmd */ = {isa = PBXFileReference; lastKnownFileType = text; path = AM335x_PRU.cmd; sourceTree = "<group>"; };
-		561BE4052B34723F0092D4DF /* PruCode.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = PruCode.asm; sourceTree = "<group>"; };
+		561BE4052B34723F0092D4DF /* microcode.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = microcode.asm; sourceTree = "<group>"; };
 		561BE4062B3472400092D4DF /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		561BE4072B3472540092D4DF /* 05-MountingSDCard.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "05-MountingSDCard.txt"; sourceTree = "<group>"; };
 		561BE4082B3472540092D4DF /* 04-HowToSSHByRoot.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "04-HowToSSHByRoot.txt"; sourceTree = "<group>"; };
@@ -2107,7 +2107,7 @@
 				561BE3FF2B3472170092D4DF /* pruconfig.hpp */,
 				561BE3FE2B3472020092D4DF /* deviceoverlay */,
 				561BE3FD2B3471F90092D4DF /* startup */,
-				561BE3FC2B3471EC0092D4DF /* BeaglePRU */,
+				561BE3FC2B3471EC0092D4DF /* microcode */,
 				561BE3FB2B3471E00092D4DF /* setup */,
 			);
 			path = beagle;
@@ -2136,16 +2136,16 @@
 			path = setup;
 			sourceTree = "<group>";
 		};
-		561BE3FC2B3471EC0092D4DF /* BeaglePRU */ = {
+		561BE3FC2B3471EC0092D4DF /* microcode */ = {
 			isa = PBXGroup;
 			children = (
 				561BE4042B34723F0092D4DF /* AM335x_PRU.cmd */,
 				561BE4062B3472400092D4DF /* main.c */,
 				561BE4032B34723F0092D4DF /* makefile */,
-				561BE4052B34723F0092D4DF /* PruCode.asm */,
+				561BE4052B34723F0092D4DF /* microcode.asm */,
 				561BE4022B34723F0092D4DF /* resource_table_empty.h */,
 			);
-			path = BeaglePRU;
+			path = microcode;
 			sourceTree = "<group>";
 		};
 		561BE3FD2B3471F90092D4DF /* startup */ = {
