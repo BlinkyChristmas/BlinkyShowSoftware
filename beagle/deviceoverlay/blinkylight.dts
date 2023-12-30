@@ -12,7 +12,7 @@
  */
 &{/chosen} {
 	overlays {
-		DIYBLIGHTS.kernel = __TIMESTAMP__;
+		blinkylight.kernel = __TIMESTAMP__;
 	};
 };
 
@@ -97,11 +97,11 @@
  */
 
 &pru0 {
-	firmware-name = "DIYBLIGHTS-fw";
+	firmware-name = "blinkylight-fw";
 };
 
 &pru1 {
-	firmware-name = "DIYBLIGHTS-fw";
+	firmware-name = "blinkylight-fw";
 };
 
 &pruss_uart {

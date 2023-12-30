@@ -926,7 +926,7 @@
 		561DE5A02B3E2D5300F0824C /* 10-BuildingClient.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "10-BuildingClient.txt"; sourceTree = "<group>"; };
 		561DE5A12B3E4DD600F0824C /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
 		561DE5A22B3F231700F0824C /* 09-DeviceTree.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "09-DeviceTree.txt"; sourceTree = "<group>"; };
-		561DE5A52B3F846E00F0824C /* DIYBLIGHTS.dts */ = {isa = PBXFileReference; lastKnownFileType = text; path = DIYBLIGHTS.dts; sourceTree = "<group>"; };
+		561DE5A52B3F846E00F0824C /* blinkylight.dts */ = {isa = PBXFileReference; lastKnownFileType = text; path = blinkylight.dts; sourceTree = "<group>"; };
 		561DE5A62B40480B00F0824C /* AM335X-PRU-RPROC-PRUCAPE-00A0.dts */ = {isa = PBXFileReference; lastKnownFileType = text; path = "AM335X-PRU-RPROC-PRUCAPE-00A0.dts"; sourceTree = "<group>"; };
 		561DE5A72B40510300F0824C /* 01-Base Beagle Bone imaging.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "01-Base Beagle Bone imaging.txt"; sourceTree = "<group>"; };
 		561DE5A82B40541400F0824C /* 02-Updating_software_SD_card.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "02-Updating_software_SD_card.txt"; sourceTree = "<group>"; };
@@ -2163,7 +2163,7 @@
 			isa = PBXGroup;
 			children = (
 				561DE5A62B40480B00F0824C /* AM335X-PRU-RPROC-PRUCAPE-00A0.dts */,
-				561DE5A52B3F846E00F0824C /* DIYBLIGHTS.dts */,
+				561DE5A52B3F846E00F0824C /* blinkylight.dts */,
 				561BE4002B3472310092D4DF /* BeagleLights.dts */,
 			);
 			path = deviceoverlay;
