@@ -1,0 +1,16 @@
+// *****************************************************************************
+// Enable the service
+// *****************************************************************************
+0. Log in as root and cd to the startup directory : cd ~/startup  (this was created at the end of Item 3, Build Blinky)
+1. Copy the server file and command script to the startup directory:
+    cp ~/BlinkyShowSoftware/beagle/startup-service/blinkylight.service ./
+    cp ~/BlinkyShowSoftware/beagle/startup-service/startShowClient.sh ./
+2. Make startshowClient.sh executable: chmod a+x startShowClient.sh
+3. Add the service to the system serice directory:
+    cp blinkylight.service /usr/lib/systemd/system/
+4. Change to that directory: cd /usr/lib/systemd/system
+5. Execute the following:
+    systemd-analyze verify blinkylight.service
+    systemctl daemon-reload
+    systemctl enable blinkylight.service
+

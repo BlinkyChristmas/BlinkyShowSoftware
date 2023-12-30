@@ -6,7 +6,7 @@ After=generic-board-startup.service
 Type=simple
 User=root
 WorkingDirectory=/root/startup
-ExecStart=/root/startup/startBeagleClient.sh
+ExecStart=/root/startup/startShowClient.sh
 
 [Install]
 WantedBy=multi-user.target

@@ -2,6 +2,12 @@
 // Building Blinky software
 // *******************************************************************************
 
+// **********************************************************************************
+// Acquire the blinky software
+// **********************************************************************************
+
+0. Ensure you are in the root home directory (cd ~)
+1. git clone --depth=1 https://github.com/BlinkyChristmas/BlinkyShowSoftware.git
 
 // ********************************************************************************
 // Building PRU microcode
@@ -18,12 +24,14 @@
 // *******************************************************************************
 
 1. Copy the Blinky dts file to the system overlays:
-    cp ~/BlinkyShowSoftware/beagle/deviceoverlay/blinkylight.dts /opt/source/dtb-5.10-ti/src/arm/overlays/
+    cp ~/BlinkyShowSoftware/beagle/device-overlay/blinkylight.dts /opt/source/dtb-5.10-ti/src/arm/overlays/
 2. Change to the top directory:
     cd /opt/source/dtb-5.10-ti/
 3. Build it: make
 4. Copy the dtbo to the system folder:
-    /opt/source/dtb-5.10-ti/src/arm/overlays/blinkylight.dtbo /boot/dtbs/`uname -r`/overlays/
+    cp /opt/source/dtb-5.10-ti/src/arm/overlays/blinkylight.dtbo /boot/dtbs/`uname -r`/overlays/
+5. Copy the dtbo to the /lib/firmware folder (Not sure this is needed, contradications in what I have found)
+    cp /opt/source/dtb-5.10-ti/src/arm/overlays/blinkylight.dtbo /lib/firmware/
 
 // *******************************************************************************
 // Ensuring the init daemon is up to date
@@ -36,7 +44,8 @@
 // ***************************************************************************
 
 1. Edit the /boot/uEnv.txt file
-
+2. Under the ###Additional custom capes uncomment the first line and change to:
+    uboot_overlay_addr4=blinkylight.dtbo
 
 // ****************************************************************************
 // Building the Blinky ShowClient

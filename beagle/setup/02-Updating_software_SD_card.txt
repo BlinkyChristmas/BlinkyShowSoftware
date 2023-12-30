@@ -154,10 +154,3 @@ NOTE: The system device tree is located:
 3. Update it: git pull
 4. Make the device overlays. Enter: make
 
-// **********************************************************************************
-// Acquire the blinky software
-// **********************************************************************************
-
-0. Ensure you are in the root home directory (cd ~)
-1. git clone --depth=1 https://github.com/BlinkyChristmas/BlinkyShowSoftware.git
-

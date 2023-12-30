@@ -136,9 +136,11 @@ auto ShowClient::setConfiguration(const std::filesystem::path &path) -> bool {
     // It takes a while for the SD card to mount, so we have a check here
     auto retry = 10 ;
     auto good = true ;
+    ledController.clearAll() ;
+    ledController.setLed(StatusLed::CONNECTSTATUS, StatusLed::FLASH);
+    ledController.setLed(StatusLed::SHOWSTATUS, StatusLed::FLASH);
+
     while(!std::filesystem::exists(path)){
-        ledController.setLed(StatusLed::SHOWSTATUS, StatusLed::FLASH) ;
-        ledController.setLed(StatusLed::CONNECTSTATUS, StatusLed::FLASH) ;
         std::this_thread::sleep_for(std::chrono::milliseconds(500)) ;
         retry -= 1 ;
         if (retry< 0) {
@@ -147,14 +149,16 @@ auto ShowClient::setConfiguration(const std::filesystem::path &path) -> bool {
         }
     }
     // are we good or not?
-    if (good) {
-        ledController.clearAll() ;
-        if (!configuration.load(path) ){
-            return false ;
-        }
-        this->initialize(configuration);
-        
+    if (!good) {
+        ledController.flashAll() ;
+        return good ;
     }
+    ledController.clearAll() ;
+    if (!configuration.load(path) ){
+        ledController.flashAll() ;
+        return false ;
+    }
+    this->initialize(configuration);
     return good ;
 }
 //======================================================================

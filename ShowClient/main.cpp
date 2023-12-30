@@ -11,6 +11,7 @@
 #include <cstdlib>
 
 #include "showclient.hpp"
+#include "controllers/statusled.hpp"
 
 using namespace std::string_literals ;
 
@@ -29,8 +30,10 @@ auto usage() -> void {
 //======================================================================
 int main(int argc, const char * argv[]) {
     ShowClient showClient ;
+    StatusLed statusLed ;
     auto status = EXIT_SUCCESS ;
     try {
+        statusLed.clearAll() ;
         if (argc != 2) {
             usage() ;
             throw std::runtime_error("Insufficient parameters.");
@@ -43,9 +46,11 @@ int main(int argc, const char * argv[]) {
     }
     catch(const std::exception &e){
         std::cerr << "Exception: "<<e.what() << std::endl;
+        statusLed.flashAll();
         status = EXIT_FAILURE ;
     }
     catch(...){
+        statusLed.flashAll();
         std::cerr << "Unknown exception" << std::endl;
         status = EXIT_FAILURE ;
     }

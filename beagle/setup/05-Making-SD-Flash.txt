@@ -15,5 +15,8 @@
     Let up the button when the lights go off after being all on.
     It should then start flashing the BeagleBone
     
-Note: The SD card now has a complete, updated debian, pru support, and needed software
-      Once the BeagleBone is flashed, the fstab will be updated, and the Blink code will be built, Device tree configured
+Note: It is not clear, but I think it not, if the fstab setting is maintained once flashed to the BeagleBone.  If not, then
+    one would need to modify the /etc/fstab after the flash, to add the following to the bottom:
+  
+      /dev/mmcblk0p1 /media  auto auto,rw,async,user,nofail 0 0
+
