@@ -932,6 +932,7 @@
 		561DE5A82B40541400F0824C /* 02-Updating_software_SD_card.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "02-Updating_software_SD_card.txt"; sourceTree = "<group>"; };
 		561DE5A92B405EA100F0824C /* 03-Making-SD-Flash.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "03-Making-SD-Flash.txt"; sourceTree = "<group>"; };
 		561DE5AA2B40628200F0824C /* 05-Build-Blinky.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "05-Build-Blinky.txt"; sourceTree = "<group>"; };
+		561DE5AB2B4092F200F0824C /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		569244732B3748F400B1A729 /* chunkheader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = chunkheader.cpp; sourceTree = "<group>"; };
 		569244742B3748F400B1A729 /* chunkheader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = chunkheader.hpp; sourceTree = "<group>"; };
 		569244762B374AF100B1A729 /* fileheader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = fileheader.cpp; sourceTree = "<group>"; };
@@ -2144,6 +2145,7 @@
 				561BE4032B34723F0092D4DF /* makefile */,
 				561BE4052B34723F0092D4DF /* microcode.asm */,
 				561BE4022B34723F0092D4DF /* resource_table_empty.h */,
+				561DE5AB2B4092F200F0824C /* .gitignore */,
 			);
 			path = microcode;
 			sourceTree = "<group>";
