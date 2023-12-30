@@ -8,22 +8,22 @@
 // *******************************************************************************
 
 0. Log on as root
-1. Move to the microcode directory: cd ~/BlinkyShowSoftware/beagle/BeaglePRU
+1. Move to the microcode directory: cd ~/BlinkyShowSoftware/beagle/microcode
 2. Build it by entering: make
 3. Copy the code to /lib/firmware:
-    cp ./gen/BeaglePRU.out /lib/firmware/DIYBLIGHTS-fw
+    make install
 
 // ********************************************************************************
 // Building Device Tree
 // *******************************************************************************
 
 1. Copy the Blinky dts file to the system overlays:
-    cp ~/BlinkyShowSoftware/beagle/deviceoverlay/DIYBLIGHTS.dts /opt/source/dtb-5.10-ti/src/arm/overlays/
+    cp ~/BlinkyShowSoftware/beagle/deviceoverlay/blinkylight.dts /opt/source/dtb-5.10-ti/src/arm/overlays/
 2. Change to the top directory:
     cd /opt/source/dtb-5.10-ti/
 3. Build it: make
 4. Copy the dtbo to the system folder:
-    /opt/source/dtb-5.10-ti/src/arm/overlays/DIYBLIGHTS.dtbo /boot/dtbs/`uname -r`/overlays/
+    /opt/source/dtb-5.10-ti/src/arm/overlays/blinkylight.dtbo /boot/dtbs/`uname -r`/overlays/
 
 // *******************************************************************************
 // Ensuring the init daemon is up to date
