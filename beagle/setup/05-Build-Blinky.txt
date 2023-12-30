@@ -1,0 +1,56 @@
+// ********************************************************************************
+// Building Blinky software
+// *******************************************************************************
+
+
+// ********************************************************************************
+// Building PRU microcode
+// *******************************************************************************
+
+0. Log on as root
+1. Move to the microcode directory: cd ~/BlinkyShowSoftware/beagle/BeaglePRU
+2. Build it by entering: make
+3. Copy the code to /lib/firmware:
+    cp ./gen/BeaglePRU.out /lib/firmware/DIYBLIGHTS-fw
+
+// ********************************************************************************
+// Building Device Tree
+// *******************************************************************************
+
+1. Copy the Blinky dts file to the system overlays:
+    cp ~/BlinkyShowSoftware/beagle/deviceoverlay/DIYBLIGHTS.dts /opt/source/dtb-5.10-ti/src/arm/overlays/
+2. Change to the top directory:
+    cd /opt/source/dtb-5.10-ti/
+3. Build it: make
+4. Copy the dtbo to the system folder:
+    /opt/source/dtb-5.10-ti/src/arm/overlays/DIYBLIGHTS.dtbo /boot/dtbs/`uname -r`/overlays/
+
+// *******************************************************************************
+// Ensuring the init daemon is up to date
+// ******************************************************************************
+
+1.  Enter: update-initramfs -uk `uname -r`
+
+// ****************************************************************************
+// Enabling the overlay
+// ***************************************************************************
+
+1. Edit the /boot/uEnv.txt file
+
+
+// ****************************************************************************
+// Building the Blinky ShowClient
+// ***************************************************************************
+
+1. Change to the directory: cd ~/BlinkyShowSoftware/ShowClient
+2. Enter : cmake . -B ./build -DCMAKE_BUILD_TYPE=Release -DBEAGLE=1
+3. Enter : cmake --build ./build --config Release
+
+// ***********************************************************************
+// Setting up the server and start directory
+// **********************************************************************
+
+0. Ensure you are in the root home directory: cd ~
+1. Create a startup directory: mkdir startup
+2. Copy the ShowClient to the startup: cp ./BlinkyShowSoftware/ShowClient/build/ShowClient ./startup/
+

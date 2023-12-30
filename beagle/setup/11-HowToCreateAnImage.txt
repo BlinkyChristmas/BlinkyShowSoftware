@@ -1,4 +1,4 @@
-
+sudo beagle-flasher it'll copy eMMC -> microsd with out a reboot..
 
 // ****************************************************************************
 // eMMC → microSD

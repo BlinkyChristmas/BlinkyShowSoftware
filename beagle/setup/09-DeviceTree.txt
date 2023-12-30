@@ -22,6 +22,8 @@ This may be need to be updated, so
     
 The images are now built
 
+Copy /opt/source/dtb-5.10-ti/src/arm/overlays/DIYBLIGHTS.dtbo /boot/dtbs/`uname -r`/overlays/
+
 5. Copy /opt/source/dtb-5.10-ti/src/arm/overlays/DIYBLIGHTS.dtbo into /lib/firmware
 
 6. Update the initrd image:

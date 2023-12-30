@@ -887,7 +887,7 @@
 		561BE4062B3472400092D4DF /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		561BE4072B3472540092D4DF /* 05-MountingSDCard.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "05-MountingSDCard.txt"; sourceTree = "<group>"; };
 		561BE4082B3472540092D4DF /* 04-HowToSSHByRoot.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "04-HowToSSHByRoot.txt"; sourceTree = "<group>"; };
-		561BE4092B3472540092D4DF /* 01-FlashingTheBeaglebone.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "01-FlashingTheBeaglebone.txt"; sourceTree = "<group>"; };
+		561BE4092B3472540092D4DF /* 04-Flash-Beagle-Mount.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "04-Flash-Beagle-Mount.txt"; sourceTree = "<group>"; };
 		561BE40A2B3472540092D4DF /* 07-ALSASound.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "07-ALSASound.txt"; sourceTree = "<group>"; };
 		561BE40B2B3472540092D4DF /* 02-AddingUserToSudo.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "02-AddingUserToSudo.txt"; sourceTree = "<group>"; };
 		561BE40C2B3472540092D4DF /* 08-PRUDevelopment.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "08-PRUDevelopment.txt"; sourceTree = "<group>"; };
@@ -928,6 +928,10 @@
 		561DE5A22B3F231700F0824C /* 09-DeviceTree.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "09-DeviceTree.txt"; sourceTree = "<group>"; };
 		561DE5A52B3F846E00F0824C /* DIYBLIGHTS.dts */ = {isa = PBXFileReference; lastKnownFileType = text; path = DIYBLIGHTS.dts; sourceTree = "<group>"; };
 		561DE5A62B40480B00F0824C /* AM335X-PRU-RPROC-PRUCAPE-00A0.dts */ = {isa = PBXFileReference; lastKnownFileType = text; path = "AM335X-PRU-RPROC-PRUCAPE-00A0.dts"; sourceTree = "<group>"; };
+		561DE5A72B40510300F0824C /* 01-Base Beagle Bone imaging.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "01-Base Beagle Bone imaging.txt"; sourceTree = "<group>"; };
+		561DE5A82B40541400F0824C /* 02-Updating_software_SD_card.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "02-Updating_software_SD_card.txt"; sourceTree = "<group>"; };
+		561DE5A92B405EA100F0824C /* 03-Making-SD-Flash.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "03-Making-SD-Flash.txt"; sourceTree = "<group>"; };
+		561DE5AA2B40628200F0824C /* 05-Build-Blinky.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "05-Build-Blinky.txt"; sourceTree = "<group>"; };
 		569244732B3748F400B1A729 /* chunkheader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = chunkheader.cpp; sourceTree = "<group>"; };
 		569244742B3748F400B1A729 /* chunkheader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = chunkheader.hpp; sourceTree = "<group>"; };
 		569244762B374AF100B1A729 /* fileheader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = fileheader.cpp; sourceTree = "<group>"; };
@@ -2112,7 +2116,11 @@
 		561BE3FB2B3471E00092D4DF /* setup */ = {
 			isa = PBXGroup;
 			children = (
-				561BE4092B3472540092D4DF /* 01-FlashingTheBeaglebone.txt */,
+				561DE5A72B40510300F0824C /* 01-Base Beagle Bone imaging.txt */,
+				561DE5A82B40541400F0824C /* 02-Updating_software_SD_card.txt */,
+				561DE5A92B405EA100F0824C /* 03-Making-SD-Flash.txt */,
+				561BE4092B3472540092D4DF /* 04-Flash-Beagle-Mount.txt */,
+				561DE5AA2B40628200F0824C /* 05-Build-Blinky.txt */,
 				561BE40B2B3472540092D4DF /* 02-AddingUserToSudo.txt */,
 				561DE59F2B3DF14400F0824C /* 03-Passwords.txt */,
 				561BE4082B3472540092D4DF /* 04-HowToSSHByRoot.txt */,
