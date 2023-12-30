@@ -60,7 +60,7 @@ After booting on the SD card, will update the card, before we make it a "flasher
 5. Restart the ssh daemon: systemctl restart ssh
 
 // **********************************************************************************
-// Disabling uneeded device overlays
+// Disabling uneeded device overlays (optional, configuraiton dependent)
 // **********************************************************************************
 
 1. Edit the /boot/uEnv.txt file: nano /boot/uEnv.txt
@@ -70,7 +70,7 @@ After booting on the SD card, will update the card, before we make it a "flasher
 3. Save the file
 
 // **********************************************************************************
-// Setting up ALSA sound
+// Setting up ALSA sound (optional)
 // **********************************************************************************
 
 1. Optional (only if one wants to verify the device id)
@@ -99,7 +99,8 @@ After booting on the SD card, will update the card, before we make it a "flasher
     One wants the ARM-A8 installer for PRU CGT:  https://dr-download.ti.com/software-development/ide-configuration-compiler-or-debugger/MD-FaNNGkDH7s/2.3.3/ti_cgt_pru_2.3.3_armlinuxa8hf_busybox_installer.sh
 2. Enter: wget https://dr-download.ti.com/software-development/ide-configuration-compiler-or-debugger/MD-FaNNGkDH7s/2.3.3/ti_cgt_pru_2.3.3_armlinuxa8hf_busybox_installer.sh
 3. Change the file to be executable: chmod a+x ./ti_cgt_pru_2.3.3_armlinuxa8hf_busybox_installer.sh
-3. Now execute the installer. Enter: ./ti_cgt_pru_2.3.3_armlinuxa8hf_busybox_installer.sh
+4. Now execute the installer. Enter: ./ti_cgt_pru_2.3.3_armlinuxa8hf_busybox_installer.sh
+5. Remove the installer: rm ./ti_cgt_pru_2.3.3_armlinuxa8hf_busybox_installer.sh
 
 // **********************************************************************************
 // Setting up needed symbols
@@ -145,7 +146,7 @@ Save the file
 
 NOTE: The system device tree is located:
         /opt/source/dtb-5.10-ti
-        this is from:
+        this is from (for reference, a shallow copy):
             git clone -b v5.10.x-ti-unified https://git.beagleboard.org/beagleboard/BeagleBoard-DeviceTrees.git ; \
 
 1. Setup git ownership of the /opt/source/dtb directory
@@ -154,3 +155,6 @@ NOTE: The system device tree is located:
 3. Update it: git pull
 4. Make the device overlays. Enter: make
 
+// **********************************************************************************
+// At this point, you should have a PRU/Device overlay development environment
+// **********************************************************************************
