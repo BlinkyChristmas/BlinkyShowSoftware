@@ -61,6 +61,12 @@ install_PRU1:
 		@echo 'blinkylight-fw > $(PRU1)/firmware
 		@echo 'Starting new PRU1 application'
 		@echo 'start >  $(PRU1)/state'
+install:
+	@echo ''
+	@echo 'Copying microde to /lib/firmware/blinkylight-fw'
+	@sudo cp $(TARGET) /lib/firmware/blinkylight-fw
+	@echo ''
+
 
 $(GEN_DIR)/microcode.out:	$(GEN_DIR)/main.object $(GEN_DIR)/microcode.object
 		@echo 'LD	$^'
