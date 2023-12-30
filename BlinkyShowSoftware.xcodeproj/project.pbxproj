@@ -880,7 +880,6 @@
 		561BE3F72B34068C0092D4DF /* mediacontroller.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = mediacontroller.hpp; sourceTree = "<group>"; };
 		561BE3FF2B3472170092D4DF /* pruconfig.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = pruconfig.hpp; sourceTree = "<group>"; };
 		561BE4002B3472310092D4DF /* BeagleLights.dts */ = {isa = PBXFileReference; lastKnownFileType = text; path = BeagleLights.dts; sourceTree = "<group>"; };
-		561BE4012B3472310092D4DF /* DIYBLIGHTS-00A0.dtbo */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DIYBLIGHTS-00A0.dtbo"; sourceTree = "<group>"; };
 		561BE4022B34723F0092D4DF /* resource_table_empty.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = resource_table_empty.h; sourceTree = "<group>"; };
 		561BE4032B34723F0092D4DF /* makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = makefile; sourceTree = "<group>"; };
 		561BE4042B34723F0092D4DF /* AM335x_PRU.cmd */ = {isa = PBXFileReference; lastKnownFileType = text; path = AM335x_PRU.cmd; sourceTree = "<group>"; };
@@ -928,6 +927,7 @@
 		561DE5A12B3E4DD600F0824C /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
 		561DE5A22B3F231700F0824C /* 09-DeviceTree.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "09-DeviceTree.txt"; sourceTree = "<group>"; };
 		561DE5A52B3F846E00F0824C /* DIYBLIGHTS.dts */ = {isa = PBXFileReference; lastKnownFileType = text; path = DIYBLIGHTS.dts; sourceTree = "<group>"; };
+		561DE5A62B40480B00F0824C /* AM335X-PRU-RPROC-PRUCAPE-00A0.dts */ = {isa = PBXFileReference; lastKnownFileType = text; path = "AM335X-PRU-RPROC-PRUCAPE-00A0.dts"; sourceTree = "<group>"; };
 		569244732B3748F400B1A729 /* chunkheader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = chunkheader.cpp; sourceTree = "<group>"; };
 		569244742B3748F400B1A729 /* chunkheader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = chunkheader.hpp; sourceTree = "<group>"; };
 		569244762B374AF100B1A729 /* fileheader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = fileheader.cpp; sourceTree = "<group>"; };
@@ -2115,12 +2115,12 @@
 				561BE4092B3472540092D4DF /* 01-FlashingTheBeaglebone.txt */,
 				561BE40B2B3472540092D4DF /* 02-AddingUserToSudo.txt */,
 				561DE59F2B3DF14400F0824C /* 03-Passwords.txt */,
+				561BE4082B3472540092D4DF /* 04-HowToSSHByRoot.txt */,
 				561BE4072B3472540092D4DF /* 05-MountingSDCard.txt */,
 				561BE40C2B3472540092D4DF /* 08-PRUDevelopment.txt */,
+				561BE40D2B3472540092D4DF /* 06-TimeZone-Msg.txt */,
 				561DE5212B3C9C9E00F0824C /* 10-BuildingMicrocode */,
 				561DE5A22B3F231700F0824C /* 09-DeviceTree.txt */,
-				561BE4082B3472540092D4DF /* 04-HowToSSHByRoot.txt */,
-				561BE40D2B3472540092D4DF /* 06-TimeZone-Msg.txt */,
 				561BE40A2B3472540092D4DF /* 07-ALSASound.txt */,
 				561DE5A02B3E2D5300F0824C /* 10-BuildingClient.txt */,
 				561BE4612B36413E0092D4DF /* 11-HowToCreateAnImage.txt */,
@@ -2152,9 +2152,9 @@
 		561BE3FE2B3472020092D4DF /* deviceoverlay */ = {
 			isa = PBXGroup;
 			children = (
+				561DE5A62B40480B00F0824C /* AM335X-PRU-RPROC-PRUCAPE-00A0.dts */,
 				561DE5A52B3F846E00F0824C /* DIYBLIGHTS.dts */,
 				561BE4002B3472310092D4DF /* BeagleLights.dts */,
-				561BE4012B3472310092D4DF /* DIYBLIGHTS-00A0.dtbo */,
 			);
 			path = deviceoverlay;
 			sourceTree = "<group>";

@@ -1,4 +1,5 @@
-// Getting the 
+// Getting the Blinky Show Software
+git clone --depth=1 https://github.com/BlinkyChristmas/BlinkyShowSoftware.git
 
 
 //********************************************************************************
