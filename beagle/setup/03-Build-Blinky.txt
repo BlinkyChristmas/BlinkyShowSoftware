@@ -31,8 +31,6 @@
 3. Build it: make
 4. Copy the dtbo to the system folder:
     cp /opt/source/dtb-5.10-ti/src/arm/overlays/blinkylight.dtbo /boot/dtbs/`uname -r`/overlays/
-5. Copy the dtbo to the /lib/firmware folder (Not sure this is needed, contradications in what I have found)
-    cp /opt/source/dtb-5.10-ti/src/arm/overlays/blinkylight.dtbo /lib/firmware/
 
 // *******************************************************************************
 // Ensuring the init daemon is up to date

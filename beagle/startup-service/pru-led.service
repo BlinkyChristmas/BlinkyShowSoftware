@@ -1,5 +1,7 @@
 [Unit]
 Description=Starts the prus and blanks the led
+After=bb-symlinks.service
+Wants=multi-user.target
 
 [Service]
 Type=oneshot
@@ -8,4 +10,5 @@ WorkingDirectory=/root/startup
 ExecStart=/root/startup/firmware-led.sh
 
 [Install]
-
+WantedBy=multi-user.target
+After=bb-symlinks.service
