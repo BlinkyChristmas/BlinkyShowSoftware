@@ -67,6 +67,7 @@ After booting on the SD card, will update the card, before we make it a "flasher
 2. uncomment the following lines:
     disable_uboot_overlay_video=1
     disable_uboot_overlay_audio=1
+    disable_uboot_overlay_adc=1
 3. Save the file
 
 // **********************************************************************************

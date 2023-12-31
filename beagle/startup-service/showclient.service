@@ -1,0 +1,14 @@
+[Unit]
+Description=Starts the show client
+After=pru-led.service
+Requires=pru-led.service
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/startup
+ExecStart=/root/startup/showclient.sh
+
+[Install]
+After=pru-led.service
+

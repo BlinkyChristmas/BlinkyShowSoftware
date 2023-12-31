@@ -1,0 +1,11 @@
+[Unit]
+Description=Starts the prus and blanks the led
+
+[Service]
+Type=oneshot
+User=root
+WorkingDirectory=/root/startup
+ExecStart=/root/startup/firmware-led.sh
+
+[Install]
+

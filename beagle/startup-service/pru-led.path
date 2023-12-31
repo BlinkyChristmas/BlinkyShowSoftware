@@ -1,0 +1,11 @@
+[Unit]
+Description=Monitors for the pru and led path
+
+[Path]
+PathExists=/sys/class/remoteproc/remoteproc2/firmware
+PathExists=/sys/class/remoteproc/remoteproc1/firmware
+DirectoryNotEmpty=/sys/class/leds
+Unit = pru-led.service
+
+[Install]
+WantedBy=multi-user.target

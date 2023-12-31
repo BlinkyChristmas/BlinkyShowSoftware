@@ -1,6 +1,27 @@
 // *****************************************************************************
-// Enable the service
+// Enable services
 // *****************************************************************************
+
+// *****************************************************************************
+// Automount /media
+// *****************************************************************************
+
+Normally one would add the following to /etc/fstab
+        /dev/mmcblk0p1 /media  auto auto,rw,async,user,nofail 0 0
+And have the uEnv.txt on the SD card to auto mount
+
+However, that doesnt seem to survive a SD card flasher/flasher
+
+I dont know yet if as a service works across a flash, but here goes:
+
+1. Copy the media.mount service to /usr/lib/systemd/system:
+    cp ~/BlinkyShowSoftware/beagle/startup-service/media.mount /usr/lib/systemd/system
+2. Reload the daemon:
+    systemctl daemon-reload
+3. Enable the service:
+    systemctl enable media.mount
+
+
 0. Log in as root and cd to the startup directory : cd ~/startup  (this was created at the end of Item 3, Build Blinky)
 1. Copy the server file and command script to the startup directory:
     cp ~/BlinkyShowSoftware/beagle/startup-service/blinkylight.service ./
