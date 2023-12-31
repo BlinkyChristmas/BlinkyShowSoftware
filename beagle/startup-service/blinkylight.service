@@ -3,7 +3,7 @@ Description=Enable the DIYB Beagle Light software (sound volume,pru firmware, st
 After=generic-board-startup.service
 
 [Service]
-Type=simple
+Type=idle
 User=root
 WorkingDirectory=/root/startup
 ExecStart=/root/startup/startShowClient.sh

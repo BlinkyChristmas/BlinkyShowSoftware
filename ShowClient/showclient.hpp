@@ -53,6 +53,8 @@ class ShowClient {
     bool run_forever ;
     
     bool threadRunning ;
+    
+    StatusLed::LEDMode showLEDStatus ;
     auto runLoop() ;
     
     util::ourclock::time_point nopRequestSent ;

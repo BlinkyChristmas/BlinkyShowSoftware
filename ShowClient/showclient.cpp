@@ -167,6 +167,7 @@ auto ShowClient::run() -> void {
     try {
         isPlaying = false ;
         inShow = false ;
+        //DBGMSG(std::cout, "Setting LEDs to all off, run flash");
         ledController.setLed(StatusLed::CONNECTSTATUS, StatusLed::OFF);
         ledController.setLed(StatusLed::SHOWSTATUS, StatusLed::OFF);
         ledController.setLed(StatusLed::PLAYSTATUS, StatusLed::OFF);
@@ -175,6 +176,7 @@ auto ShowClient::run() -> void {
             // We are in an acceptable time span
             isPlaying = false ;
             inShow = false ;
+            //DBGMSG(std::cout, "Setting LEDs to all off, run flash");
             ledController.setLed(StatusLed::RUNSTATUS, StatusLed::FLASH);
             ledController.setLed(StatusLed::CONNECTSTATUS, StatusLed::OFF);
             ledController.setLed(StatusLed::SHOWSTATUS, StatusLed::OFF);
@@ -196,7 +198,7 @@ auto ShowClient::run() -> void {
                     packet.setHandle(configuration.name);
                     packet.setClientType(IdentPacket::CLIENT);
                     myClient.sendPacket(packet);
-                    ledController.setLed(StatusLed::SHOWSTATUS, StatusLed::FLASH);
+                    //ledController.setLed(StatusLed::SHOWSTATUS, StatusLed::FLASH);
                     
                     // Now we idle, and do keep alives. Callbacks do the rest of the work.
                     util::ourclock::time_point lastKeepAlive = util::ourclock::now() ;
@@ -356,7 +358,7 @@ auto ShowClient::clientShow( const Packet &packet, Client *) -> bool{
     auto ptr = static_cast<const ShowPacket*>(&packet) ;
     DBGMSG(std::cout, "Received Show Packet");
     auto state = ptr->state() ;
-    auto ledstatus = StatusLed::ON ;
+    showLEDStatus = StatusLed::ON ;
     if (state) {
         inShow = true ;
         showAudio = useAudio = configuration.useAudio ;
@@ -368,9 +370,9 @@ auto ShowClient::clientShow( const Packet &packet, Client *) -> bool{
             showLight = lightController.setShow(state) ;
         }
         if (configuration.useAudio != showAudio || configuration.useLights != showLight){
-            ledstatus = StatusLed::FLASH ;
+            showLEDStatus = StatusLed::FLASH ;
         }
-        ledController.setLed(StatusLed::SHOWSTATUS, ledstatus) ;
+        ledController.setLed(StatusLed::SHOWSTATUS, showLEDStatus) ;
     }
     else {
         inShow = false ;
@@ -382,7 +384,7 @@ auto ShowClient::clientShow( const Packet &packet, Client *) -> bool{
         }
         showAudio = useAudio = configuration.useAudio ;
         showLight = useLight = configuration.useLights ;
-        ledController.setLed(StatusLed::SHOWSTATUS, StatusLed::FLASH) ;
+        ledController.setLed(StatusLed::SHOWSTATUS, showLEDStatus) ;
         ledController.setLed(StatusLed::PLAYSTATUS, StatusLed::OFF) ;
     }
     

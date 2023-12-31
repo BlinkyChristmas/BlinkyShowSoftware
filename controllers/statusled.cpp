@@ -42,7 +42,7 @@ auto StatusLed::setLed(int lednumber, LEDMode mode, bool force) -> void {
         switch (mode) {
             case LEDMode::ON: {
                 
-                DBGMSG(std::cerr, "Opening: "s + LEDLOCATION.at(lednumber)+"/trigger"s) ;
+                //DBGMSG(std::cerr, "Opening: "s + LEDLOCATION.at(lednumber)+"/trigger"s) ;
                 auto output = std::ofstream(LEDLOCATION.at(lednumber)+"/trigger"s) ;
                 if (!output.is_open()) {
                     std::cerr << "Unable to open led: " << LEDLOCATION.at(lednumber) + "/trigger"s << std::endl;
