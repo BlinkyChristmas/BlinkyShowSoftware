@@ -1,0 +1,10 @@
+[Unit]
+Description=Automount the SD Card
+
+[Automount]
+Where=/media
+TimeoutIdleSec=600
+
+[Install]
+WantedBy=multi-user.target
+

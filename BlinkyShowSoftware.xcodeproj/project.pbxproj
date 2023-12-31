@@ -921,6 +921,8 @@
 		561DE5AA2B40628200F0824C /* 03-Build-Blinky.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "03-Build-Blinky.txt"; sourceTree = "<group>"; };
 		561DE5AB2B4092F200F0824C /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		561DE5AC2B40ABF500F0824C /* 04-Service-Setup.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "04-Service-Setup.txt"; sourceTree = "<group>"; };
+		561DE5AD2B41990100F0824C /* media.mount */ = {isa = PBXFileReference; lastKnownFileType = text; path = media.mount; sourceTree = "<group>"; };
+		561DE5AE2B41A33800F0824C /* media.automount */ = {isa = PBXFileReference; lastKnownFileType = text; path = media.automount; sourceTree = "<group>"; };
 		569244732B3748F400B1A729 /* chunkheader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = chunkheader.cpp; sourceTree = "<group>"; };
 		569244742B3748F400B1A729 /* chunkheader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = chunkheader.hpp; sourceTree = "<group>"; };
 		569244762B374AF100B1A729 /* fileheader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = fileheader.cpp; sourceTree = "<group>"; };
@@ -2132,6 +2134,8 @@
 			isa = PBXGroup;
 			children = (
 				561BE40F2B34725F0092D4DF /* blinkylight.service */,
+				561DE5AD2B41990100F0824C /* media.mount */,
+				561DE5AE2B41A33800F0824C /* media.automount */,
 				561BE40E2B34725F0092D4DF /* startShowClient.sh */,
 			);
 			path = "startup-service";
