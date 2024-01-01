@@ -2,7 +2,7 @@
 /*
  * Copyright (C) 2015 Texas Instruments Incorporated - https://www.ti.com/
  * Modified by Charles Kerr
- * Based of: AM335X-PRU-RPROC-PRUCAPE-00A0.dts
+ * Based off: AM335X-PRU-RPROC-PRUCAPE-00A0.dts
  */
 
 /dts-v1/;
@@ -21,16 +21,17 @@
  * Free up the pins used by the cape from the pinmux helpers.
  */
 &ocp {
-        P8_46_pinmux { status = "disabled"; };  /* P8_46: lcd_data1, OMAP_MUX_MODE5 | AM33XX_PIN_OUTPUT, PRU CAPE Audio Clk, HDMI Conf. */
+    P8_46_pinmux { status = "disabled"; };  /* P8_46: lcd_data1, OMAP_MUX_MODE5 | AM33XX_PIN_OUTPUT, PRU CAPE Audio Clk, HDMI Conf. */
+    P8_12_pinmux { status = "disabled"; };    /* P8_12:GPIO:44  */
 };
 
 &am33xx_pinmux {
-        pru_cape_bone_pins: pru_cape_bone_pins {
-                pinctrl-single,pins = <
-                    0x30 0x06  /* P8_12 GPIO:44 $PINS:12 MODE 6 -pru0 R30_14 */
-                    0xA4 0x05  /* P8_46 GPIO:71 $PINS:41 MODE 5 - pru1 R30_1 */
-		>;
-	};
+    pru_cape_bone_pins: pru_cape_bone_pins {
+        pinctrl-single,pins = <
+            0x30 0x06  /* P8_12 GPIO:44 $PINS:12 MODE 6 -pru0 R30_14 */
+            0xA4 0x05  /* P8_46 GPIO:71 $PINS:41 MODE 5 - pru1 R30_1 */
+        >;
+    };
 };
 
 
@@ -39,8 +40,8 @@
 };
 
 &pruss {
-	status = "okay";
-	pinctrl-names = "default";
+    status = "okay";
+    pinctrl-names = "default";
     pinctrl-0 = <&pru_cape_bone_pins>;
 };
 

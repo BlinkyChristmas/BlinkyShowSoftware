@@ -923,6 +923,7 @@
 		561DE5B22B41D26F00F0824C /* showclient.service */ = {isa = PBXFileReference; lastKnownFileType = text; path = showclient.service; sourceTree = "<group>"; };
 		561DE5B32B41D28200F0824C /* showclient.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = showclient.sh; sourceTree = "<group>"; };
 		561DE5B72B42D27B00F0824C /* AM335X-PRU-RPROC-PRUCAPE-00A0.dts.example */ = {isa = PBXFileReference; lastKnownFileType = text; path = "AM335X-PRU-RPROC-PRUCAPE-00A0.dts.example"; sourceTree = "<group>"; };
+		561DE5B82B42DDB800F0824C /* WorkingDTS.dts */ = {isa = PBXFileReference; lastKnownFileType = text; path = WorkingDTS.dts; sourceTree = "<group>"; };
 		569244732B3748F400B1A729 /* chunkheader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = chunkheader.cpp; sourceTree = "<group>"; };
 		569244742B3748F400B1A729 /* chunkheader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = chunkheader.hpp; sourceTree = "<group>"; };
 		569244762B374AF100B1A729 /* fileheader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = fileheader.cpp; sourceTree = "<group>"; };
@@ -2145,6 +2146,7 @@
 			children = (
 				561DE5A52B3F846E00F0824C /* blinkylight.dts */,
 				561DE5B72B42D27B00F0824C /* AM335X-PRU-RPROC-PRUCAPE-00A0.dts.example */,
+				561DE5B82B42DDB800F0824C /* WorkingDTS.dts */,
 			);
 			path = "device-overlay";
 			sourceTree = "<group>";
