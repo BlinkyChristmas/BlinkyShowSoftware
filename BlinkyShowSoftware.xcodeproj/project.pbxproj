@@ -920,11 +920,10 @@
 		561DE5AB2B4092F200F0824C /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		561DE5AC2B40ABF500F0824C /* 04-Service-Setup.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "04-Service-Setup.txt"; sourceTree = "<group>"; };
 		561DE5AD2B41990100F0824C /* media.mount */ = {isa = PBXFileReference; lastKnownFileType = text; path = media.mount; sourceTree = "<group>"; };
-		561DE5AF2B41CBD800F0824C /* firmware-leds.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "firmware-leds.sh"; sourceTree = "<group>"; };
-		561DE5B12B41CCDB00F0824C /* pru-led.service */ = {isa = PBXFileReference; lastKnownFileType = text; path = "pru-led.service"; sourceTree = "<group>"; };
 		561DE5B22B41D26F00F0824C /* showclient.service */ = {isa = PBXFileReference; lastKnownFileType = text; path = showclient.service; sourceTree = "<group>"; };
 		561DE5B32B41D28200F0824C /* showclient.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = showclient.sh; sourceTree = "<group>"; };
 		561DE5B52B41F58800F0824C /* 04a-Server-Setup.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "04a-Server-Setup.txt"; sourceTree = "<group>"; };
+		561DE5B72B42D27B00F0824C /* AM335X-PRU-RPROC-PRUCAPE-00A0.dts.example */ = {isa = PBXFileReference; lastKnownFileType = text; path = "AM335X-PRU-RPROC-PRUCAPE-00A0.dts.example"; sourceTree = "<group>"; };
 		569244732B3748F400B1A729 /* chunkheader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = chunkheader.cpp; sourceTree = "<group>"; };
 		569244742B3748F400B1A729 /* chunkheader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = chunkheader.hpp; sourceTree = "<group>"; };
 		569244762B374AF100B1A729 /* fileheader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = fileheader.cpp; sourceTree = "<group>"; };
@@ -2138,9 +2137,7 @@
 			children = (
 				561DE5AD2B41990100F0824C /* media.mount */,
 				561DE5B22B41D26F00F0824C /* showclient.service */,
-				561DE5AF2B41CBD800F0824C /* firmware-leds.sh */,
 				561DE5B32B41D28200F0824C /* showclient.sh */,
-				561DE5B12B41CCDB00F0824C /* pru-led.service */,
 			);
 			path = "startup-service";
 			sourceTree = "<group>";
@@ -2149,6 +2146,7 @@
 			isa = PBXGroup;
 			children = (
 				561DE5A52B3F846E00F0824C /* blinkylight.dts */,
+				561DE5B72B42D27B00F0824C /* AM335X-PRU-RPROC-PRUCAPE-00A0.dts.example */,
 			);
 			path = "device-overlay";
 			sourceTree = "<group>";

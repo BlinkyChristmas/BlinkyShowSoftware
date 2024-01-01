@@ -58,7 +58,12 @@
 // Setting up the server and start directory
 // **********************************************************************
 
-0. Ensure you are in the root home directory: cd ~
-1. Create a startup directory: mkdir startup
-2. Copy the ShowClient to the startup: cp ./BlinkyShowSoftware/ShowClient/build/ShowClient ./startup/
+0. Ensure you are in the root home directory:
+    cd ~
+1. Create a startup directory:
+    mkdir startup
+2. Copy the ShowClient to the startup:
+    cp ./BlinkyShowSoftware/ShowClient/build/ShowClient ./startup/
+3. Copy the startup shell script to the startup directory:
+    cp ./BlinkyShowSoftware/beagle/startup-service/showclient.sh ./startup/
 
