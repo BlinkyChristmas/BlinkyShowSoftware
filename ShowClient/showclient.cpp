@@ -384,7 +384,7 @@ auto ShowClient::clientShow( const Packet &packet, Client *) -> bool{
         }
         showAudio = useAudio = configuration.useAudio ;
         showLight = useLight = configuration.useLights ;
-        ledController.setLed(StatusLed::SHOWSTATUS, showLEDStatus) ;
+        ledController.setLed(StatusLed::SHOWSTATUS, StatusLed::OFF) ;
         ledController.setLed(StatusLed::PLAYSTATUS, StatusLed::OFF) ;
     }
     

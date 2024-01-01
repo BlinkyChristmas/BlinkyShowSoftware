@@ -99,7 +99,7 @@ auto ShowServer::handleConnect( ServerClient::Pointer client ,const asio::error_
         if ((ec.value() == asio::error::connection_aborted) || (ec.value() == asio::error::operation_aborted)) {
             // Should we do something special?
         }
-        if (acceptor.is_open()){
+        else if (acceptor.is_open()){
             acceptor.close() ;
         }
         // and we should close all of our connections
