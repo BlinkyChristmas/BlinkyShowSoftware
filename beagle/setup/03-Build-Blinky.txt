@@ -66,4 +66,6 @@
     cp ./BlinkyShowSoftware/ShowClient/build/ShowClient ./startup/
 3. Copy the startup shell script to the startup directory:
     cp ./BlinkyShowSoftware/beagle/startup-service/showclient.sh ./startup/
+4. Make the shell script executable:
+    chmod a+x ./startup/showclient.sh
 
