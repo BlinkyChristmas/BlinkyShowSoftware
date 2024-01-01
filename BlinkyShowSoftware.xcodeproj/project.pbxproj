@@ -883,7 +883,7 @@
 		561BE4042B34723F0092D4DF /* AM335x_PRU.cmd */ = {isa = PBXFileReference; lastKnownFileType = text; path = AM335x_PRU.cmd; sourceTree = "<group>"; };
 		561BE4052B34723F0092D4DF /* microcode.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = microcode.asm; sourceTree = "<group>"; };
 		561BE4062B3472400092D4DF /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
-		561BE4092B3472540092D4DF /* 06-Flash-Beagle-Mount.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "06-Flash-Beagle-Mount.txt"; sourceTree = "<group>"; };
+		561BE4092B3472540092D4DF /* XX-Flash-Beagle-Mount.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "XX-Flash-Beagle-Mount.txt"; sourceTree = "<group>"; };
 		561BE4102B3472780092D4DF /* client.cfg */ = {isa = PBXFileReference; lastKnownFileType = text; path = client.cfg; sourceTree = "<group>"; };
 		561BE4112B3473760092D4DF /* clientconfig.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = clientconfig.hpp; sourceTree = "<group>"; };
 		561BE4122B3473760092D4DF /* clientconfig.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = clientconfig.cpp; sourceTree = "<group>"; };
@@ -922,7 +922,6 @@
 		561DE5AD2B41990100F0824C /* media.mount */ = {isa = PBXFileReference; lastKnownFileType = text; path = media.mount; sourceTree = "<group>"; };
 		561DE5B22B41D26F00F0824C /* showclient.service */ = {isa = PBXFileReference; lastKnownFileType = text; path = showclient.service; sourceTree = "<group>"; };
 		561DE5B32B41D28200F0824C /* showclient.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = showclient.sh; sourceTree = "<group>"; };
-		561DE5B52B41F58800F0824C /* 04a-Server-Setup.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "04a-Server-Setup.txt"; sourceTree = "<group>"; };
 		561DE5B72B42D27B00F0824C /* AM335X-PRU-RPROC-PRUCAPE-00A0.dts.example */ = {isa = PBXFileReference; lastKnownFileType = text; path = "AM335X-PRU-RPROC-PRUCAPE-00A0.dts.example"; sourceTree = "<group>"; };
 		569244732B3748F400B1A729 /* chunkheader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = chunkheader.cpp; sourceTree = "<group>"; };
 		569244742B3748F400B1A729 /* chunkheader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = chunkheader.hpp; sourceTree = "<group>"; };
@@ -2110,10 +2109,9 @@
 				561DE5A72B40510300F0824C /* 01-Base Beagle Bone imaging.txt */,
 				561DE5A82B40541400F0824C /* 02-Updating_software_SD_card.txt */,
 				561DE5AA2B40628200F0824C /* 03-Build-Blinky.txt */,
-				561DE5B52B41F58800F0824C /* 04a-Server-Setup.txt */,
 				561DE5AC2B40ABF500F0824C /* 04-Service-Setup.txt */,
 				561DE5A92B405EA100F0824C /* 05-Making-SD-Flash.txt */,
-				561BE4092B3472540092D4DF /* 06-Flash-Beagle-Mount.txt */,
+				561BE4092B3472540092D4DF /* XX-Flash-Beagle-Mount.txt */,
 				561BE4612B36413E0092D4DF /* XX-HowToCreateAnImage.txt */,
 			);
 			path = setup;
