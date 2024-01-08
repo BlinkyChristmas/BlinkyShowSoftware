@@ -126,7 +126,7 @@ auto commandConnections() -> bool {
     auto con = server.informationOnConnections() ;
     std::cout << std::endl;
     for (const auto &entry:con){
-        std::cout << "\t"<< entry << "\n";
+        std::cout << "\t"<< entry.toString() << "\n";
     }
     std::cout<<"Total: "<< con.size() << std::endl;
    return true ;

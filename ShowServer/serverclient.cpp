@@ -18,9 +18,9 @@ ServerClient::ServerClient(asio::io_context &io_context) : Client(io_context),ha
 
 
 //======================================================================
-auto ServerClient::information() const -> std::string {
+auto ServerClient::information() const -> StatusEntry {
     auto rvalue = Client::information() ;
-    rvalue += " , "s + handle ;
+    rvalue.handle = handle ;
     return rvalue ;
 }
 
@@ -63,5 +63,4 @@ auto ServerClient::clientNop( const Packet &packet, Client *client) -> bool{
         servClient->sendPacket(packet) ;
     }
     return true ;
-    
 }

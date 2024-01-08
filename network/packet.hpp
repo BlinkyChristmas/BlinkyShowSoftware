@@ -29,7 +29,7 @@ protected:
 
 public:
     enum PacketType {
-        INVALID,IDENT,SHOW,PLAY,SYNC,LOAD,NOP,TYPECOUNT
+        INVALID,IDENT,SHOW,PLAY,SYNC,LOAD,NOP,STATUS,TYPECOUNT
     };
     static auto nameForPacket(PacketType type) -> const std::string & ;
     std::chrono::system_clock::time_point packetTime ;

@@ -16,6 +16,7 @@
 #include "playpacket.hpp"
 #include "showpacket.hpp"
 #include "syncpacket.hpp"
+#include "statuspacket.hpp"
 /*
 #include "volumepacket.hpp"
 #include "requestpacket.hpp"

@@ -23,7 +23,7 @@ public:
     std::string handle ;
     std::uint32_t server_key ;
     
-    auto information() const -> std::string ;
+    auto information() const -> StatusEntry;
     
     auto clientIdent( const Packet &packet,Client *client) -> bool ;
     auto clientNop( const Packet &packet, Client *client) -> bool;

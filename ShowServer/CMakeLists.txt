@@ -66,6 +66,8 @@ add_executable(ShowServer
     ../network/showpacket.hpp
     ../network/syncpacket.cpp
     ../network/syncpacket.hpp
+    ../network/statuspacket.cpp
+    ../network/statuspacket.hpp
     ../network/allpackets.hpp
 
     ../support/rtaudio/RtAudio.cpp

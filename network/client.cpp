@@ -14,6 +14,40 @@ using namespace std::string_literals ;
 
 
 // =======================================================================================
+// StatusEntry methods
+// =======================================================================================
+
+// =======================================================================================
+auto StatusEntry::data() const -> std::vector<std::uint8_t> {
+    auto buffer = util::Buffer() ;
+    buffer.write(client, CLIENTSIZE) ;
+    buffer.write(address,ADDRESSSIZE);
+    buffer.write(handle,HANDLESIZE);
+    buffer.write(connectTime,TIMESIZE);
+    buffer.write(receiveTime,TIMESIZE);
+    buffer.write(sendTime,TIMESIZE);
+    return buffer.data ;
+}
+// =======================================================================================
+auto StatusEntry::load(const std::vector<std::uint8_t> &data) -> void {
+    auto buffer = util::Buffer(data) ;
+    this->client = buffer.read<std::string>(CLIENTSIZE) ;
+    this->address = buffer.read<std::string>(ADDRESSSIZE) ;
+    this->handle = buffer.read<std::string>(HANDLESIZE) ;
+    this->connectTime = buffer.read<std::string>(TIMESIZE) ;
+    this->receiveTime = buffer.read<std::string>(TIMESIZE) ;
+    this->sendTime = buffer.read<std::string>(TIMESIZE) ;
+}
+// =======================================================================================
+StatusEntry::StatusEntry(const std::vector<std::uint8_t> &data): StatusEntry() {
+    load(data);
+}
+// =======================================================================================
+auto StatusEntry::toString() const-> std::string {
+    return client + " , " + handle +" , " + address + " , " + connectTime + " , " + receiveTime + " , " + sendTime ;
+}
+
+// =======================================================================================
 // Client interrupt handlers for read/writing
 // =======================================================================================
 // ========================================================================================
@@ -27,7 +61,7 @@ auto Client::packetRead(const asio::error_code& ec, size_t bytes_transferred) ->
             if (ec.value() == asio::error::operation_aborted || ec.value() == asio::error::eof){
                 if (netSocket.is_open()){
                     DBGMSG(std::cerr,"Closing socket");
-                    netSocket.close() ;
+                    //netSocket.close() ;
                 }
             }
             // we should clear out queued output
@@ -376,9 +410,15 @@ auto Client::type() const -> IdentPacket::ClientType {
 }
 
 // ========================================================================================
-auto Client::information() const -> std::string {
+auto Client::information() const -> StatusEntry{
     const auto format = "%b %d %H:%M:%S"s ;
-    return util::sysTimeToString(this->connect_time,format) + " , "s +  this->address() + " , "  + IdentPacket::nameForClient(client_type) + " , " + util::sysTimeToString(this->receive_time,format) + " , "s + util::sysTimeToString(this->send_time,format) ;
+    auto status = StatusEntry() ;
+    status.connectTime = util::sysTimeToString(this->connect_time,format);
+    status.receiveTime = util::sysTimeToString(this->receive_time,format) ;
+    status.sendTime = util::sysTimeToString(this->send_time,format) ;
+    status.address = this->address();
+    status.client = IdentPacket::nameForClient(client_type)  ;
+    return status ;
 }
 
 // ========================================================================================

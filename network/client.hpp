@@ -16,6 +16,27 @@
 #include "identpacket.hpp"
 #include "utility/timeutil.hpp"
 
+struct StatusEntry {
+    static constexpr auto HANDLESIZE = 20 ;
+    static constexpr auto TIMESIZE = 16 ;
+    static constexpr auto CLIENTSIZE = 7 ;
+    static constexpr auto ADDRESSSIZE = 18 ;
+    
+    static constexpr auto ENTRYSIZE = (TIMESIZE * 3) + HANDLESIZE + CLIENTSIZE + ADDRESSSIZE ;
+    
+    std::string client; // 7 bytes
+    std::string address ; //18
+    std::string handle ; // 20 bytes
+    std::string connectTime ; // 16 bytes
+    std::string receiveTime ; // 16 bytes
+    std::string sendTime ; // 16 bytes
+    
+    auto data() const -> std::vector<std::uint8_t> ;
+    auto load(const std::vector<std::uint8_t> &data) -> void ;
+    StatusEntry() = default ;
+    StatusEntry(const std::vector<std::uint8_t> &data);
+    auto toString() const -> std::string ;
+};
 
 //======================================================================
 class Client : public std::enable_shared_from_this<Client> {
@@ -98,7 +119,7 @@ public:
     
     // address and total information
     auto address() const -> std::string ;
-    auto information() const -> std::string ;
+    auto information() const -> StatusEntry;
     
     
     // This lets use set our callbacks for packets

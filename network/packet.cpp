@@ -11,7 +11,7 @@ using namespace std::string_literals ;
 
 // ===========================================================================
 const std::vector<std::string> Packet::TYPENAMES{
-    "INVALID"s,"IDENT"s,"SHOW"s,"PLAY"s,"SYNC"s,"LOAD"s,"NOP"s
+    "INVALID"s,"IDENT"s,"SHOW"s,"PLAY"s,"SYNC"s,"LOAD"s,"NOP"s,"STATUS"s
 };
 // ===========================================================================
 auto Packet::nameForPacket(PacketType type) -> const std::string & {

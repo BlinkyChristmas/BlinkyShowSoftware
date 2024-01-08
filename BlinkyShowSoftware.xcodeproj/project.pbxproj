@@ -87,6 +87,9 @@
 		569244782B374AF100B1A729 /* fileheader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 569244762B374AF100B1A729 /* fileheader.cpp */; };
 		569244792B37590A00B1A729 /* fileheader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 569244762B374AF100B1A729 /* fileheader.cpp */; };
 		5692447A2B37591200B1A729 /* chunkheader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 569244732B3748F400B1A729 /* chunkheader.cpp */; };
+		56A34AD22B4C140400FDA333 /* statuspacket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56A34AD02B4C140400FDA333 /* statuspacket.cpp */; };
+		56A34AD32B4C140400FDA333 /* statuspacket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56A34AD02B4C140400FDA333 /* statuspacket.cpp */; };
+		56A34AD42B4C140400FDA333 /* statuspacket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56A34AD02B4C140400FDA333 /* statuspacket.cpp */; };
 		56CE55082B39870200FD1DC3 /* showclient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56CE55062B39870200FD1DC3 /* showclient.cpp */; };
 		56CE550B2B39C03000FD1DC3 /* showserver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56CE55092B39C03000FD1DC3 /* showserver.cpp */; };
 		56CE550E2B39C71B00FD1DC3 /* serverclient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56CE550C2B39C71B00FD1DC3 /* serverclient.cpp */; };
@@ -928,6 +931,8 @@
 		569244742B3748F400B1A729 /* chunkheader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = chunkheader.hpp; sourceTree = "<group>"; };
 		569244762B374AF100B1A729 /* fileheader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = fileheader.cpp; sourceTree = "<group>"; };
 		569244772B374AF100B1A729 /* fileheader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = fileheader.hpp; sourceTree = "<group>"; };
+		56A34AD02B4C140400FDA333 /* statuspacket.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = statuspacket.cpp; sourceTree = "<group>"; };
+		56A34AD12B4C140400FDA333 /* statuspacket.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = statuspacket.hpp; sourceTree = "<group>"; };
 		56CE55062B39870200FD1DC3 /* showclient.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = showclient.cpp; sourceTree = "<group>"; };
 		56CE55072B39870200FD1DC3 /* showclient.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = showclient.hpp; sourceTree = "<group>"; };
 		56CE55092B39C03000FD1DC3 /* showserver.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = showserver.cpp; sourceTree = "<group>"; };
@@ -1067,6 +1072,8 @@
 				561BE3A52B337EF20092D4DF /* showpacket.hpp */,
 				561BE3AD2B337EF20092D4DF /* syncpacket.cpp */,
 				561BE39A2B337EF20092D4DF /* syncpacket.hpp */,
+				56A34AD02B4C140400FDA333 /* statuspacket.cpp */,
+				56A34AD12B4C140400FDA333 /* statuspacket.hpp */,
 			);
 			path = network;
 			sourceTree = "<group>";
@@ -2359,6 +2366,7 @@
 				56CE550F2B39F85A00FD1DC3 /* frameclock.cpp in Sources */,
 				561BE4212B347C710092D4DF /* main.cpp in Sources */,
 				561BE4432B34E9020092D4DF /* client.cpp in Sources */,
+				56A34AD22B4C140400FDA333 /* statuspacket.cpp in Sources */,
 				561DE5162B3C5B0E00F0824C /* playlist.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2376,6 +2384,7 @@
 				561BE44A2B34E9200092D4DF /* mapfile.cpp in Sources */,
 				56CE55152B3A0B7300FD1DC3 /* fileheader.cpp in Sources */,
 				561BE4342B34E9010092D4DF /* playpacket.cpp in Sources */,
+				56A34AD32B4C140400FDA333 /* statuspacket.cpp in Sources */,
 				561BE4392B34E9010092D4DF /* syncpacket.cpp in Sources */,
 				56CE55132B3A0B6600FD1DC3 /* mwavfile.cpp in Sources */,
 				561BE4482B34E9200092D4DF /* timeutil.cpp in Sources */,
@@ -2402,6 +2411,7 @@
 				569244792B37590A00B1A729 /* fileheader.cpp in Sources */,
 				561BE4592B35D9B40092D4DF /* packet.cpp in Sources */,
 				569244662B37396800B1A729 /* lightfile.cpp in Sources */,
+				56A34AD42B4C140400FDA333 /* statuspacket.cpp in Sources */,
 				5692446C2B37398300B1A729 /* mediacontroller.cpp in Sources */,
 				5692447A2B37591200B1A729 /* chunkheader.cpp in Sources */,
 				561BE45A2B35D9B40092D4DF /* showpacket.cpp in Sources */,

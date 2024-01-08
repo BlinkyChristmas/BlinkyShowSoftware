@@ -45,7 +45,11 @@ private:
     bool clientIsRunning ;
     mutable std::mutex clientAccess ;
     std::vector<ServerClient::Pointer> connections ;
+    mutable std::mutex statusAccess;
+    std::vector<ServerClient::Pointer> statusConnections;
+    
     auto clearConnections() -> void ;
+    auto clearStatus()->void ;
 
     asio::executor_work_guard<asio::io_context::executor_type> clientguard{asio::make_work_guard(clientContext)} ;
     
@@ -54,8 +58,8 @@ private:
     auto runServer() -> void ;
     
     
-    std::vector<std::string> connectionInformation ;
-    auto checkBroken() -> std::vector<std::string> ;
+    std::vector<StatusEntry> connectionInformation ;
+    auto checkBroken() -> std::vector<StatusEntry> ;
 
     StopCallback  stopPlayingCallback ;
     
@@ -80,7 +84,7 @@ public:
     auto setPlayStopCallback( const StopCallback &callback) -> void ;
     
     auto setServerKey(std::uint32_t key) -> void ;
-    auto informationOnConnections()  -> std::vector<std::string> ;
+    auto informationOnConnections()  -> std::vector<StatusEntry> ;
     
     auto is_open() const -> bool ;
     // Clent callbacks ;
@@ -97,7 +101,8 @@ public:
     
     auto load(std::uint32_t framecount, const std::string &music, const std::string &light) -> void ;
     auto play(bool state) -> bool ;
-    
+    auto clientStatus(const Packet &packet, Client *client) ->bool ;
+
 };
 
 #endif /* showserver_hpp */
